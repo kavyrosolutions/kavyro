@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kavyro | Virtual Assistant & Digital Agency</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --clr-bg:        #0a0a0f;
+      --clr-surface:   #12121a;
+      --clr-card:      #1a1a28;
+      --clr-border:    #2a2a40;
+      --clr-accent:    #6c63ff;
+      --clr-accent2:   #a78bfa;
+      --clr-gold:      #f59e0b;
+      --clr-text:      #e8e8f0;
+      --clr-muted:     #8888aa;
+      --radius:        12px;
+      --transition:    0.3s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--clr-bg);
+      color: var(--clr-text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ─── Scrollbar ─────────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--clr-bg); }
+    ::-webkit-scrollbar-thumb { background: var(--clr-accent); border-radius: 3px; }
+
+    /* ─── Utility ───────────────────────────────────────────────── */
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+    .section    { padding: 96px 0; }
+    .section-label {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--clr-accent);
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      line-height: 1.15;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--clr-muted);
+      max-width: 560px;
+    }
+    .highlight { color: var(--clr-accent2); }
+
+    /* ─── Button ────────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 30px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+    }
+    .btn-primary {
+      background: var(--clr-accent);
+      color: #fff;
+    }
+    .btn-primary:hover { background: #5a52e0; transform: translateY(-2px); box-shadow: 0 12px 32px rgba(108,99,255,0.35); }
+    .btn-outline {
+      background: transparent;
+      color: var(--clr-text);
+      border: 1.5px solid var(--clr-border);
+    }
+    .btn-outline:hover { border-color: var(--clr-accent); color: var(--clr-accent); }
+
+    /* ─── Navbar ────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 999;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--clr-border);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+    .logo span { color: var(--clr-accent); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--clr-muted);
+      transition: color var(--transition);
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta { margin-left: 12px; }
+
+    /* Hamburger */
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 24px; height: 2px; background: var(--clr-text); border-radius: 2px; transition: var(--transition); }
+
+    /* ─── Hero ──────────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 68px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-glow {
+      position: absolute;
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(108,99,255,0.18) 0%, transparent 70%);
+      top: -150px; right: -200px;
+      pointer-events: none;
+    }
+    .hero-glow2 {
+      position: absolute;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(167,139,250,0.12) 0%, transparent 70%);
+      bottom: 0; left: -100px;
+      pointer-events: none;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      padding: 80px 0;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(108,99,255,0.12);
+      border: 1px solid rgba(108,99,255,0.3);
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--clr-accent2);
+      margin-bottom: 24px;
+    }
+    .hero-badge::before { content: '●'; font-size: 0.5rem; color: var(--clr-gold); }
+    .hero-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.8rem, 5.5vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      color: #fff;
+      margin-bottom: 24px;
+    }
+    .hero-title .grad {
+      background: linear-gradient(135deg, var(--clr-accent), var(--clr-accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-desc {
+      font-size: 1.1rem;
+      color: var(--clr-muted);
+      margin-bottom: 36px;
+      max-width: 480px;
+    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hero-stats {
+      display: flex;
+      gap: 36px;
+      margin-top: 52px;
+      padding-top: 36px;
+      border-top: 1px solid var(--clr-border);
+    }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+    }
+    .stat-label { font-size: 0.82rem; color: var(--clr-muted); margin-top: 2px; }
+
+    /* Hero visual */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-card-wrap {
+      width: 100%;
+      max-width: 420px;
+      position: relative;
+    }
+    .hero-main-card {
+      background: var(--clr-card);
+      border: 1px solid var(--clr-border);
+      border-radius: 20px;
+      padding: 32px;
+      position: relative;
+      z-index: 2;
+    }
+    .hc-avatar {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--clr-accent), var(--clr-accent2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 16px;
+    }
+    .hc-title { font-weight: 700; font-size: 1rem; color: #fff; margin-bottom: 4px; }
+    .hc-sub { font-size: 0.8rem; color: var(--clr-muted); margin-bottom: 20px; }
+    .hc-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      background: rgba(108,99,255,0.15);
+      color: var(--clr-accent2);
+      border: 1px solid rgba(108,99,255,0.25);
+    }
+    .floating-pill {
+      position: absolute;
+      background: var(--clr-card);
+      border: 1px solid var(--clr-border);
+      border-radius: 100px;
+      padding: 10px 18px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      display: flex; align-items: center; gap: 8px;
+      white-space: nowrap;
+      z-index: 3;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    }
+    .pill-1 { top: -20px; right: -20px; }
+    .pill-2 { bottom: -20px; left: -20px; }
+    .pill-dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; }
+    .pill-dot-gold { background: var(--clr-gold); }
+
+    /* ─── Services ──────────────────────────────────────────────── */
+    #services { background: var(--clr-surface); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .service-card {
+      background: var(--clr-card);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius);
+      padding: 32px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--clr-accent), var(--clr-accent2));
+      opacity: 0;
+      transition: var(--transition);
+    }
+    .service-card:hover { border-color: rgba(108,99,255,0.4); transform: translateY(-4px); }
+    .service-card:hover::before { opacity: 1; }
+    .svc-icon {
+      width: 48px; height: 48px;
+      border-radius: 10px;
+      background: rgba(108,99,255,0.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+    }
+    .svc-title { font-weight: 700; font-size: 1.05rem; color: #fff; margin-bottom: 10px; }
+    .svc-desc { font-size: 0.9rem; color: var(--clr-muted); line-height: 1.65; }
+
+    /* ─── Why Us ─────────────────────────────────────────────────── */
+    .why-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .why-list { display: flex; flex-direction: column; gap: 28px; margin-top: 40px; }
+    .why-item { display: flex; gap: 18px; align-items: flex-start; }
+    .why-icon {
+      width: 42px; height: 42px; flex-shrink: 0;
+      border-radius: 10px;
+      background: rgba(108,99,255,0.12);
+      border: 1px solid rgba(108,99,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+    .why-item h4 { font-weight: 600; color: #fff; margin-bottom: 4px; }
+    .why-item p { font-size: 0.9rem; color: var(--clr-muted); }
+
+    /* Why right side */
+    .why-visual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .why-box {
+      background: var(--clr-card);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      text-align: center;
+    }
+    .why-box:first-child { grid-column: 1 / -1; }
+    .why-box-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--clr-accent2);
+    }
+    .why-box-label { font-size: 0.85rem; color: var(--clr-muted); margin-top: 4px; }
+
+    /* ─── Process ───────────────────────────────────────────────── */
+    #process { background: var(--clr-surface); }
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0;
+      margin-top: 56px;
+      position: relative;
+    }
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 28px; left: 10%; right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--clr-border), transparent);
+    }
+    .step {
+      text-align: center;
+      padding: 0 20px;
+      position: relative;
+    }
+    .step-num {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: var(--clr-accent);
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .step h4 { font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .step p { font-size: 0.87rem; color: var(--clr-muted); }
+
+    /* ─── Testimonials ──────────────────────────────────────────── */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .testi-card {
+      background: var(--clr-card);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius);
+      padding: 32px;
+    }
+    .testi-stars { color: var(--clr-gold); font-size: 0.9rem; margin-bottom: 16px; }
+    .testi-text { font-size: 0.95rem; color: var(--clr-muted); line-height: 1.7; margin-bottom: 24px; font-style: italic; }
+    .testi-author { display: flex; align-items: center; gap: 14px; }
+    .testi-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--clr-accent), var(--clr-accent2));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 1rem; color: #fff;
+    }
+    .testi-name { font-weight: 600; color: #fff; font-size: 0.92rem; }
+    .testi-role { font-size: 0.8rem; color: var(--clr-muted); }
+
+    /* ─── CTA Strip ──────────────────────────────────────────────── */
+    #cta {
+      background: linear-gradient(135deg, rgba(108,99,255,0.15), rgba(167,139,250,0.08));
+      border-top: 1px solid rgba(108,99,255,0.2);
+      border-bottom: 1px solid rgba(108,99,255,0.2);
+      text-align: center;
+      padding: 96px 0;
+    }
+    #cta .section-title { max-width: 700px; margin: 0 auto 20px; }
+    #cta .section-sub { margin: 0 auto 40px; }
+    #cta .btn-actions { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+
+    /* ─── Contact ───────────────────────────────────────────────── */
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .contact-info h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 14px;
+    }
+    .contact-info p { color: var(--clr-muted); font-size: 0.95rem; margin-bottom: 36px; }
+    .contact-item {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 20px;
+    }
+    .contact-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: rgba(108,99,255,0.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .contact-detail span { font-size: 0.78rem; color: var(--clr-muted); display: block; }
+    .contact-detail strong { color: #fff; font-size: 0.92rem; }
+    .social-links { display: flex; gap: 12px; margin-top: 32px; }
+    .social-btn {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: var(--clr-card);
+      border: 1px solid var(--clr-border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    .social-btn:hover { border-color: var(--clr-accent); background: rgba(108,99,255,0.12); }
+
+    /* Form */
+    .contact-form {
+      background: var(--clr-card);
+      border: 1px solid var(--clr-border);
+      border-radius: 16px;
+      padding: 40px;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--clr-muted);
+      margin-bottom: 8px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: var(--clr-text);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.92rem;
+      transition: border-color var(--transition);
+      outline: none;
+      resize: vertical;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: var(--clr-muted); }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--clr-accent); }
+    .form-group select option { background: var(--clr-card); }
+
+    /* ─── Footer ─────────────────────────────────────────────────── */
+    footer {
+      background: var(--clr-surface);
+      border-top: 1px solid var(--clr-border);
+      padding: 48px 0 32px;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    .footer-copy { font-size: 0.85rem; color: var(--clr-muted); }
+    .footer-links { display: flex; gap: 28px; }
+    .footer-links a { font-size: 0.85rem; color: var(--clr-muted); transition: color var(--transition); }
+    .footer-links a:hover { color: #fff; }
+
+    /* ─── Mobile Nav Drawer ─────────────────────────────────────── */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--clr-bg);
+      z-index: 1000;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--clr-muted);
+      transition: color var(--transition);
+    }
+    .mobile-nav a:hover { color: #fff; }
+    .mobile-close {
+      position: absolute; top: 24px; right: 24px;
+      font-size: 1.6rem;
+      cursor: pointer;
+      color: var(--clr-muted);
+    }
+
+    /* ─── Responsive ─────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-visual { display: none; }
+      .why-inner { grid-template-columns: 1fr; gap: 40px; }
+      .why-visual { order: -1; }
+      .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .section { padding: 64px 0; }
+      .hero-stats { flex-wrap: wrap; gap: 24px; }
+      .process-steps::before { display: none; }
+      .footer-inner { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── MOBILE NAV ──────────────────────────────────────────── -->
+  <div class="mobile-nav" id="mobileNav">
+    <span class="mobile-close" onclick="closeMobileNav()">✕</span>
+    <a href="#services" onclick="closeMobileNav()">Services</a>
+    <a href="#why-us" onclick="closeMobileNav()">Why Us</a>
+    <a href="#process" onclick="closeMobileNav()">Process</a>
+    <a href="#testimonials" onclick="closeMobileNav()">Testimonials</a>
+    <a href="#contact" onclick="closeMobileNav()" class="btn btn-primary" style="font-size:1rem;">Get Started</a>
+  </div>
+
+  <!-- ─── NAVBAR ─────────────────────────────────────────────── -->
+  <nav>
+    <div class="container nav-inner">
+      <a href="#hero" class="logo">Kavyro<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#why-us">Why Us</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+      </ul>
+      <a href="#contact" class="btn btn-primary nav-cta">Get Started</a>
+      <div class="hamburger" onclick="openMobileNav()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ─── HERO ───────────────────────────────────────────────── -->
+  <section id="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-glow2"></div>
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-content">
+          <div class="hero-badge">Your Growth Partner — Virtual Assistants &amp; Digital Experts</div>
+          <h1 class="hero-title">
+            We Handle the Work.<br>
+            You <span class="grad">Scale the Business.</span>
+          </h1>
+          <p class="hero-desc">
+            Kavyro is a full-service virtual assistant and digital agency delivering results in marketing, design, SEO, content, video, and web development — so you can focus on what matters.
+          </p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">Start a Project ↗</a>
+            <a href="#services" class="btn btn-outline">Explore Services</a>
+          </div>
+          <div class="hero-stats">
+            <div>
+              <div class="stat-num">200+</div>
+              <div class="stat-label">Projects Delivered</div>
+            </div>
+            <div>
+              <div class="stat-num">50+</div>
+              <div class="stat-label">Happy Clients</div>
+            </div>
+            <div>
+              <div class="stat-num">98%</div>
+              <div class="stat-label">Satisfaction Rate</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Card Visual -->
+        <div class="hero-visual">
+          <div class="hero-card-wrap">
+            <div class="floating-pill pill-1">
+              <span class="pill-dot"></span> Available for Projects
+            </div>
+            <div class="hero-main-card">
+              <div class="hc-avatar">🚀</div>
+              <div class="hc-title">Full-Service Digital Agency</div>
+              <div class="hc-sub">VA-powered. Results-driven.</div>
+              <div class="hc-tags">
+                <span class="tag">SEO</span>
+                <span class="tag">Web Dev</span>
+                <span class="tag">Video Editing</span>
+                <span class="tag">Graphics</span>
+                <span class="tag">Social Media</span>
+                <span class="tag">Advertising</span>
+              </div>
+            </div>
+            <div class="floating-pill pill-2">
+              <span class="pill-dot pill-dot-gold"></span> New clients welcome
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SERVICES ───────────────────────────────────────────── -->
+  <section id="services" class="section">
+    <div class="container">
+      <div class="section-label">What We Do</div>
+      <h2 class="section-title">Services Built for <span class="highlight">Modern Businesses</span></h2>
+      <p class="section-sub">From day-to-day tasks to complex digital campaigns — we've got every corner of your business covered.</p>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="svc-icon">📈</div>
+          <div class="svc-title">Digital Marketing</div>
+          <p class="svc-desc">Data-driven campaigns across all channels to grow your brand presence, generate leads, and convert your audience into loyal customers.</p>
+        </div>
+        <div class="service-card">
+          <div class="svc-icon">🔍</div>
+          <div class="svc-title">SEO Optimization</div>
+          <p class="svc-desc">Rank higher, get found faster. We build sustainable organic growth through technical SEO, on-page strategy, and link building.</p>
+        </div>
+        <div class="service-card">
+          <div class="svc-icon">🎬</div>
+          <div class="svc-title">Video Editing</div>
+          <p class="svc-desc">Professional video production and editing for ads, reels, YouTube, corporate content, and social media — fast turnarounds guaranteed.</p>
+        </div>
+        <div class="service-card">
+          <div class="svc-icon">💻</div>
+          <div class="svc-title">Web Development &amp; Design</div>
+          <p class="svc-desc">Custom websites and web apps built with performance and conversion in mind. Clean design, fast load times, and mobile-first always.</p>
+        </div>
+        <div class="service-card">
+          <div class="svc-icon">🎨</div>
+          <div class="svc-title">Graphic Design</div>
+          <p class="svc-desc">Brand identity, social media visuals, marketing collateral, and everything in between — designed to make you stand out.</p>
+        </div>
+        <div class="service-card">
+          <div class="svc-icon">✍️</div>
+          <div class="svc-title">Content Marketing</div>
+          <p class="svc-desc">Strategic content that attracts, educates, and converts — from blog posts and email newsletters to scripts and landing page copy.</p>
+        </div>
+        <div class="service-card">
+          <div class="svc-icon">📣</div>
+          <div class="svc-title">Paid Advertising</div>
+          <p class="svc-desc">Google Ads, Facebook &amp; Instagram campaigns managed end-to-end. We maximize your ROAS with precise targeting and creative testing.</p>
+        </div>
+        <div class="service-card">
+          <div class="svc-icon">📱</div>
+          <div class="svc-title">Social Media Management</div>
+          <p class="svc-desc">Consistent posting, community engagement, and growth strategies across all your social platforms — handled entirely by our team.</p>
+        </div>
+        <div class="service-card">
+          <div class="svc-icon">🤝</div>
+          <div class="svc-title">Virtual Assistant Services</div>
+          <p class="svc-desc">Skilled VAs for admin, research, scheduling, email management, CRM updates, and any task that's eating into your productive hours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── WHY US ─────────────────────────────────────────────── -->
+  <section id="why-us" class="section">
+    <div class="container">
+      <div class="why-inner">
+        <div>
+          <div class="section-label">Why Kavyro</div>
+          <h2 class="section-title">One Agency.<br><span class="highlight">Every Solution.</span></h2>
+          <p class="section-sub">We combine the agility of a VA service with the expertise of a full digital agency — giving you more value at every step.</p>
+          <div class="why-list">
+            <div class="why-item">
+              <div class="why-icon">⚡</div>
+              <div>
+                <h4>Fast &amp; Reliable Delivery</h4>
+                <p>Deadlines are sacred. Our team is built around accountability and consistent, on-time results.</p>
+              </div>
+            </div>
+            <div class="why-item">
+              <div class="why-icon">🎯</div>
+              <div>
+                <h4>Results-Oriented Approach</h4>
+                <p>Every campaign, design, and deliverable is tied to a business goal — not just activities.</p>
+              </div>
+            </div>
+            <div class="why-item">
+              <div class="why-icon">🔒</div>
+              <div>
+                <h4>Transparent &amp; Affordable</h4>
+                <p>No hidden fees, no surprises. Flexible packages that scale with your business needs.</p>
+              </div>
+            </div>
+            <div class="why-item">
+              <div class="why-icon">🌍</div>
+              <div>
+                <h4>Global Team, Local Understanding</h4>
+                <p>Our distributed team brings diverse expertise while understanding your specific market context.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="why-visual">
+          <div class="why-box">
+            <div class="why-box-num">200+</div>
+            <div class="why-box-label">Successful Projects Completed</div>
+          </div>
+          <div class="why-box">
+            <div class="why-box-num">9+</div>
+            <div class="why-box-label">Core Service Areas</div>
+          </div>
+          <div class="why-box">
+            <div class="why-box-num">24/7</div>
+            <div class="why-box-label">Team Availability</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PROCESS ────────────────────────────────────────────── -->
+  <section id="process" class="section">
+    <div class="container">
+      <div style="text-align:center; margin-bottom: 0;">
+        <div class="section-label">How We Work</div>
+        <h2 class="section-title">Simple. Structured. <span class="highlight">Effective.</span></h2>
+        <p class="section-sub" style="margin: 0 auto;">A clear process from day one so you always know exactly what's happening.</p>
+      </div>
+      <div class="process-steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <h4>Discovery Call</h4>
+          <p>We learn about your business, goals, and pain points to craft the right strategy.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <h4>Proposal &amp; Scope</h4>
+          <p>Receive a tailored proposal with clear deliverables, timelines, and pricing.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <h4>Onboarding</h4>
+          <p>We set up workflows, access, and communication channels — ready to launch fast.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <h4>Execute &amp; Deliver</h4>
+          <p>Our team gets to work, with regular updates and feedback rounds built in.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">05</div>
+          <h4>Review &amp; Grow</h4>
+          <p>We review results, optimize, and continuously improve to hit your bigger goals.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── TESTIMONIALS ───────────────────────────────────────── -->
+  <section id="testimonials" class="section" style="background: var(--clr-surface);">
+    <div class="container">
+      <div class="section-label">Client Love</div>
+      <h2 class="section-title">What Our Clients <span class="highlight">Say</span></h2>
+      <p class="section-sub">Real results, real people. Here's what businesses say after working with Kavyro.</p>
+      <div class="testimonials-grid">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Kavyro took our social media from zero to fully managed within a week. The team is incredibly responsive and the results speak for themselves."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">M</div>
+            <div>
+              <div class="testi-name">Marcus J.</div>
+              <div class="testi-role">E-commerce Founder</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Our website redesign was done ahead of schedule and looked better than we imagined. The dev team at Kavyro really listened to what we needed."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">S</div>
+            <div>
+              <div class="testi-name">Sarah L.</div>
+              <div class="testi-role">Marketing Director</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"The VA support alone saves me 20+ hours a week. Pair that with their SEO work and our organic traffic has grown over 300% in 4 months."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">D</div>
+            <div>
+              <div class="testi-name">David O.</div>
+              <div class="testi-role">Business Coach</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CTA ────────────────────────────────────────────────── -->
+  <section id="cta">
+    <div class="container">
+      <div class="section-label">Ready to Start?</div>
+      <h2 class="section-title">Let's Build Something<br><span class="highlight">Great Together</span></h2>
+      <p class="section-sub">Whether you need a full team or a single expert, Kavyro is ready to plug in and deliver from day one.</p>
+      <div class="btn-actions" style="margin-top: 36px;">
+        <a href="#contact" class="btn btn-primary" style="font-size:1rem; padding:16px 36px;">Book a Free Consultation ↗</a>
+        <a href="https://www.facebook.com/profile.php?id=61587041615055" target="_blank" class="btn btn-outline" style="font-size:1rem; padding:16px 36px;">Find Us on Facebook</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CONTACT ────────────────────────────────────────────── -->
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="section-label">Contact Us</div>
+      <h2 class="section-title">Get in <span class="highlight">Touch</span></h2>
+      <div class="contact-inner" style="margin-top:48px;">
+        <div class="contact-info">
+          <h3>Let's talk about your project.</h3>
+          <p>Fill out the form and we'll get back to you within 24 hours. No commitments, just a real conversation about how we can help.</p>
+          <div class="contact-item">
+            <div class="contact-icon">📧</div>
+            <div class="contact-detail">
+              <span>Email</span>
+              <strong>hello@kavyro.com</strong>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">💬</div>
+            <div class="contact-detail">
+              <span>Response Time</span>
+              <strong>Within 24 hours</strong>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🌐</div>
+            <div class="contact-detail">
+              <span>Availability</span>
+              <strong>Mon – Sat, 8AM – 8PM</strong>
+            </div>
+          </div>
+          <div class="social-links">
+            <a href="https://www.facebook.com/profile.php?id=61587041615055" target="_blank" class="social-btn" title="Facebook">f</a>
+            <a href="#" class="social-btn" title="Instagram">ig</a>
+            <a href="#" class="social-btn" title="LinkedIn">in</a>
+          </div>
+        </div>
+
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" placeholder="John" required />
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" placeholder="Doe" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" placeholder="john@company.com" required />
+          </div>
+          <div class="form-group">
+            <label>Service Needed</label>
+            <select required>
+              <option value="" disabled selected>Select a service…</option>
+              <option>Digital Marketing</option>
+              <option>SEO Optimization</option>
+              <option>Video Editing</option>
+              <option>Web Development &amp; Design</option>
+              <option>Graphic Design</option>
+              <option>Content Marketing</option>
+              <option>Paid Advertising</option>
+              <option>Social Media Management</option>
+              <option>Virtual Assistant Services</option>
+              <option>Multiple / Not Sure</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Tell Us About Your Project</label>
+            <textarea rows="5" placeholder="Describe your project, goals, budget range, or any questions you have…" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; padding:16px;">
+            Send Message ↗
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─────────────────────────────────────────────── -->
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        <div class="logo" style="font-size:1.2rem; margin-bottom:6px;">Kavyro<span>.</span></div>
+        <div class="footer-copy">© 2025 Kavyro. All rights reserved.</div>
+      </div>
+      <div class="footer-links">
+        <a href="#services">Services</a>
+        <a href="#why-us">Why Us</a>
+        <a href="#process">Process</a>
+        <a href="#contact">Contact</a>
+        <a href="https://www.facebook.com/profile.php?id=61587041615055" target="_blank">Facebook</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ─── SCRIPTS ─────────────────────────────────────────────── -->
+  <script>
+    function openMobileNav()  { document.getElementById('mobileNav').classList.add('open'); }
+    function closeMobileNav() { document.getElementById('mobileNav').classList.remove('open'); }
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type="submit"]');
+      btn.textContent = '✓ Message Sent!';
+      btn.style.background = '#22c55e';
+      setTimeout(() => {
+        btn.textContent = 'Send Message ↗';
+        btn.style.background = '';
+        e.target.reset();
+      }, 3000);
+    }
+
+    // Smooth active nav highlight on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 100) current = s.id;
+      });
+      navLinks.forEach(a => {
+        a.style.color = a.getAttribute('href') === '#' + current ? '#fff' : '';
+      });
+    });
+  </script>
+</body>
+</html>
