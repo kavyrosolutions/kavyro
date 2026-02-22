@@ -33,12 +33,12 @@
     a { color: var(--blue); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 29px; }
 
     /* ── Navbar ── */
     nav {
       position: sticky; top: 0; z-index: 999;
-      background: rgba(255,255,255,0.97);
+      background: rgba(255,255,255);
       backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
       box-shadow: 0 2px 20px rgba(22,88,161,0.07);
@@ -53,9 +53,15 @@
       background: linear-gradient(135deg, var(--blue), var(--cyan));
       display: flex; align-items: center; justify-content: center;
     }
-    .logo-icon img { width: 28px; height: 28px; object-fit: contain; border-radius: 4px; }
+    .logo-icon img { width: 40px; height: 40px; object-fit: contain; border-radius: 4px; }
     .logo-text { display: flex; flex-direction: column; line-height: 1; }
-    .logo-name { font-family: 'Montserrat', sans-serif; font-size: 1.05rem; font-weight: 800; color: var(--blue); }
+    .logo-name { 
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--blue);
+      letter-spacing: 0.02em;
+     }
     .logo-sub  { font-size: 0.58rem; font-weight: 500; letter-spacing: 0.18em; color: var(--gray); text-transform: uppercase; font-family: 'Poppins', sans-serif; }
     .nav-back {
       display: inline-flex; align-items: center; gap: 6px;
@@ -229,7 +235,7 @@
       background: linear-gradient(135deg, var(--blue-mid), var(--cyan));
       display: flex; align-items: center; justify-content: center;
     }
-    .f-logo-icon img { width: 22px; height: 22px; object-fit: contain; border-radius: 3px; }
+    .f-logo-icon img { width: 36px; height: 36px; object-fit: contain; border-radius: 3px; }
     .f-logo-name { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.95rem; color: #fff; }
     .f-logo-sub  { font-size: 0.52rem; letter-spacing: 0.15em; color: rgba(255,255,255,0.5); display: block; font-family: 'Poppins', sans-serif; }
     .footer-copy { font-size: 0.82rem; color: rgba(255,255,255,0.4); }
