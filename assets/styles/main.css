@@ -1,0 +1,20 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --blue:       #1658a1;
+    --blue-dark:  #0d3d73;
+    --blue-mid:   #1d78c4;
+    --cyan:       #54c8da;
+    --gray:       #575b5b;
+    --gray-light: #f2f6fb;
+    --white:      #ffffff;
+    --border:     #dce5f0;
+}
+
+html { scroll-behavior: smooth; }
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--white);
+    color: var(--gray);
+    line-height: 1.65;
+}
