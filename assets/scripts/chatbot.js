@@ -124,9 +124,40 @@
   ];
 
   const FALLBACK = {
-    reply: "That's a great question! 🤔 I want to make sure you get the right answer.\n\nFor specific inquiries, I'd recommend:\n📧 **Email us:** kavyrosolutions@gmail.com\n📋 **Or fill out our contact form** on this page — we reply within 24 hours!\n\nIs there anything else I can help with?",
-    chips: ['Our Services', 'Pricing', 'Get Started', 'Contact Us']
+    reply: "I'm not sure I understand what you mean. Could you please provide more context or clarify your question? I'm here to help with any inquiries about Kavyro Solutions services, or reach us directly at **kavyrosolutions@gmail.com**. 📧",
+    chips: ['Our Services', 'Pricing', 'Contact Us']
   };
+
+  /* ── AI Config (Groq) ───────────────────────────────────── */
+  function ksBuildSystemPrompt() {
+    const kbText = KB.map(e => e.keys.join(', ') + ':\n' + e.reply).join('\n\n---\n\n');
+    return `You are Kavi, the friendly AI assistant for Kavyro Solutions — an AI-driven digital agency and VA company. Help visitors learn about services, pricing, and how to get started.
+
+RULES:
+- Be warm, professional, concise (under 200 words unless detail is requested).
+- Use **bold** markdown, bullet points, line breaks, and occasional emojis matching the brand.
+- Never invent services, prices, or facts not listed in the knowledge base below.
+- If the user wants to contact, book, or get a quote, include "Visit Contact Form" in chips.
+- Politely decline off-topic questions unrelated to Kavyro Solutions.
+
+CHIPS: Return 2–4 short button labels in the chips array. Prefer these exact strings when applicable: "Our Services", "Pricing", "Get Started", "Contact Us", "Visit Contact Form", "Book Free Consultation". You may also use free-form strings for natural follow-ups.
+
+OUTPUT FORMAT: You must always respond with a valid JSON object and nothing else:
+{"reply": "your message here", "chips": ["Chip 1", "Chip 2"]}
+
+KNOWLEDGE BASE:
+${kbText}`;
+  }
+
+  const AI_CONFIG = {
+    apiKey:       '',
+    endpoint:     'https://api.groq.com/openai/v1/chat/completions',
+    model:        'llama-3.3-70b-versatile',
+    systemPrompt: ksBuildSystemPrompt()
+  };
+
+  let ksHistory = [];
+  const KS_MAX_HISTORY_TURNS = 10;
 
   /* ── DOM refs ───────────────────────────────────────────── */
   const win    = document.getElementById('ks-window');
@@ -138,6 +169,7 @@
 
   let isOpen   = false;
   let greeted  = false;
+  let ksBusy   = false;
 
   /* ── Toggle ─────────────────────────────────────────────── */
   window.ksChatToggle = function () {
@@ -214,50 +246,89 @@
     }, delay);
   }
 
-  /* ── Handle chip shortcuts ──────────────────────────────── */
-  const CHIP_MAP = {
-    'our services':           'services',
-    'pricing':                'pricing',
-    'how much does it cost?': 'price',
-    'get started':            'get started',
-    'contact us':             'contact',
-    'book free consultation': 'contact',
-    'visit contact form':     'contact form',
-    'how we work':            'process',
-    'our process':            'process',
-    'why choose us?':         'why choose us',
-    'turnaround time':        'turnaround',
-    'how long does seo take?':'how long seo',
-    'how long does it take?': 'turnaround',
-    'seo':                    'seo',
-    'web development':        'web development',
-    'social media':           'social media',
-    'virtual assistant':      'virtual assistant',
-    'va pricing':             'va pricing',
-    'minimum ad budget?':     'minimum ad budget',
-    'get a quote':            'get a quote',
-  };
+  /* ── Scroll-action chip labels ──────────────────────────── */
+  const SCROLL_TO_CONTACT = new Set([
+    'contact us', 'visit contact form', 'book free consultation', 'get a quote'
+  ]);
 
-  function ksHandle(text) {
-    const mapped = CHIP_MAP[text.toLowerCase()] || text;
+  /* ── Groq API call ──────────────────────────────────────── */
+  async function ksCallGemini(userText) {
+    ksHistory.push({ role: 'user', content: userText });
+    if (ksHistory.length > KS_MAX_HISTORY_TURNS * 2)
+      ksHistory = ksHistory.slice(ksHistory.length - KS_MAX_HISTORY_TURNS * 2);
+
+    const payload = JSON.stringify({
+      model:           AI_CONFIG.model,
+      messages:        [{ role: 'system', content: AI_CONFIG.systemPrompt }, ...ksHistory],
+      response_format: { type: 'json_object' },
+      temperature:     0.7,
+      max_tokens:      512
+    });
+
+    const doFetch = () => fetch(AI_CONFIG.endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' + AI_CONFIG.apiKey
+      },
+      body: payload
+    });
+
+    let response = await doFetch();
+
+    // Rate-limited — wait 5 s then retry once
+    if (response.status === 429) {
+      await new Promise(r => setTimeout(r, 5000));
+      response = await doFetch();
+    }
+
+    if (!response.ok) { ksHistory.pop(); throw new Error('HTTP ' + response.status); }
+
+    const data    = await response.json();
+    const rawJson = data.choices[0].message.content;
+    ksHistory.push({ role: 'assistant', content: rawJson });
+
+    const parsed = JSON.parse(rawJson);
+    return {
+      reply: parsed.reply || FALLBACK.reply,
+      chips: Array.isArray(parsed.chips) ? parsed.chips : []
+    };
+  }
+
+  async function ksHandle(text) {
+    const raw = text.toLowerCase();
+
+    // Scroll-action chips — instant, no AI needed
+    if (SCROLL_TO_CONTACT.has(raw)) {
+      const msg = raw === 'visit contact form'
+        ? "I'll take you to our contact form! 📋"
+        : "Heading to our contact form where you can book your free consultation! 🗓️";
+      ksBot(msg, []);
+      setTimeout(() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }), 800);
+      return;
+    }
+
+    if (ksBusy) return;
+    ksBusy = true;
     ksAppend(text, 'user');
     ksChips([]);
-    const q = mapped.toLowerCase();
+    ksTyping();
 
-    if (q === 'contact form') {
-      ksBot("I'll take you to our contact form! 📋", []);
-      setTimeout(() => { document.getElementById('contact').scrollIntoView({behavior:'smooth'}); }, 800);
-      return;
+    try {
+      const { reply, chips } = await ksCallGemini(text);
+      ksRemoveTyping();
+      ksAppend(reply, 'bot');
+      ksChips(chips || []);
+    } catch (err) {
+      ksRemoveTyping();
+      const q = text.toLowerCase();
+      const m = KB.find(k => k.keys.some(kw => q.includes(kw)));
+      ksAppend(m ? m.reply : FALLBACK.reply, 'bot');
+      ksChips(m ? m.chips : FALLBACK.chips);
+      console.warn('[Kavi] API unavailable, using KB fallback:', err.message);
+    } finally {
+      ksBusy = false;
     }
-    if (q === 'book free consultation' || q === 'get a quote') {
-      ksBot("Heading to our contact form where you can book your free consultation! 🗓️", []);
-      setTimeout(() => { document.getElementById('contact').scrollIntoView({behavior:'smooth'}); }, 800);
-      return;
-    }
-
-    const match = KB.find(k => k.keys.some(kw => q.includes(kw)));
-    if (match) ksBot(match.reply, match.chips);
-    else       ksBot(FALLBACK.reply, FALLBACK.chips);
   }
 
   /* ── Send ───────────────────────────────────────────────── */
