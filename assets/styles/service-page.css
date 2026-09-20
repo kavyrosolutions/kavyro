@@ -7,6 +7,7 @@
 /* ── Nav links (legal pages only have "Back to Home") ── */
 .nav-links { display: flex; align-items: center; gap: 26px; list-style: none; }
 .nav-links a {
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 2px;
     font-size: 0.87rem; font-weight: 500; color: var(--gray);
     transition: color 0.2s;
 }

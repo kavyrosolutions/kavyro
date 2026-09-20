@@ -141,6 +141,7 @@ nav {
 
 .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
 .nav-links a {
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 2px;
     font-size: 0.87rem;
     font-weight: 500;
     color: var(--gray);
@@ -256,9 +257,10 @@ nav {
 
 .hero-title {
     font-family: 'Montserrat', sans-serif;
-    font-size: clamp(2.5rem, 5vw, 3.9rem);
+    font-size: clamp(2.2rem, 4vw, 3.15rem);
     font-weight: 900;
     line-height: 1.1;
+    text-wrap: balance;
     color: #fff;
     margin-bottom: 24px;
 }
@@ -466,7 +468,7 @@ a.panel-item { text-decoration: none; color: inherit; }
 }
 /* Each card is a link to its service page. The title carries the <a>; its
    ::after covers the card so the whole surface is the target. */
-.svc-title a { color: inherit; text-decoration: none; }
+.svc-title a { display: inline-block; padding: 6px 0; margin: -6px 0; color: inherit; text-decoration: none; }
 .svc-title a::after { content: ''; position: absolute; inset: 0; }
 .svc-card:hover .svc-title a { color: var(--blue-mid); }
 .svc-more {
@@ -829,8 +831,8 @@ footer {
     color: #fff; margin-bottom: 16px;
     letter-spacing: 0.04em;
 }
-.f-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-.f-col ul a { font-size: 0.84rem; color: rgba(255,255,255,0.65); transition: color var(--ease); }
+.f-col ul { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+.f-col ul a { display: inline-block; padding: 6px 0; font-size: 0.84rem; color: rgba(255,255,255,0.65); transition: color var(--ease); }
 .f-col ul a:hover { color: var(--cyan); }
 
 .footer-bottom {
@@ -839,7 +841,7 @@ footer {
 }
 .footer-copy { font-size: 0.82rem; color: rgba(255,255,255,0.62); }
 .footer-bottom-links { display: flex; gap: 20px; }
-.footer-bottom-links a { font-size: 0.82rem; color: rgba(255,255,255,0.62); transition: color var(--ease); }
+.footer-bottom-links a { display: inline-block; padding: 8px 0; font-size: 0.82rem; color: rgba(255,255,255,0.62); transition: color var(--ease); }
 .footer-bottom-links a:hover { color: var(--cyan); }
 
 /* ─── RESPONSIVE ─────────────────────────────────────────────── */
@@ -862,6 +864,15 @@ footer {
 }
 @media (max-width: 600px) {
     .section { padding: 64px 0; }
+    /* First screen on a phone: headline, then the buttons, then the copy,
+       so the primary action sits inside the fold instead of under it. */
+    #hero { padding-top: 60px; }
+    .hero-inner { padding: 40px 0 56px; }
+    .hero-copy { display: flex; flex-direction: column; }
+    .hero-title { font-size: 2.1rem; margin-bottom: 20px; }
+    .hero-desc { order: 1; margin: 26px 0 0; font-size: 1rem; }
+    .hero-stats { order: 2; margin-top: 36px; padding-top: 28px; }
+    .hero-btns .btn { padding: 12px 20px; font-size: 0.88rem; }
     .services-grid { grid-template-columns: 1fr; }
     .testi-grid { grid-template-columns: 1fr; }
     .why-stats { grid-template-columns: 1fr 1fr; }

@@ -23,6 +23,10 @@ Open the site in a browser via Laragon's local server (typically `http://kavyro.
 Site-wide rule: no prices, payment terms or billing language anywhere. Fees are
 left to the proposal. Do not add pricing, packages or "affordable" copy.
 
+Assets are cache-busted with `?v=<date>` on every `<link rel="stylesheet">`
+and `<script src>`. After changing any CSS or JS, bump the version string in
+all nine HTML pages (`grep -l '?v=' *.html`).
+
 ## Architecture
 
 ### index.html structure

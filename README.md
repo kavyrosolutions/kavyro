@@ -87,6 +87,11 @@ add that origin to `connect-src` or submissions will be blocked.
 `robots.txt` and `sitemap.xml` are deployed as-is; add a `<url>` to the sitemap
 when a page is added.
 
+Stylesheets and scripts are linked with `?v=<date>` and `_headers` caches
+`assets/*` for a day at the edge and in browsers. Bump the version string in
+every page whenever a CSS or JS file changes, or visitors keep the old file
+until the cache expires.
+
 ## Contact
 
 kavyrosolutions@gmail.com
