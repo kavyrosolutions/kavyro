@@ -3,14 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FJXBDVE3B0"></script>
+  <!-- Google tag (gtag.js). The queue and config are set up here as usual;
+       the library itself is fetched after the load event so that on a slow
+       connection its 70 KB does not compete with the stylesheet and the hero
+       fonts. gtag.js replays the queued config, so the page view is still
+       recorded. -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-FJXBDVE3B0');
+
+    window.addEventListener('load', function () {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-FJXBDVE3B0';
+      document.head.appendChild(s);
+    });
   </script>
   <title>Terms of Service | Kavyro Solutions</title>
   <meta name="description" content="The terms that govern use of the Kavyro Solutions website and services, covering scope, revisions, intellectual property, and liability." />
@@ -33,9 +43,8 @@
   <meta name="twitter:image:alt" content="Kavyro Solutions — AI-Driven Digital Agency" />
   <link rel="icon" type="image/png" href="assets/logo.png" />
   <link rel="apple-touch-icon" href="assets/logo.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Poppins:wght@300;400;500;600;700&family=Nunito:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="preload" href="assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="assets/styles/main.css" />
   <link rel="stylesheet" href="assets/styles/legal-page.css" />
 </head>

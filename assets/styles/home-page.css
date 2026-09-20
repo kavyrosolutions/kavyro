@@ -148,7 +148,12 @@ nav {
 }
 .nav-links a:hover { color: var(--blue); }
 
-.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+/* A 44px button around the 24px glyph so the tap target meets Google's minimum. */
+.hamburger {
+    display: none; flex-direction: column; justify-content: center; align-items: center;
+    gap: 5px; width: 44px; height: 44px; margin-right: -10px;
+    background: none; border: 0; cursor: pointer;
+}
 .hamburger span { width: 24px; height: 2px; background: var(--blue); border-radius: 2px; }
 
 /* ─── MOBILE NAV ─────────────────────────────────────────────── */
