@@ -31,7 +31,7 @@ nav {
     color: var(--blue);
     letter-spacing: 0.02em;
     }
-.logo-sub  { font-size: 0.58rem; font-weight: 500; letter-spacing: 0.18em; color: var(--gray); text-transform: uppercase; font-family: 'Poppins', sans-serif; }
+.logo-sub  { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; color: var(--gray); text-transform: uppercase; font-family: 'Poppins', sans-serif; }
 .nav-back {
     display: inline-flex; align-items: center; gap: 6px;
     font-size: 0.87rem; font-weight: 500;
@@ -101,7 +101,7 @@ nav {
     border-radius: 12px;
     padding: 24px;
 }
-.toc h4 {
+.toc h2 {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700; font-size: 0.82rem;
     color: var(--blue); text-transform: uppercase;
@@ -151,6 +151,10 @@ nav {
     margin-bottom: 14px; line-height: 1.8;
 }
 .legal-section p:last-child { margin-bottom: 0; }
+/* Links in running text are only a shade off the body grey, so they are
+   underlined rather than left to colour alone. */
+.legal-section p a,
+.legal-section li a { text-decoration: underline; text-underline-offset: 2px; }
 
 .legal-section ul, .legal-section ol {
     margin: 12px 0 16px 20px;
@@ -206,10 +210,10 @@ footer {
 }
 .f-logo-icon img { width: 36px; height: 36px; object-fit: contain; border-radius: 3px; }
 .f-logo-name { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.95rem; color: #fff; }
-.f-logo-sub  { font-size: 0.52rem; letter-spacing: 0.15em; color: rgba(255,255,255,0.5); display: block; font-family: 'Poppins', sans-serif; }
-.footer-copy { font-size: 0.82rem; color: rgba(255,255,255,0.4); }
+.f-logo-sub  { font-size: 0.75rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.65); display: block; font-family: 'Poppins', sans-serif; }
+.footer-copy { font-size: 0.82rem; color: rgba(255,255,255,0.62); }
 .footer-links { display: flex; gap: 20px; }
-.footer-links a { font-size: 0.82rem; color: rgba(255,255,255,0.5); transition: color 0.2s; }
+.footer-links a { font-size: 0.82rem; color: rgba(255,255,255,0.65); transition: color 0.2s; }
 .footer-links a:hover { color: var(--cyan); text-decoration: none; }
 
 @media (max-width: 820px) {

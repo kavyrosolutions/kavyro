@@ -23,8 +23,7 @@ Open the site in a browser via Laragon's local server (typically `http://kavyro.
 All styles, markup, and scripts live in one file in this order:
 1. **`<style>`** — Full CSS (~850 lines). Sections are delimited by `/* ─── SECTION NAME ─── */` comments. CSS variables are defined in `:root` and used throughout.
 2. **`<body>`** — Page sections in order: mobile nav overlay → `<nav>` → `#hero` → `#trust` → `#services` → `#why` → `#process` → `#ai-strip` → `#testimonials` → `#cta` → `#contact` → `<footer>`
-3. **Chatbot widget** — Appended after the footer: `#ks-bubble` (FAB button) + `#ks-window` (chat dialog)
-4. **`<script>`** — Inline JS at the bottom handling: navbar scroll behavior, mobile nav toggle, contact form submission (`handleForm`), and the chatbot logic
+3. **`<script>`** — `assets/scripts/main.js`, loaded at the bottom: navbar scroll behavior, mobile nav toggle, contact form submission (`handleForm`)
 
 ### Design tokens (CSS variables)
 ```
@@ -37,9 +36,6 @@ All styles, markup, and scripts live in one file in this order:
 ### Typography
 Three Google Fonts families: **Montserrat** (headings/logo), **Poppins** (body/UI), **Nunito** (secondary).
 
-### Chatbot (`#ks-window`)
-Pure client-side keyword-matching chatbot. The knowledge base is a `KB` array of `{ keys, reply, chips }` objects defined in the inline `<script>`. Matching is done by checking if the user's lowercase input includes any key string. A `FALLBACK` object handles unmatched queries. No external API is called.
-
 ### Contact form
 The `handleForm(event)` function handles submission. Check the inline script for the current backend/endpoint used (FormSubmit or similar).
 
@@ -51,5 +47,4 @@ These pages duplicate the navbar and footer HTML. They share the same CSS variab
 - **No external CSS or JS files** — all code is inline per page.
 - **Section IDs** are the navigation anchors: `#hero`, `#services`, `#why`, `#process`, `#ai-strip`, `#testimonials`, `#contact`.
 - **Utility classes**: `.container` (max-width 1160px), `.section` (96px padding), `.btn`, `.label`, `.title`, `.subtitle`.
-- **Chatbot IDs** are prefixed `ks-` (`#ks-bubble`, `#ks-window`, `#ks-msgs`, `#ks-quick`, `#ks-input`, `#ks-send`).
 - Contact email: `kavyrosolutions@gmail.com`

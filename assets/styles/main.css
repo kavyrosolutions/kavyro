@@ -18,3 +18,21 @@ body {
     color: var(--gray);
     line-height: 1.65;
 }
+
+/* Keyboard users get a ring, mouse users do not. */
+:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 3px;
+}
+
+/* First tab stop on every page. Parked above the viewport until focused, then
+   drops in over the fixed nav (z-index 1000) and the mobile overlay. */
+.skip-link {
+    position: absolute; top: 12px; left: 12px; z-index: 1001;
+    padding: 10px 16px; border-radius: 8px;
+    background: var(--blue-dark); color: var(--white);
+    font-weight: 600; text-decoration: none;
+    transform: translateY(calc(-100% - 24px));
+    transition: transform 180ms ease-out;
+}
+.skip-link:focus { transform: none; }

@@ -1,1 +1,10 @@
 .env
+.htaccess
+dist/
+node_modules/
+.next/
+.open-next/
+.wrangler/
+.work/
+.claude/
+next-env.d.ts
