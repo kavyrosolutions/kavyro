@@ -18,7 +18,7 @@
 .btn {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 13px 28px; border-radius: 7px;
-    font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.9rem;
+    font-family: 'Poppins', 'Poppins Fallback', sans-serif; font-weight: 600; font-size: 0.9rem;
     border: 2px solid transparent; white-space: nowrap;
     transition: transform 0.2s, background 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
@@ -68,7 +68,7 @@
     color: #fff; font-size: 0.75rem; font-weight: 700;
     display: flex; align-items: center; justify-content: center;
 }
-.steps b { display: block; color: var(--blue); font-family: 'Montserrat', sans-serif; font-size: 0.95rem; margin-bottom: 2px; }
+.steps b { display: block; color: var(--blue); font-family: 'Montserrat', 'Montserrat Fallback', sans-serif; font-size: 0.95rem; margin-bottom: 2px; }
 
 /* ── FAQ accordion (plain <details>, no script) ── */
 .faq details {
@@ -79,7 +79,7 @@
     cursor: pointer; list-style: none;
     display: flex; justify-content: space-between; gap: 12px; align-items: center;
     padding: 14px 0;
-    font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--blue);
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--blue);
 }
 .faq summary::-webkit-details-marker { display: none; }
 .faq summary::after { content: '+'; color: var(--cyan); font-size: 1.3rem; line-height: 1; flex-shrink: 0; }
@@ -94,7 +94,7 @@
     background: linear-gradient(140deg, var(--blue-dark), var(--blue)); color: #fff;
 }
 .side-card h2 {
-    font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.05rem;
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif; font-weight: 800; font-size: 1.05rem;
     color: #fff; margin-bottom: 8px;
 }
 .side-card p { font-size: 0.86rem; color: rgba(255,255,255,0.78); line-height: 1.6; margin-bottom: 16px; }
@@ -103,7 +103,7 @@
 
 .related { margin-top: 16px; }
 .related h2 {
-    font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.82rem;
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif; font-weight: 700; font-size: 0.82rem;
     color: var(--blue); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px;
 }
 .related ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
@@ -120,10 +120,10 @@
     border-radius: 14px; padding: 36px 28px; text-align: center; margin-top: 48px;
 }
 .cta-band h2 {
-    font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.5rem;
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif; font-weight: 900; font-size: 1.5rem;
     color: var(--blue-dark); margin-bottom: 8px;
 }
-.cta-band p { font-family: 'Poppins', sans-serif; color: rgba(13,61,115,0.8); margin-bottom: 18px; }
+.cta-band p { font-family: 'Poppins', 'Poppins Fallback', sans-serif; color: rgba(13,61,115,0.8); margin-bottom: 18px; }
 .cta-band .actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
 
 /* ── Small screens ── */

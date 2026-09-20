@@ -25,13 +25,13 @@ nav {
 .logo-icon img { width: 40px; height: 40px; object-fit: contain; border-radius: 3px; }
 .logo-text { display: flex; flex-direction: column; line-height: 1; }
 .logo-name { 
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
     font-size: 1.05rem;
     font-weight: 800;
     color: var(--blue);
     letter-spacing: 0.02em;
     }
-.logo-sub  { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; color: var(--gray); text-transform: uppercase; font-family: 'Poppins', sans-serif; }
+.logo-sub  { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; color: var(--gray); text-transform: uppercase; font-family: 'Poppins', 'Poppins Fallback', sans-serif; }
 .nav-back {
     display: inline-flex; align-items: center; gap: 6px; min-height: 44px;
     font-size: 0.87rem; font-weight: 500;
@@ -68,7 +68,7 @@ nav {
 .hero-breadcrumb a { color: var(--cyan); }
 .hero-breadcrumb a:hover { text-decoration: underline; }
 .page-hero h1 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
     font-size: clamp(2rem, 4vw, 3rem); font-weight: 900;
     color: #fff; margin-bottom: 12px;
 }
@@ -102,7 +102,7 @@ nav {
     padding: 24px;
 }
 .toc h2 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
     font-weight: 700; font-size: 0.82rem;
     color: var(--blue); text-transform: uppercase;
     letter-spacing: 0.1em; margin-bottom: 16px;
@@ -127,7 +127,7 @@ nav {
 .legal-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
 
 .legal-section h2 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
     font-size: 1.35rem; font-weight: 800;
     color: var(--blue); margin-bottom: 16px;
     display: flex; align-items: center; gap: 10px;
@@ -140,13 +140,13 @@ nav {
 }
 
 .legal-section h3 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
     font-size: 1rem; font-weight: 700;
     color: var(--blue); margin: 24px 0 10px;
 }
 
 .legal-section p {
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Nunito', 'Nunito Fallback', sans-serif;
     font-size: 0.95rem; color: var(--gray);
     margin-bottom: 14px; line-height: 1.8;
 }
@@ -160,7 +160,7 @@ nav {
     margin: 12px 0 16px 20px;
 }
 .legal-section li {
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Nunito', 'Nunito Fallback', sans-serif;
     font-size: 0.95rem; color: var(--gray);
     line-height: 1.8; margin-bottom: 6px;
 }
@@ -174,7 +174,7 @@ nav {
     margin: 20px 0;
 }
 .info-box p {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', 'Poppins Fallback', sans-serif;
     font-size: 0.88rem; color: var(--blue);
     margin: 0; font-weight: 500;
 }
@@ -188,7 +188,7 @@ nav {
     margin: 20px 0;
 }
 .warn-box p {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', 'Poppins Fallback', sans-serif;
     font-size: 0.88rem; color: #92400e;
     margin: 0; font-weight: 500;
 }
@@ -209,8 +209,8 @@ footer {
     display: flex; align-items: center; justify-content: center;
 }
 .f-logo-icon img { width: 36px; height: 36px; object-fit: contain; border-radius: 3px; }
-.f-logo-name { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.95rem; color: #fff; }
-.f-logo-sub  { font-size: 0.75rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.65); display: block; font-family: 'Poppins', sans-serif; }
+.f-logo-name { font-family: 'Montserrat', 'Montserrat Fallback', sans-serif; font-weight: 800; font-size: 0.95rem; color: #fff; }
+.f-logo-sub  { font-size: 0.75rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.65); display: block; font-family: 'Poppins', 'Poppins Fallback', sans-serif; }
 .footer-copy { font-size: 0.82rem; color: rgba(255,255,255,0.62); }
 .footer-links { display: flex; gap: 20px; }
 .footer-links a { display: inline-block; padding: 8px 0; font-size: 0.82rem; color: rgba(255,255,255,0.65); transition: color 0.2s; }

@@ -21,13 +21,13 @@ img { display: block; max-width: 100%; }
     text-transform: uppercase;
     color: var(--blue);      /* cyan on white was 2:1; cyan is kept for the navy #process */
     margin-bottom: 12px;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', 'Poppins Fallback', sans-serif;
 }
 #process .label { color: var(--cyan); }
 .label-dark { color: var(--blue-dark); }
 
 .title {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
     font-size: clamp(1.9rem, 4vw, 2.75rem);
     font-weight: 800;
     line-height: 1.18;
@@ -38,7 +38,7 @@ img { display: block; max-width: 100%; }
 .title.dark  { color: var(--blue-dark); }
 
 .subtitle {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', 'Poppins Fallback', sans-serif;
     font-size: 1rem;
     font-weight: 400;
     color: var(--gray);
@@ -56,7 +56,7 @@ img { display: block; max-width: 100%; }
     gap: 8px;
     padding: 13px 28px;
     border-radius: 7px;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', 'Poppins Fallback', sans-serif;
     font-weight: 600;
     font-size: 0.9rem;
     cursor: pointer;
@@ -124,14 +124,14 @@ nav {
 .logo-icon svg { width: 22px; height: 22px; }
 .logo-text { display: flex; flex-direction: column; line-height: 1; }
 .logo-name {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
     font-size: 1.05rem;
     font-weight: 800;
     color: var(--blue);
     letter-spacing: 0.02em;
 }
 .logo-sub {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', 'Poppins Fallback', sans-serif;
     font-size: 0.75rem;
     font-weight: 500;
     letter-spacing: 0.1em;
@@ -170,7 +170,7 @@ nav {
 }
 .mobile-nav.open { display: flex; }
 .mobile-nav a {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
     font-size: 1.6rem;
     font-weight: 700;
     color: var(--gray);
@@ -241,7 +241,7 @@ nav {
     border: 1px solid rgba(84,200,218,0.35);
     padding: 7px 18px;
     border-radius: 100px;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', 'Poppins Fallback', sans-serif;
     font-size: 0.76rem;
     font-weight: 500;
     color: var(--cyan);
@@ -256,7 +256,7 @@ nav {
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
 .hero-title {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
     font-size: clamp(2.2rem, 4vw, 3.15rem);
     font-weight: 900;
     line-height: 1.1;
@@ -267,7 +267,7 @@ nav {
 .hero-title .cyan { color: var(--cyan); }
 
 .hero-desc {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', 'Poppins Fallback', sans-serif;
     font-size: 1.05rem;
     font-weight: 300;
     color: rgba(255,255,255,0.78);
@@ -286,7 +286,7 @@ nav {
     border-top: 1px solid rgba(255,255,255,0.14);
 }
 .stat-num {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
     font-size: 2.1rem;
     font-weight: 900;
     color: var(--cyan);
@@ -296,7 +296,7 @@ nav {
     font-size: 0.78rem;
     color: rgba(255,255,255,0.6);
     margin-top: 4px;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', 'Poppins Fallback', sans-serif;
 }
 
 /* Hero right panel */
@@ -321,7 +321,7 @@ nav {
     font-size: 1.3rem;
 }
 .panel-title {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
     font-weight: 700; font-size: 0.95rem; color: #fff;
 }
 .panel-sub { font-size: 0.78rem; color: rgba(255,255,255,0.6); }
@@ -362,7 +362,7 @@ a.panel-item { text-decoration: none; color: inherit; }
     display: flex; align-items: center; gap: 7px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.2);
     white-space: nowrap;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', 'Poppins Fallback', sans-serif;
 }
 .pill-top  { top: -18px; right: -18px; }
 .pill-bot  { bottom: -18px; left: -18px; }
@@ -393,7 +393,7 @@ a.panel-item { text-decoration: none; color: inherit; }
 .trust-divider { width: 1px; height: 28px; background: var(--border); flex-shrink: 0; }
 .trust-logos { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
 .trust-logo {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
     font-weight: 700;
     font-size: 0.85rem;
     color: #5f6e84;   /* 4.8:1 on the grey-light band; the old #aab4c4 was 2.1:1 */
@@ -454,14 +454,14 @@ a.panel-item { text-decoration: none; color: inherit; }
     margin-bottom: 20px;
 }
 .svc-title {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
     font-weight: 700;
     font-size: 1rem;
     color: var(--blue);
     margin-bottom: 10px;
 }
 .svc-desc {
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Nunito', 'Nunito Fallback', sans-serif;
     font-size: 0.9rem;
     color: var(--gray);
     line-height: 1.7;
@@ -473,7 +473,7 @@ a.panel-item { text-decoration: none; color: inherit; }
 .svc-card:hover .svc-title a { color: var(--blue-mid); }
 .svc-more {
     display: inline-block; margin-top: 14px;
-    font-family: 'Poppins', sans-serif; font-size: 0.82rem; font-weight: 600;
+    font-family: 'Poppins', 'Poppins Fallback', sans-serif; font-size: 0.82rem; font-weight: 600;
     color: var(--blue); transition: transform var(--ease);
 }
 .svc-card:hover .svc-more { transform: translateX(4px); }
@@ -498,12 +498,12 @@ a.panel-item { text-decoration: none; color: inherit; }
     color: #fff;
 }
 .why-item h3 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
     font-weight: 700; font-size: 0.95rem;
     color: var(--blue); margin-bottom: 5px;
 }
 .why-item p {
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Nunito', 'Nunito Fallback', sans-serif;
     font-size: 0.9rem; color: var(--gray);
 }
 
@@ -527,7 +527,7 @@ a.panel-item { text-decoration: none; color: inherit; }
     border: none;
 }
 .sb-num {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
     font-size: 2.5rem; font-weight: 900;
     color: var(--blue);   /* cyan on the white box is 2:1, short of the 3:1 large text needs */
 }
@@ -559,7 +559,7 @@ a.panel-item { text-decoration: none; color: inherit; }
     border-radius: 50%;
     background: var(--cyan);
     color: var(--blue-dark);
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
     font-weight: 900; font-size: 1.1rem;
     display: flex; align-items: center; justify-content: center;
     margin: 0 auto 22px;
@@ -567,12 +567,12 @@ a.panel-item { text-decoration: none; color: inherit; }
     box-shadow: 0 4px 20px rgba(84,200,218,0.35);
 }
 .step h3 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
     font-weight: 700; font-size: 0.88rem;
     color: #fff; margin-bottom: 8px;
 }
 .step p {
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Nunito', 'Nunito Fallback', sans-serif;
     font-size: 0.82rem; color: rgba(255,255,255,0.65);
 }
 
@@ -600,7 +600,7 @@ a.panel-item { text-decoration: none; color: inherit; }
 .ai-card:hover { border-color: var(--cyan); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(84,200,218,0.12); }
 .ai-card.span2 { grid-column: 1 / -1; background: linear-gradient(135deg, rgba(22,88,161,0.06), rgba(84,200,218,0.1)); }
 .ai-card-icon { font-size: 2rem; margin-bottom: 10px; }
-.ai-card-title { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.88rem; color: var(--blue); margin-bottom: 4px; }
+.ai-card-title { font-family: 'Montserrat', 'Montserrat Fallback', sans-serif; font-weight: 700; font-size: 0.88rem; color: var(--blue); margin-bottom: 4px; }
 .ai-card-desc { font-size: 0.78rem; color: var(--gray); }
 
 .ai-content .label { display: block; }
@@ -616,7 +616,7 @@ a.panel-item { text-decoration: none; color: inherit; }
     font-size: 0.75rem; color: #fff; font-weight: 700;
     margin-top: 2px;
 }
-.ai-list-item p { font-family: 'Nunito', sans-serif; font-size: 0.92rem; color: var(--gray); }
+.ai-list-item p { font-family: 'Nunito', 'Nunito Fallback', sans-serif; font-size: 0.92rem; color: var(--gray); }
 .ai-list-item strong { color: var(--blue); font-weight: 600; }
 
 /* ─── TESTIMONIALS ───────────────────────────────────────────── */
@@ -647,7 +647,7 @@ a.panel-item { text-decoration: none; color: inherit; }
 .testi-card:hover { box-shadow: 0 12px 36px rgba(22,88,161,0.1); border-color: rgba(22,88,161,0.2); }
 .testi-stars { color: #f59e0b; font-size: 0.85rem; margin-bottom: 14px; letter-spacing: 2px; }
 .testi-text {
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Nunito', 'Nunito Fallback', sans-serif;
     font-size: 0.93rem; color: var(--gray);
     line-height: 1.78; font-style: italic;
     margin-bottom: 24px;
@@ -657,11 +657,11 @@ a.panel-item { text-decoration: none; color: inherit; }
     width: 44px; height: 44px; border-radius: 50%;
     background: linear-gradient(135deg, var(--blue), var(--cyan));
     display: flex; align-items: center; justify-content: center;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
     font-weight: 700; font-size: 1rem; color: #fff;
 }
 .testi-name {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
     font-weight: 700; font-size: 0.9rem; color: var(--blue);
 }
 .testi-role { font-size: 0.78rem; color: var(--gray); }
@@ -678,13 +678,13 @@ a.panel-item { text-decoration: none; color: inherit; }
     cursor: pointer; list-style: none;
     display: flex; justify-content: space-between; align-items: center; gap: 12px;
     padding: 16px 0;
-    font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--blue);
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--blue);
 }
 .faq summary::-webkit-details-marker { display: none; }
 .faq summary::after { content: '+'; color: var(--cyan); font-size: 1.3rem; line-height: 1; flex-shrink: 0; }
 .faq details[open] summary::after { content: '–'; }
 .faq details p {
-    font-family: 'Nunito', sans-serif; font-size: 0.92rem; color: var(--gray);
+    font-family: 'Nunito', 'Nunito Fallback', sans-serif; font-size: 0.92rem; color: var(--gray);
     line-height: 1.7; padding-bottom: 16px;
 }
 
@@ -708,7 +708,7 @@ a.panel-item { text-decoration: none; color: inherit; }
     margin-top: 52px;
 }
 .contact-left h3 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
     font-size: 1.45rem; font-weight: 800;
     color: var(--blue); margin-bottom: 12px;
 }
@@ -724,7 +724,7 @@ a.panel-item { text-decoration: none; color: inherit; }
 }
 .c-detail span { font-size: 0.75rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.08em; display: block; }
 .c-detail strong {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
     font-weight: 700; font-size: 0.9rem; color: var(--blue);
 }
 
@@ -736,7 +736,7 @@ a.panel-item { text-decoration: none; color: inherit; }
     border: 1px solid var(--border);
     display: flex; align-items: center; justify-content: center;
     font-size: 0.82rem; font-weight: 800;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
     color: var(--blue); cursor: pointer;
     transition: var(--ease);
 }
@@ -774,7 +774,7 @@ a.panel-item { text-decoration: none; color: inherit; }
     border: 1.5px solid var(--border);
     border-radius: 8px;
     padding: 12px 16px;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', 'Poppins Fallback', sans-serif;
     font-size: 0.9rem;
     color: #1a1a2e;
     outline: none;
@@ -813,20 +813,20 @@ footer {
 }
 .f-logo-icon svg { width: 18px; height: 18px; }
 .f-logo-name {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
     font-size: 0.95rem; font-weight: 800; color: #fff;
 }
 .f-logo-sub {
     font-size: 0.75rem; letter-spacing: 0.1em;
     color: rgba(255,255,255,0.65); display: block;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', 'Poppins Fallback', sans-serif;
 }
 .f-brand p {
     font-size: 0.86rem; color: rgba(255,255,255,0.65);
     line-height: 1.7; max-width: 220px;
 }
 .f-col h3 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
     font-weight: 700; font-size: 0.85rem;
     color: #fff; margin-bottom: 16px;
     letter-spacing: 0.04em;
