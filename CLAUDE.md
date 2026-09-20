@@ -12,10 +12,16 @@ Open the site in a browser via Laragon's local server (typically `http://kavyro.
 
 ## File Structure
 
-- `index.html` — Main landing page (all CSS and JS are inline in this single file, ~1 900 lines)
-- `privacy-policy.html` — Privacy policy page (self-contained)
-- `terms-of-service.html` — Terms of service page (self-contained)
-- `logo.png` — Site logo used across all pages
+- `index.html` — Main landing page
+- `digital-marketing-seo.html`, `web-design.html`, `video-editing.html`, `virtual-assistant-services.html`, `ai-automation.html` — Service pages (same shell as the legal pages plus `assets/styles/service-page.css`; each carries Service, FAQPage and BreadcrumbList JSON-LD)
+- `about.html` — About page (same shell)
+- `privacy-policy.html` — Privacy policy page
+- `terms-of-service.html` — Terms of service page
+- `assets/` — `styles/`, `scripts/main.js`, self-hosted `fonts/`, `logo.png`/`logo.webp`, `og-image.jpg`
+- `robots.txt`, `sitemap.xml`, `_headers` — crawl and Cloudflare header config, deployed as-is
+
+Site-wide rule: no prices, payment terms or billing language anywhere. Fees are
+left to the proposal. Do not add pricing, packages or "affordable" copy.
 
 ## Architecture
 

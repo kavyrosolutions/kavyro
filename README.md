@@ -10,21 +10,31 @@ Live at [kavyrosolutions.com](https://kavyrosolutions.com).
 
 The landing page runs top to bottom as a single narrative: a hero pitch, trust
 signals, the service catalogue, reasons to choose the agency, the engagement
-process, an AI capability strip, testimonials, a closing call to action, and a
-contact form.
+process, an AI capability strip, testimonials, an FAQ, a closing call to
+action, and a contact form.
 
 Nine services are presented: digital marketing, SEO optimization, video editing,
 web development and design, graphic design, content marketing, paid advertising,
-social media management, and virtual assistant services.
+social media management, and virtual assistant services. Each service card
+links to one of five service pages, which carry the detail, an FAQ and their
+own Service and FAQPage structured data:
 
-Two supporting pages, `privacy-policy.html` and `terms-of-service.html`, are
-linked from the footer.
+- `digital-marketing-seo.html` — SEO, paid ads, social media, content
+- `web-design.html` — websites, landing pages, e-commerce, graphic design
+- `video-editing.html`
+- `virtual-assistant-services.html`
+- `ai-automation.html`
+
+`about.html`, `privacy-policy.html` and `terms-of-service.html` complete the
+set. The service and About pages share `legal-page.css` for their shell and
+add `service-page.css` on top. Nothing on the site quotes a price; fees are
+left to the proposal, and the pages are written that way on purpose.
 
 ## Stack
 
 Plain HTML, CSS, and vanilla JavaScript. No framework, no bundler, no
-dependencies. Markup lives in the three HTML files; styles and scripts are split
-under `assets/`.
+dependencies. Markup lives in the HTML files at the root; styles, scripts and
+fonts are split under `assets/`.
 
 ## Development
 
