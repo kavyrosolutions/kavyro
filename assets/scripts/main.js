@@ -161,3 +161,85 @@ links.forEach(a => { a.style.color = a.getAttribute('href') === '#' + cur ? 'var
   }, { rootMargin: '200px' });
   io.observe(slot);
 })();
+
+/* Hero tour: the five roles advance on their own. Pauses on hover, on focus,
+   while the panel is off screen, and for anyone who asked for less motion —
+   and the Pause control is real, so nobody is stuck watching it move. */
+(function () {
+  const tour = document.getElementById('heroTour');
+  if (!tour) return;
+
+  const steps = [...tour.querySelectorAll('.tour-step')];
+  const dot = tour.querySelector('.tour-dot');
+  const fill = tour.querySelector('.tour-fill');
+  const caption = tour.querySelector('.tour-caption');
+  const toggle = tour.querySelector('.tour-toggle');
+  if (!steps.length) return;
+
+  const STEP_MS = 4600;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let index = 0;
+  let timer = null;
+  let paused = reduced;
+  let visible = true;
+
+  function place(i) {
+    const step = steps[i];
+    steps.forEach((s, n) => s.classList.toggle('is-active', n === i));
+    if (dot) dot.style.setProperty('--dot-y', (step.offsetTop + step.offsetHeight / 2 - 4) + 'px');
+    if (caption) {
+      caption.textContent = step.dataset.caption || '';
+      caption.classList.remove('is-new');
+      void caption.offsetWidth;
+      caption.classList.add('is-new');
+    }
+    if (fill) {
+      fill.style.animation = 'none';
+      void fill.offsetWidth;
+      fill.style.animation = '';
+    }
+  }
+
+  function run() {
+    clearTimeout(timer);
+    if (paused || !visible) { tour.classList.remove('is-playing'); return; }
+    tour.classList.add('is-playing');
+    timer = setTimeout(() => {
+      index = (index + 1) % steps.length;
+      place(index);
+      run();
+    }, STEP_MS);
+  }
+
+  function goTo(i) { index = i; place(index); run(); }
+
+  place(0);
+  run();
+
+  steps.forEach((step, i) => {
+    step.addEventListener('mouseenter', () => { paused = true; run(); goTo(i); });
+    step.addEventListener('focus', () => { paused = true; run(); goTo(i); });
+  });
+  tour.addEventListener('mouseleave', () => {
+    if (toggle && toggle.dataset.state === 'paused') return;
+    paused = false;
+    run();
+  });
+
+  if (toggle) {
+    if (reduced) { toggle.dataset.state = 'paused'; toggle.textContent = 'Play'; }
+    toggle.addEventListener('click', () => {
+      const nowPaused = toggle.dataset.state === 'playing';
+      toggle.dataset.state = nowPaused ? 'paused' : 'playing';
+      toggle.textContent = nowPaused ? 'Play' : 'Pause';
+      paused = nowPaused;
+      run();
+    });
+  }
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver((entries) => {
+      entries.forEach((e) => { visible = e.isIntersecting; run(); });
+    }, { threshold: 0.25 }).observe(tour);
+  }
+})();

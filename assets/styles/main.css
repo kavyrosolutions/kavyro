@@ -190,7 +190,7 @@ nav {
 .icon .stroke { fill: none; stroke: var(--ic, currentColor); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
 .icon .accent { fill: var(--ic2, var(--cyan)); }
 .icon .accent.stroke { fill: none; stroke: var(--ic2, var(--cyan)); }
-.svc-icon, .ai-card-icon, .svc-item .ico { color: var(--blue); }
+.ai-card-icon, .svc-item .ico { color: var(--blue); }
 .related a .icon, .legal-section p > .icon, .legal-section li > .icon { color: var(--blue-mid); margin-right: 7px; }
 .panel-avatar, .pi-icon { color: #fff; }
 .pi-icon .icon { stroke-width: 1.9; }
@@ -241,30 +241,28 @@ nav {
     70%      { transform: translateY(1%) scale(0.99); }
 }
 
-.svc-icon, .svc-item .ico, .why-icon, .ai-card-icon, .c-icon, .pi-icon, .panel-avatar { transition: transform 0.3s cubic-bezier(0.34, 1.4, 0.64, 1); }
-.svc-card:hover .svc-icon, .svc-item:hover .ico, .why-item:hover .why-icon,
+.svc-item .ico, .why-icon, .ai-card-icon, .c-icon, .pi-icon, .panel-avatar { transition: transform 0.3s cubic-bezier(0.34, 1.4, 0.64, 1); }
+.svc-item:hover .ico, .why-item:hover .why-icon,
 .ai-card:hover .ai-card-icon, .c-item:hover .c-icon, .panel-item:hover .pi-icon { transform: translateY(-3px) scale(1.08); }
 
 
 @media (prefers-reduced-motion: reduce) {
     .icon.is-armed > *, .icon.is-live > * { opacity: 1; transform: none; animation: none; }
-    .svc-card:hover .svc-icon, .svc-item:hover .ico, .why-item:hover .why-icon,
+    .svc-item:hover .ico, .why-item:hover .why-icon,
     .ai-card:hover .ai-card-icon, .c-item:hover .c-icon, .panel-item:hover .pi-icon { transform: none; }
 }
 
 /* Icon tiles: flat lilac squares read as dull, so the tile now carries a
    ring and a soft brand glow, and on hover it fills with the gradient and
    flips the icon to white. */
-.svc-icon, .svc-item .ico {
+.svc-item .ico {
     position: relative;
     border: 1px solid rgba(22,88,161,0.12);
     box-shadow: 0 6px 18px rgba(22,88,161,0.08), inset 0 1px 0 rgba(255,255,255,0.7);
     transition: transform 0.3s cubic-bezier(0.34, 1.4, 0.64, 1), background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
-.svc-icon { font-size: 1.7rem; }
 .svc-item .ico { font-size: 1.35rem; }
 
-.svc-card:hover .svc-icon,
 .svc-item:hover .ico {
     background: linear-gradient(135deg, var(--blue), var(--cyan));
     border-color: transparent;
@@ -342,4 +340,4 @@ nav {
 }
 
 /* On a hovered card the tile fills with the gradient, so the icon goes white. */
-.svc-card:hover .svc-icon .icon, .svc-item:hover .ico .icon { --ic: #fff; --ic2: rgba(255,255,255,0.82); }
+.svc-item:hover .ico .icon { --ic: #fff; --ic2: rgba(255,255,255,0.82); }
