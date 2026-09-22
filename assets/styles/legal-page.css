@@ -87,8 +87,8 @@ nav {
 /* ── Layout ── */
 .legal-layout {
     display: grid;
-    grid-template-columns: 240px 1fr;
-    gap: 48px;
+    grid-template-columns: 288px 1fr;
+    gap: 44px;
     padding: 64px 0 96px;
     align-items: start;
 }
