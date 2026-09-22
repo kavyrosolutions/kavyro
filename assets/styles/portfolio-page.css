@@ -125,6 +125,16 @@
     font-size: 0.93rem; line-height: 1.75; color: var(--gray);
 }
 
+/* Running text sits at the same weight as the body grey, so links in it are
+   underlined rather than left to colour alone. */
+.pf-head p a, .sys-note a, .pf-cap dd a {
+    text-decoration: underline; text-underline-offset: 2px;
+}
+
+/* ── FAQ (accordion styling comes from service-page.css) ── */
+.pf-faq { max-width: 760px; }
+.pf-faq details { border-color: var(--border); }
+
 /* ── Creative gallery ── */
 .pf-gallery {
     display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
