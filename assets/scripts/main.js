@@ -69,41 +69,64 @@ secs.forEach(s => { if (window.scrollY >= s.offsetTop - 90) cur = s.id; });
 links.forEach(a => { a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--blue)' : ''; });
 });
 
-// Fade-in on scroll
-const observer = new IntersectionObserver((entries) => {
-entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; } });
-}, { threshold: 0.1 });
-document.querySelectorAll('.svc-card, .why-item, .step, .testi-card, .ai-card').forEach(el => {
-el.style.opacity = '0';
-el.style.transform = 'translateY(20px)';
-el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-observer.observe(el);
-});
-/* Inline icons draw themselves the first time they scroll into view. Armed
-   from JS so that with scripting off (or reduced motion) they simply render
-   finished rather than staying invisible. */
+/* Scroll reveal. Blocks fly up as they arrive, staggered within their own
+   row so a grid arrives as a sequence rather than all at once. Classes do
+   the work; JS only decides when, and only the first time. */
 (function () {
-  const icons = document.querySelectorAll('svg.icon');
-  if (!icons.length || !('IntersectionObserver' in window)) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const SELECTOR = [
+    '.svc-card', '.why-item', '.step', '.testi-card', '.ai-card', '.ai-list-item',
+    '.svc-item', '.sys', '.work', '.plat', '.pf-gallery figure', '.pf-cap',
+    '.c-item', '.faq details', '.legal-section', '.pf-head', '.trust-logo',
+  ].join(', ');
 
-  const draw = new IntersectionObserver((entries) => {
+  const blocks = document.querySelectorAll(SELECTOR);
+  if (!blocks.length) return;
+  if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const io = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
       if (!e.isIntersecting) return;
-      e.target.classList.add('is-drawn');
-      draw.unobserve(e.target);
+      e.target.classList.add('is-in');
+      e.target.classList.remove('is-waiting');
+      io.unobserve(e.target);
     });
-  }, { threshold: 0.25, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+  blocks.forEach((el, i) => {
+    const row = el.parentElement ? [...el.parentElement.children].indexOf(el) : i;
+    el.style.setProperty('--reveal-delay', Math.min(row % 6, 5) * 70 + 'ms');
+    el.classList.add('reveal', 'is-waiting');
+    io.observe(el);
+  });
+
+  // Anything the observer never reports still ends up visible.
+  setTimeout(function () {
+    blocks.forEach((el) => el.classList.remove('is-waiting'));
+  }, 3000);
+})();
+/* Inline icons: armed from JS so that with scripting off they simply render
+   finished, then set running whenever they are on screen and idle when they
+   are not, so a long page is never animating things nobody is looking at. */
+(function () {
+  const icons = document.querySelectorAll('svg.icon');
+  if (!icons.length) return;
+  if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    icons.forEach((icon) => icon.classList.add('is-live'));
+    return;
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => e.target.classList.toggle('is-live', e.isIntersecting));
+  }, { threshold: 0.2, rootMargin: '0px 0px -40px 0px' });
 
   icons.forEach((icon) => {
     icon.classList.add('is-armed');
-    draw.observe(icon);
+    io.observe(icon);
   });
 
-  // Whatever happens — a hidden tab, an observer that never fires — no icon
-  // stays invisible for more than a few seconds.
+  // Nothing stays invisible if the observer never reports.
   setTimeout(function () {
-    icons.forEach((icon) => icon.classList.add('is-drawn'));
+    icons.forEach((icon) => { if (!icon.classList.contains('is-live')) icon.classList.add('is-live'); });
   }, 2500);
 })();
 
