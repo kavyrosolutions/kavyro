@@ -25,9 +25,9 @@ own Service and FAQPage structured data:
 - `virtual-assistant-services.html`
 - `ai-automation.html`
 
-`portfolio.html` collects the agency work — client websites, the custom business systems,
-paid campaigns, email, social content and video — and links out to the live
-sites. Its imagery is real: screenshots of each live site and the campaign
+`portfolio.html` collects the agency work — client websites, the custom
+business systems built for operations teams, paid campaigns, email, social
+content and video — and links out to the live sites. Its imagery is real: screenshots of each live site and the campaign
 creative as it was published, stored as webp under `assets/portfolio/`. Re-shoot
 a screenshot with headless Chrome when a client site changes:
 
@@ -36,10 +36,14 @@ chrome --headless=new --hide-scrollbars --virtual-time-budget=20000 \
   --window-size=1440,900 --screenshot=out.png https://example.com/
 ```
 
-then crop to 16:10 and convert to webp at 1280×800. `about.html`, `privacy-policy.html` and `terms-of-service.html` complete
-the set. The service, About and Portfolio pages share `legal-page.css` for
-their shell and add `service-page.css` on top; Portfolio adds
-`portfolio-page.css` for its full-width work sections. Nothing on the site quotes a price; fees are
+then crop to 16:10 and convert to webp at 1280×800. The business systems have
+no screenshots on purpose: they run inside client offices, so that section is
+typographic rather than illustrated with mock-ups.
+
+`about.html`, `privacy-policy.html` and `terms-of-service.html` complete the
+set. The service, About and Portfolio pages share `legal-page.css` for their
+shell and add `service-page.css` on top; Portfolio adds `portfolio-page.css`
+for its full-width work sections. Nothing on the site quotes a price; fees are
 left to the proposal, and the pages are written that way on purpose.
 
 ## Stack
