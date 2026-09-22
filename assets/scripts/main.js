@@ -106,3 +106,35 @@ observer.observe(el);
     icons.forEach((icon) => icon.classList.add('is-drawn'));
   }, 2500);
 })();
+
+/* Lottie slot. One element, one animation, and the 164KB player is only
+   fetched if that element is on the page and the visitor has scrolled it
+   into view — everything else on this site animates in CSS. */
+(function () {
+  const slot = document.querySelector('[data-lottie]');
+  if (!slot || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  let started = false;
+  const start = () => {
+    if (started) return;
+    started = true;
+    const s = document.createElement('script');
+    s.src = 'assets/scripts/lottie-light.min.js?v=20260922h';
+    s.onload = () => {
+      window.lottie.loadAnimation({
+        container: slot,
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: slot.dataset.lottie,
+      });
+    };
+    document.body.appendChild(s);
+  };
+
+  if (!('IntersectionObserver' in window)) { start(); return; }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { start(); io.disconnect(); } });
+  }, { rootMargin: '200px' });
+  io.observe(slot);
+})();
