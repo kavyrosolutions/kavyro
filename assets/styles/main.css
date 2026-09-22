@@ -183,10 +183,13 @@ nav {
    were read out by screen readers. */
 .icon {
     width: 1em; height: 1em; display: inline-block; flex-shrink: 0;
-    fill: none; stroke: currentColor; stroke-width: 1.7;
-    stroke-linecap: round; stroke-linejoin: round;
+    fill: currentColor; stroke: none;
     vertical-align: -0.14em;
 }
+/* A few shapes in the set are lines rather than solids. */
+.icon .stroke { fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.icon .accent { fill: var(--cyan); }
+.icon .accent.stroke { fill: none; stroke: var(--cyan); }
 .svc-icon, .ai-card-icon, .svc-item .ico { color: var(--blue); }
 .related a .icon, .legal-section p > .icon, .legal-section li > .icon { color: var(--blue-mid); margin-right: 7px; }
 .panel-avatar, .pi-icon { color: #fff; }
@@ -196,35 +199,38 @@ nav {
    gradient on light tiles, and the last shape of each drawing — the detail
    that says which icon it is — takes the cyan. On the dark slots both stay
    in currentColor so they read as white. */
-.svc-icon .icon, .svc-item .ico .icon, .ai-card-icon .icon, .related a .icon { stroke: url(#ico-grad); }
-.svc-icon .icon .accent, .svc-item .ico .icon .accent, .ai-card-icon .icon .accent, .related a .icon .accent { stroke: var(--cyan); }
-.why-icon .icon .accent, .c-icon .icon .accent, .panel-avatar .icon .accent, .pi-icon .icon .accent { stroke: var(--cyan-light); }
+.svc-icon .icon, .svc-item .ico .icon, .ai-card-icon .icon, .related a .icon { fill: url(#ico-grad); }
+.svc-icon .icon .stroke, .svc-item .ico .icon .stroke, .ai-card-icon .icon .stroke, .related a .icon .stroke { stroke: url(#ico-grad); }
+.svc-icon .icon .accent, .svc-item .ico .icon .accent, .ai-card-icon .icon .accent, .related a .icon .accent { fill: var(--cyan); }
+.svc-icon .icon .accent.stroke, .svc-item .ico .icon .accent.stroke { stroke: var(--cyan); fill: none; }
+.why-icon .icon .accent, .c-icon .icon .accent, .panel-avatar .icon .accent, .pi-icon .icon .accent { fill: var(--cyan-light); }
+.why-icon .icon .accent.stroke, .c-icon .icon .accent.stroke, .pi-icon .icon .accent.stroke { stroke: var(--cyan-light); fill: none; }
 
 /* Motion: each icon draws itself once, the first time it scrolls into view,
    and lifts slightly when its card is hovered. pathLength="100" on every
    shape means one dash length works for all of them. */
-.icon > * { stroke-dasharray: 100; stroke-dashoffset: 0; }
-.icon.is-armed > * { stroke-dashoffset: 100; opacity: 0; }
-/* The finished state is declared as well as animated, so an icon is never
-   left invisible if the animation is skipped or throttled. */
-.icon.is-drawn > * { stroke-dashoffset: 0; opacity: 1; animation: ico-draw 0.75s cubic-bezier(0.65, 0, 0.35, 1) forwards; }
-.icon.is-drawn > *:nth-child(2) { animation-delay: 0.12s; }
-.icon.is-drawn > *:nth-child(3) { animation-delay: 0.22s; }
-.icon.is-drawn > *:nth-child(4) { animation-delay: 0.3s; }
-.icon.is-drawn > *:nth-child(n+5) { animation-delay: 0.36s; }
-@keyframes ico-draw {
-    from { stroke-dashoffset: 100; opacity: 0; }
-    20%  { opacity: 1; }
-    to   { stroke-dashoffset: 0; opacity: 1; }
+/* Motion: solid shapes cannot be "drawn", so each part rises into place
+   with a short overshoot, one after another — the same feel as the hero
+   animation, in CSS. */
+.icon > * { transform-box: fill-box; transform-origin: 50% 100%; }
+.icon.is-armed > * { opacity: 0; transform: translateY(18%) scale(0.72); }
+.icon.is-drawn > * { opacity: 1; transform: none; animation: ico-rise 0.55s cubic-bezier(0.22, 1.4, 0.44, 1) backwards; }
+.icon.is-drawn > *:nth-child(2) { animation-delay: 0.08s; }
+.icon.is-drawn > *:nth-child(3) { animation-delay: 0.16s; }
+.icon.is-drawn > *:nth-child(4) { animation-delay: 0.22s; }
+.icon.is-drawn > *:nth-child(n+5) { animation-delay: 0.28s; }
+@keyframes ico-rise {
+    from { opacity: 0; transform: translateY(18%) scale(0.72); }
+    to   { opacity: 1; transform: none; }
 }
 
 .svc-icon, .svc-item .ico, .why-icon, .ai-card-icon, .c-icon, .pi-icon, .panel-avatar { transition: transform 0.3s cubic-bezier(0.34, 1.4, 0.64, 1); }
 .svc-card:hover .svc-icon, .svc-item:hover .ico, .why-item:hover .why-icon,
 .ai-card:hover .ai-card-icon, .c-item:hover .c-icon, .panel-item:hover .pi-icon { transform: translateY(-3px) scale(1.08); }
-.svc-card:hover .icon .accent, .svc-item:hover .icon .accent { stroke: var(--cyan); }
+
 
 @media (prefers-reduced-motion: reduce) {
-    .icon.is-armed > *, .icon.is-drawn > * { stroke-dashoffset: 0; opacity: 1; animation: none; }
+    .icon.is-armed > *, .icon.is-drawn > * { opacity: 1; transform: none; animation: none; }
     .svc-card:hover .svc-icon, .svc-item:hover .ico, .why-item:hover .why-icon,
     .ai-card:hover .ai-card-icon, .c-item:hover .c-icon, .panel-item:hover .pi-icon { transform: none; }
 }
@@ -248,9 +254,13 @@ nav {
     box-shadow: 0 12px 26px rgba(22,88,161,0.32);
 }
 .svc-card:hover .svc-icon .icon,
-.svc-item:hover .ico .icon { stroke: #fff; }
+.svc-item:hover .ico .icon { fill: #fff; }
+.svc-card:hover .svc-icon .icon .stroke,
+.svc-item:hover .ico .icon .stroke { stroke: #fff; }
 .svc-card:hover .svc-icon .icon .accent,
-.svc-item:hover .ico .icon .accent { stroke: rgba(255,255,255,0.8); }
+.svc-item:hover .ico .icon .accent { fill: rgba(255,255,255,0.82); }
+.svc-card:hover .svc-icon .icon .accent.stroke,
+.svc-item:hover .ico .icon .accent.stroke { stroke: rgba(255,255,255,0.82); }
 
 /* The same treatment for the dark slots, which only lift today. */
 .why-item:hover .why-icon, .c-item:hover .c-icon {
