@@ -176,3 +176,18 @@ nav {
     .hamburger { display: flex; }
     .nav-right { gap: 0; }
 }
+
+/* Inline SVG icons. One drawing per concept, stroked in currentColor and
+   sized in em so each slot's font-size still governs it. They replaced the
+   emoji the pages used to carry, which rendered differently on every OS and
+   were read out by screen readers. */
+.icon {
+    width: 1em; height: 1em; display: inline-block; flex-shrink: 0;
+    fill: none; stroke: currentColor; stroke-width: 1.7;
+    stroke-linecap: round; stroke-linejoin: round;
+    vertical-align: -0.14em;
+}
+.svc-icon, .ai-card-icon, .svc-item .ico { color: var(--blue); }
+.related a .icon, .legal-section p > .icon, .legal-section li > .icon { color: var(--blue-mid); margin-right: 7px; }
+.panel-avatar, .pi-icon { color: #fff; }
+.pi-icon .icon { stroke-width: 1.9; }
