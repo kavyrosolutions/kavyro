@@ -49,138 +49,10 @@ img { display: block; max-width: 100%; }
 .cyan { color: var(--cyan); }
 .white-text { color: #fff; }
 
-/* ─── BUTTONS ────────────────────────────────────────────────── */
-.btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 13px 28px;
-    border-radius: 7px;
-    font-family: 'Poppins', 'Poppins Fallback', sans-serif;
-    font-weight: 600;
-    font-size: 0.9rem;
-    cursor: pointer;
-    border: 2px solid transparent;
-    transition: var(--ease);
-    white-space: nowrap;
-}
-.btn-cyan {
-    background: var(--cyan);
-    color: var(--blue-dark);
-    border-color: var(--cyan);
-}
-.btn-cyan:hover { background: var(--cyan-light); border-color: var(--cyan-light); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(84,200,218,0.4); }
-
-.btn-blue {
-    background: var(--blue);
-    color: #fff;
-    border-color: var(--blue);
-}
-.btn-blue:hover { background: var(--blue-dark); border-color: var(--blue-dark); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(22,88,161,0.35); }
-
-.btn-outline-white {
-    background: transparent;
-    color: #fff;
-    border-color: rgba(255,255,255,0.55);
-}
-.btn-outline-white:hover { background: rgba(255,255,255,0.12); border-color: #fff; }
-
-.btn-outline-blue {
-    background: transparent;
-    color: var(--blue);
-    border-color: var(--blue);
-}
-.btn-outline-blue:hover { background: var(--blue); color: #fff; }
-
-/* ─── NAVBAR ─────────────────────────────────────────────────── */
-nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 999;
-    background: rgba(255,255,255);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--border);
-    box-shadow: 0 2px 20px rgba(22,88,161,0.07);
-}
-.nav-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 72px;
-}
-
-/* Logo */
-.logo { display: flex; align-items: center; gap: 10px; }
-.logo-icon {
-    width: 40px; height: 40px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, var(--blue) 0%, var(--cyan) 100%);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-}
-.logo-icon img { 
-    border-radius: 3px;
-    }
-.logo-icon svg { width: 22px; height: 22px; }
-.logo-text { display: flex; flex-direction: column; line-height: 1; }
-.logo-name {
-    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
-    font-size: 1.05rem;
-    font-weight: 800;
-    color: var(--blue);
-    letter-spacing: 0.02em;
-}
-.logo-sub {
-    font-family: 'Poppins', 'Poppins Fallback', sans-serif;
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    color: var(--gray);
-    text-transform: uppercase;
-}
-
-.nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
-.nav-links a {
-    display: inline-flex; align-items: center; min-height: 44px; padding: 0 2px;
-    font-size: 0.87rem;
-    font-weight: 500;
-    color: var(--gray);
-    transition: color var(--ease);
-}
-.nav-links a:hover { color: var(--blue); }
-
-/* A 44px button around the 24px glyph so the tap target meets Google's minimum. */
-.hamburger {
-    display: none; flex-direction: column; justify-content: center; align-items: center;
-    gap: 5px; width: 44px; height: 44px; margin-right: -10px;
-    background: none; border: 0; cursor: pointer;
-}
-.hamburger span { width: 24px; height: 2px; background: var(--blue); border-radius: 2px; }
-
-/* ─── MOBILE NAV ─────────────────────────────────────────────── */
-.mobile-nav {
-    display: none;
-    position: fixed; inset: 0;
-    background: var(--white);
-    z-index: 1000;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 36px;
-}
-.mobile-nav.open { display: flex; }
-.mobile-nav a {
-    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--gray);
-    transition: color var(--ease);
-}
-.mobile-nav a:hover { color: var(--blue); }
-.mobile-close {
-    position: absolute; top: 24px; right: 28px;
-    font-size: 1.5rem; cursor: pointer; color: var(--gray);
-}
+/* Buttons, the navbar, the mobile sheet and the logo live in main.css so
+   every page shares one header. The home page only overrides the bar
+   itself, which floats over the hero instead of sticking to the top. */
+nav { position: fixed; left: 0; right: 0; }
 
 /* ─── HERO ───────────────────────────────────────────────────── */
 #hero {
@@ -857,8 +729,6 @@ footer {
     .why-stats  { order: -1; }
     .ai-inner   { grid-template-columns: 1fr; gap: 44px; }
     .contact-inner { grid-template-columns: 1fr; gap: 40px; }
-    .nav-links, nav > .container > .btn { display: none !important; }
-    .hamburger { display: flex; }
     .process-steps { grid-template-columns: 1fr 1fr; }
     .process-steps::before { display: none; }
 }

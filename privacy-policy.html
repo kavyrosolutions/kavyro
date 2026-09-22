@@ -43,13 +43,23 @@
   <meta name="twitter:image:alt" content="Kavyro Solutions — outsourcing partner in the Philippines" />
   <link rel="icon" type="image/png" href="assets/logo.png" />
   <link rel="apple-touch-icon" href="assets/logo.png" />
-  <link rel="stylesheet" href="assets/styles/main.css?v=20260922b" />
-  <link rel="stylesheet" href="assets/styles/legal-page.css?v=20260922b" />
+  <link rel="stylesheet" href="assets/styles/main.css?v=20260922c" />
+  <link rel="stylesheet" href="assets/styles/legal-page.css?v=20260922c" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- ── NAVBAR ─────────────────────────────────────────────── -->
+  <!-- ─── MOBILE NAV ─────────────────────────────────────────────── -->
+  <div class="mobile-nav" id="mobileNav">
+    <span class="mobile-close" onclick="closeMob()">✕</span>
+    <a href="/" onclick="closeMob()">Home</a>
+    <a href="/#services" onclick="closeMob()">Services</a>
+    <a href="/portfolio" onclick="closeMob()">Portfolio</a>
+    <a href="/about" onclick="closeMob()">About</a>
+    <a href="/#contact" onclick="closeMob()" class="btn btn-cyan" style="font-size:1rem;">Get Started</a>
+  </div>
+
+  <!-- ─── NAVBAR ─────────────────────────────────────────────────── -->
   <nav>
     <div class="container nav-inner">
       <a href="/" class="logo">
@@ -64,7 +74,19 @@
           <span class="logo-sub">Solutions</span>
         </div>
       </a>
-      <a href="/" class="nav-back">← Back to Home</a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/#services">Services</a></li>
+          <li><a href="/portfolio">Portfolio</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+        <a href="/#contact" class="btn btn-blue btn-sm">Get Started →</a>
+        <button type="button" class="hamburger" onclick="openMob()" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -284,5 +306,6 @@
     </div>
   </footer>
 
+<script src="assets/scripts/main.js?v=20260922c"></script>
 </body>
 </html>

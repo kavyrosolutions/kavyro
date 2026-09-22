@@ -74,3 +74,98 @@ body {
     transition: transform 180ms ease-out;
 }
 .skip-link:focus { transform: none; }
+
+/* ─── SITE CHROME ────────────────────────────────────────────────
+   One header on every page: the same bar, the same five links, the
+   same call to action and the same mobile sheet. Page stylesheets
+   used to each carry their own copy, which is how the home page
+   drifted to six links and the inner pages lost the mobile menu.
+   Buttons live here too because the header uses one. */
+
+.btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 13px 28px; border-radius: 7px;
+    font-family: 'Poppins', 'Poppins Fallback', sans-serif;
+    font-weight: 600; font-size: 0.9rem;
+    border: 2px solid transparent; white-space: nowrap; cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.btn:hover { text-decoration: none; }
+.btn-sm { padding: 11px 22px; font-size: 0.87rem; }
+.btn-cyan { background: var(--cyan); color: var(--blue-dark); border-color: var(--cyan); }
+.btn-cyan:hover { background: var(--cyan-light); border-color: var(--cyan-light); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(84,200,218,0.4); }
+.btn-blue { background: var(--blue); color: #fff; border-color: var(--blue); }
+.btn-blue:hover { background: var(--blue-dark); border-color: var(--blue-dark); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(22,88,161,0.35); }
+.btn-outline-white { background: transparent; color: #fff; border-color: rgba(255,255,255,0.55); }
+.btn-outline-white:hover { background: rgba(255,255,255,0.12); border-color: #fff; }
+.btn-outline-blue { background: transparent; color: var(--blue); border-color: var(--blue); }
+.btn-outline-blue:hover { background: var(--blue); color: #fff; }
+
+nav {
+    position: sticky; top: 0; z-index: 999;
+    background: #fff;
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 2px 20px rgba(22,88,161,0.07);
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo:hover { text-decoration: none; }
+.logo-icon {
+    width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--blue) 0%, var(--cyan) 100%);
+    display: flex; align-items: center; justify-content: center;
+}
+.logo-icon img { width: 40px; height: 40px; object-fit: contain; border-radius: 3px; }
+.logo-icon svg { width: 22px; height: 22px; }
+.logo-text { display: flex; flex-direction: column; line-height: 1; }
+.logo-name {
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
+    font-size: 1.05rem; font-weight: 800; color: var(--blue); letter-spacing: 0.02em;
+}
+.logo-sub {
+    font-family: 'Poppins', 'Poppins Fallback', sans-serif;
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em;
+    color: var(--gray); text-transform: uppercase;
+}
+
+.nav-right { display: flex; align-items: center; gap: 26px; }
+.nav-links { display: flex; align-items: center; gap: 26px; list-style: none; }
+.nav-links a {
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 2px;
+    font-size: 0.87rem; font-weight: 500; color: var(--gray);
+    text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover, .nav-links a[aria-current] { color: var(--blue); text-decoration: none; }
+
+/* A 44px button around the 24px glyph so the tap target meets Google's minimum. */
+.hamburger {
+    display: none; flex-direction: column; justify-content: center; align-items: center;
+    gap: 5px; width: 44px; height: 44px; margin-right: -10px;
+    background: none; border: 0; cursor: pointer;
+}
+.hamburger span { width: 24px; height: 2px; background: var(--blue); border-radius: 2px; }
+
+.mobile-nav {
+    display: none; position: fixed; inset: 0; z-index: 1000;
+    background: var(--white);
+    flex-direction: column; align-items: center; justify-content: center; gap: 36px;
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav a {
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
+    font-size: 1.6rem; font-weight: 700; color: var(--gray);
+    text-decoration: none; transition: color 0.2s;
+}
+.mobile-nav a:hover { color: var(--blue); text-decoration: none; }
+.mobile-close {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 1.5rem; cursor: pointer; color: var(--gray);
+}
+
+@media (max-width: 860px) {
+    .nav-links, nav .nav-right > .btn { display: none !important; }
+    .hamburger { display: flex; }
+    .nav-right { gap: 0; }
+}
