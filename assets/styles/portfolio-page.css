@@ -2,8 +2,8 @@
    service-page.css (nav links, buttons, closing call to action).
 
    The page is built around real screenshots and real campaign creative, so
-   this file is mostly framing: editorial work rows, a platform grid, a
-   creative gallery and a numbered capability list. No decorative icons —
+   this file is mostly framing: editorial work rows, a typographic systems grid,
+   a creative gallery and a numbered capability list. No decorative icons —
    the images carry the page, the headings carry the keywords. */
 
 /* ── Section shell ── */
@@ -94,35 +94,35 @@
 .work-link::after { content: '↗'; font-size: 0.95rem; }
 .work-link:hover { color: var(--blue-dark); }
 
-/* ── Platform grid ── */
-.plat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
-.plat { display: flex; flex-direction: column; min-width: 0; }
-.plat .work-shot { margin-bottom: 18px; }
-.plat h3 {
-    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
-    font-size: 1.05rem; font-weight: 800; color: var(--blue); line-height: 1.3; margin-bottom: 4px;
+/* ── Business systems ──
+   No screenshots here on purpose: these run inside client businesses, so the
+   section is typographic — a numbered rule above each entry, nothing faked. */
+.sys-grid {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px 30px;
 }
-.plat .work-meta { margin-bottom: 10px; }
-.plat p {
+.sys { min-width: 0; padding-top: 18px; border-top: 2px solid var(--blue); }
+.sys:nth-child(3n - 1) { border-top-color: var(--blue-mid); }
+.sys:nth-child(3n) { border-top-color: var(--cyan); }
+.sys-num {
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
+    font-size: 0.74rem; font-weight: 800; letter-spacing: 0.14em;
+    color: var(--blue-mid); font-variant-numeric: tabular-nums; margin-bottom: 8px;
+}
+.sys h3 {
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
+    font-size: 1.05rem; font-weight: 800; color: var(--blue); line-height: 1.3; margin-bottom: 8px;
+}
+.sys p {
     font-family: 'Nunito', 'Nunito Fallback', sans-serif;
     font-size: 0.93rem; line-height: 1.75; color: var(--gray);
 }
-.plat .work-did { margin: 14px 0 12px; }
-
-/* ── Plain lists of further work ── */
-.pf-list { margin-top: 52px; padding-top: 32px; border-top: 1px solid var(--border); }
-.pf-list h3 {
-    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
-    font-size: 0.95rem; font-weight: 800; color: var(--blue); margin-bottom: 18px;
-}
-.pf-list ul {
-    list-style: none; margin: 0; padding: 0;
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0 32px;
-}
-.pf-list li {
+.sys .work-did { margin: 14px 0 0; }
+.sys-note {
+    max-width: 660px; margin-top: 40px; padding-top: 24px;
+    border-top: 1px solid var(--border);
     font-family: 'Nunito', 'Nunito Fallback', sans-serif;
-    font-size: 0.92rem; color: var(--gray);
-    padding: 10px 0; border-bottom: 1px solid var(--border);
+    font-size: 0.93rem; line-height: 1.75; color: var(--gray);
 }
 
 /* ── Creative gallery ── */
@@ -182,8 +182,7 @@
 @media (max-width: 980px) {
     .work, .work:nth-of-type(even) { grid-template-columns: 1fr; gap: 26px; }
     .work:nth-of-type(even) .work-shot { order: 0; }
-    .plat-grid { grid-template-columns: repeat(2, 1fr); }
-    .pf-list ul { grid-template-columns: repeat(2, 1fr); }
+    .sys-grid { grid-template-columns: repeat(2, 1fr); }
     .pf-gallery { grid-template-columns: repeat(3, 1fr); }
     .pf-cap { grid-template-columns: 48px 1fr; }
     .pf-cap dd { grid-column: 2; margin-top: 4px; }
@@ -191,8 +190,7 @@
 @media (max-width: 640px) {
     .pf-section { padding: 56px 0; }
     .work + .work { margin-top: 40px; padding-top: 40px; }
-    .plat-grid { grid-template-columns: 1fr; gap: 36px; }
-    .pf-list ul { grid-template-columns: 1fr; }
+    .sys-grid { grid-template-columns: 1fr; gap: 28px; }
     .pf-gallery { grid-template-columns: repeat(2, 1fr); gap: 12px; }
     .pf-stats { grid-template-columns: 1fr; }
     .pf-stat + .pf-stat { border-left: 0; padding-left: 0; border-top: 1px solid var(--border); }

@@ -25,7 +25,7 @@ own Service and FAQPage structured data:
 - `virtual-assistant-services.html`
 - `ai-automation.html`
 
-`portfolio.html` collects the team's work — client websites, custom platforms,
+`portfolio.html` collects the agency work — client websites, the custom business systems,
 paid campaigns, email, social content and video — and links out to the live
 sites. Its imagery is real: screenshots of each live site and the campaign
 creative as it was published, stored as webp under `assets/portfolio/`. Re-shoot
