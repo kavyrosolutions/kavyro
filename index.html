@@ -45,9 +45,9 @@
   <meta name="twitter:image:alt" content="Kavyro Solutions — outsourcing partner in the Philippines" />
   <link rel="icon" type="image/png" href="assets/logo.png" />
   <link rel="apple-touch-icon" href="assets/logo.png" />
-  <link rel="stylesheet" href="assets/styles/main.css?v=20260922f" />
-  <link rel="stylesheet" href="assets/styles/home-page.css?v=20260922f" />
-  <link rel="stylesheet" href="assets/styles/contact-block.css?v=20260922f" />
+  <link rel="stylesheet" href="assets/styles/main.css?v=20260922g" />
+  <link rel="stylesheet" href="assets/styles/home-page.css?v=20260922g" />
+  <link rel="stylesheet" href="assets/styles/contact-block.css?v=20260922g" />
 
   <!-- Organization and WebSite for the knowledge panel; the service list
        mirrors #services and the contact form's <select>. -->
@@ -175,12 +175,14 @@
   </script>
 </head>
 <body>
+  <!-- Brand gradient for the inline icons. -->
+  <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute"><defs><linearGradient id="ico-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1658a1"/><stop offset="55%" stop-color="#1e6bbf"/><stop offset="100%" stop-color="#54c8da"/></linearGradient></defs></svg>
 
   <a class="skip-link" href="#main">Skip to content</a>
 
   <!-- ─── MOBILE NAV ─────────────────────────────────────────────── -->
   <div class="mobile-nav" id="mobileNav">
-    <span class="mobile-close" onclick="closeMob()"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></span>
+    <span class="mobile-close" onclick="closeMob()"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><line x1="6" y1="6" x2="18" y2="18" pathLength="100"/><line class="accent" x1="18" y1="6" x2="6" y2="18" pathLength="100"/></svg></span>
     <a href="#hero" onclick="closeMob()">Home</a>
     <a href="/services" onclick="closeMob()">Services</a>
     <a href="/portfolio" onclick="closeMob()">Portfolio</a>
@@ -259,7 +261,7 @@
               <span class="dot-green"></span> Accepting New Clients
             </div>
             <div class="panel-header">
-              <div class="panel-avatar"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.5c3.6 2.2 5.5 6 5.5 10.2L14 16h-4l-3.5-3.3C6.5 8.5 8.4 4.7 12 2.5z"/><circle cx="12" cy="10" r="1.8"/><path d="M9.5 16.5 7 21l4-1.6M14.5 16.5 17 21l-4-1.6"/></svg></div>
+              <div class="panel-avatar"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.5c3.6 2.2 5.5 6 5.5 10.2L14 16h-4l-3.5-3.3C6.5 8.5 8.4 4.7 12 2.5z" pathLength="100"/><circle cx="12" cy="10" r="1.8" pathLength="100"/><path class="accent" d="M9.5 16.5 7 21l4-1.6M14.5 16.5 17 21l-4-1.6" pathLength="100"/></svg></div>
               <div>
                 <div class="panel-title">Kavyro Solutions</div>
                 <div class="panel-sub">Outsourcing Partner · Philippines</div>
@@ -268,22 +270,22 @@
             <div class="panel-tag">Roles You Can Outsource</div>
             <div class="panel-items">
               <a class="panel-item" href="/digital-marketing-seo">
-                <span class="pi-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/></svg></span>
+                <span class="pi-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="3 17 9 11 13 15 21 7" pathLength="100"/><polyline class="accent" points="15 7 21 7 21 13" pathLength="100"/></svg></span>
                 <span class="pi-label">Digital Marketing & SEO</span>
                 <span class="pi-arrow">→</span>
               </a>
               <a class="panel-item" href="/web-design">
-                <span class="pi-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="12" rx="2"/><line x1="8" y1="20" x2="16" y2="20"/><line x1="12" y1="16" x2="12" y2="20"/></svg></span>
+                <span class="pi-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="12" rx="2" pathLength="100"/><line x1="8" y1="20" x2="16" y2="20" pathLength="100"/><line class="accent" x1="12" y1="16" x2="12" y2="20" pathLength="100"/></svg></span>
                 <span class="pi-label">Web Design & Development</span>
                 <span class="pi-arrow">→</span>
               </a>
               <a class="panel-item" href="/video-editing">
-                <span class="pi-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><polygon points="10 9.5 15.5 12 10 14.5"/></svg></span>
+                <span class="pi-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2" pathLength="100"/><polygon class="accent" points="10 9.5 15.5 12 10 14.5" pathLength="100"/></svg></span>
                 <span class="pi-label">Video Editing & Content</span>
                 <span class="pi-arrow">→</span>
               </a>
               <a class="panel-item" href="/virtual-assistant-services">
-                <span class="pi-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="9" cy="8" r="3.2"/><path d="M3.6 20a5.4 5.4 0 0 1 10.8 0"/><path d="M15.6 6.3a3 3 0 0 1 1.3 5.6"/><path d="M20.4 20a5 5 0 0 0-3.4-4.7"/></svg></span>
+                <span class="pi-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="9" cy="8" r="3.2" pathLength="100"/><path d="M3.6 20a5.4 5.4 0 0 1 10.8 0" pathLength="100"/><path d="M15.6 6.3a3 3 0 0 1 1.3 5.6" pathLength="100"/><path class="accent" d="M20.4 20a5 5 0 0 0-3.4-4.7" pathLength="100"/></svg></span>
                 <span class="pi-label">Virtual Assistant Services</span>
                 <span class="pi-arrow">→</span>
               </a>
@@ -331,63 +333,63 @@
       <div class="services-grid">
 
         <div class="svc-card">
-          <div class="svc-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/></svg></div>
+          <div class="svc-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="3 17 9 11 13 15 21 7" pathLength="100"/><polyline class="accent" points="15 7 21 7 21 13" pathLength="100"/></svg></div>
           <h3 class="svc-title"><a href="/digital-marketing-seo">Digital Marketing</a></h3>
           <p class="svc-desc">A dedicated marketer running your search, social and email campaigns, and reporting on what they bring in.</p>
           <span class="svc-more">Learn more →</span>
         </div>
 
         <div class="svc-card">
-          <div class="svc-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"/><line x1="16.2" y1="16.2" x2="21" y2="21"/></svg></div>
+          <div class="svc-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7" pathLength="100"/><line class="accent" x1="16.2" y1="16.2" x2="21" y2="21" pathLength="100"/></svg></div>
           <h3 class="svc-title"><a href="/digital-marketing-seo">SEO Optimization</a></h3>
           <p class="svc-desc">An SEO specialist on your site week after week: technical fixes, better pages and links that count.</p>
           <span class="svc-more">Learn more →</span>
         </div>
 
         <div class="svc-card">
-          <div class="svc-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><polygon points="10 9.5 15.5 12 10 14.5"/></svg></div>
+          <div class="svc-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2" pathLength="100"/><polygon class="accent" points="10 9.5 15.5 12 10 14.5" pathLength="100"/></svg></div>
           <h3 class="svc-title"><a href="/video-editing">Video Editing</a></h3>
           <p class="svc-desc">An editor on your account for reels, ads, YouTube and corporate video, turned around in days.</p>
           <span class="svc-more">Learn more →</span>
         </div>
 
         <div class="svc-card">
-          <div class="svc-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="12" rx="2"/><line x1="8" y1="20" x2="16" y2="20"/><line x1="12" y1="16" x2="12" y2="20"/></svg></div>
+          <div class="svc-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="12" rx="2" pathLength="100"/><line x1="8" y1="20" x2="16" y2="20" pathLength="100"/><line class="accent" x1="12" y1="16" x2="12" y2="20" pathLength="100"/></svg></div>
           <h3 class="svc-title"><a href="/web-design">Web Development & Design</a></h3>
           <p class="svc-desc">Developers who build your site or web app, then stay on for the changes that follow launch.</p>
           <span class="svc-more">Learn more →</span>
         </div>
 
         <div class="svc-card">
-          <div class="svc-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3a9 9 0 1 0 0 18c1.2 0 2-.8 2-1.8 0-1.3-1.1-1.5-1.1-2.5 0-.8.7-1.4 1.5-1.4H17a4 4 0 0 0 4-4c0-4.4-4-8.3-9-8.3z"/><circle cx="8.5" cy="10" r="1"/><circle cx="12" cy="7.8" r="1"/><circle cx="15.6" cy="9.6" r="1"/></svg></div>
+          <div class="svc-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3a9 9 0 1 0 0 18c1.2 0 2-.8 2-1.8 0-1.3-1.1-1.5-1.1-2.5 0-.8.7-1.4 1.5-1.4H17a4 4 0 0 0 4-4c0-4.4-4-8.3-9-8.3z" pathLength="100"/><circle cx="8.5" cy="10" r="1" pathLength="100"/><circle cx="12" cy="7.8" r="1" pathLength="100"/><circle class="accent" cx="15.6" cy="9.6" r="1" pathLength="100"/></svg></div>
           <h3 class="svc-title"><a href="/web-design#design">Graphic Design</a></h3>
           <p class="svc-desc">A designer working from your brand kit on logos, identity, social graphics and print.</p>
           <span class="svc-more">Learn more →</span>
         </div>
 
         <div class="svc-card">
-          <div class="svc-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16v4z"/><line x1="14.5" y1="6.5" x2="17.5" y2="9.5"/></svg></div>
+          <div class="svc-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16v4z" pathLength="100"/><line class="accent" x1="14.5" y1="6.5" x2="17.5" y2="9.5" pathLength="100"/></svg></div>
           <h3 class="svc-title"><a href="/digital-marketing-seo#included">Content Marketing</a></h3>
           <p class="svc-desc">A writer producing blog posts, emails, scripts and landing copy in your voice, to your calendar.</p>
           <span class="svc-more">Learn more →</span>
         </div>
 
         <div class="svc-card">
-          <div class="svc-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 10h3l8-4.5v13L7 14H4a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1z"/><path d="M18.5 9a4 4 0 0 1 0 6"/><path d="M7 14v4.5a1.5 1.5 0 0 0 3 0V15.6"/></svg></div>
+          <div class="svc-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 10h3l8-4.5v13L7 14H4a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1z" pathLength="100"/><path d="M18.5 9a4 4 0 0 1 0 6" pathLength="100"/><path class="accent" d="M7 14v4.5a1.5 1.5 0 0 0 3 0V15.6" pathLength="100"/></svg></div>
           <h3 class="svc-title"><a href="/digital-marketing-seo#included">Paid Advertising</a></h3>
           <p class="svc-desc">A media buyer working inside your Google, Facebook and Instagram ad accounts, testing as they go.</p>
           <span class="svc-more">Learn more →</span>
         </div>
 
         <div class="svc-card">
-          <div class="svc-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><line x1="10.8" y1="18" x2="13.2" y2="18"/></svg></div>
+          <div class="svc-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="7" y="2.5" width="10" height="19" rx="2.5" pathLength="100"/><line class="accent" x1="10.8" y1="18" x2="13.2" y2="18" pathLength="100"/></svg></div>
           <h3 class="svc-title"><a href="/digital-marketing-seo#included">Social Media Management</a></h3>
           <p class="svc-desc">An account manager posting, replying, growing and reporting on every platform you are on.</p>
           <span class="svc-more">Learn more →</span>
         </div>
 
         <div class="svc-card">
-          <div class="svc-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="9" cy="8" r="3.2"/><path d="M3.6 20a5.4 5.4 0 0 1 10.8 0"/><path d="M15.6 6.3a3 3 0 0 1 1.3 5.6"/><path d="M20.4 20a5 5 0 0 0-3.4-4.7"/></svg></div>
+          <div class="svc-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="9" cy="8" r="3.2" pathLength="100"/><path d="M3.6 20a5.4 5.4 0 0 1 10.8 0" pathLength="100"/><path d="M15.6 6.3a3 3 0 0 1 1.3 5.6" pathLength="100"/><path class="accent" d="M20.4 20a5 5 0 0 0-3.4-4.7" pathLength="100"/></svg></div>
           <h3 class="svc-title"><a href="/virtual-assistant-services">Virtual Assistant Services</a></h3>
           <p class="svc-desc">A dedicated assistant for admin, research, scheduling, inbox and CRM. Any task that eats your day.</p>
           <span class="svc-more">Learn more →</span>
@@ -409,52 +411,33 @@
 
           <div class="why-list">
             <div class="why-item">
-              <div class="why-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polygon points="13 2.5 4.5 13.5 10.8 13.5 10 21.5 19.5 10.2 13 10.2"/></svg></div>
+              <div class="why-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polygon points="13 2.5 4.5 13.5 10.8 13.5 10 21.5 19.5 10.2 13 10.2" pathLength="100"/></svg></div>
               <div>
                 <h3>Your Hours, Not Ours</h3>
                 <p>Your specialists work your business hours and overlap with your day, wherever you are based.</p>
               </div>
             </div>
             <div class="why-item">
-              <div class="why-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="8.5" width="16" height="11" rx="3"/><circle cx="9" cy="14" r="1.2"/><circle cx="15" cy="14" r="1.2"/><line x1="12" y1="4.5" x2="12" y2="8.5"/><circle cx="12" cy="3.6" r="1.1"/></svg></div>
+              <div class="why-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="8.5" width="16" height="11" rx="3" pathLength="100"/><circle cx="9" cy="14" r="1.2" pathLength="100"/><circle cx="15" cy="14" r="1.2" pathLength="100"/><line x1="12" y1="4.5" x2="12" y2="8.5" pathLength="100"/><circle class="accent" cx="12" cy="3.6" r="1.1" pathLength="100"/></svg></div>
               <div>
                 <h3>Managed, Not Just Placed</h3>
                 <p>We recruit, train, supervise and quality-check. If someone is sick or leaves, we cover the seat.</p>
               </div>
             </div>
             <div class="why-item">
-              <div class="why-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.6"/><circle cx="12" cy="12" r="1.3"/></svg></div>
+              <div class="why-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5" pathLength="100"/><circle cx="12" cy="12" r="4.6" pathLength="100"/><circle class="accent" cx="12" cy="12" r="1.3" pathLength="100"/></svg></div>
               <div>
                 <h3>Output, Not Timesheets</h3>
                 <p>Every role has a scope and a measure attached. You review work delivered, not hours logged.</p>
               </div>
             </div>
             <div class="why-item">
-              <div class="why-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 17.5a6 6 0 1 1 6 0v1.5H9v-1.5z"/><line x1="10" y1="21.2" x2="14" y2="21.2"/></svg></div>
+              <div class="why-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 17.5a6 6 0 1 1 6 0v1.5H9v-1.5z" pathLength="100"/><line class="accent" x1="10" y1="21.2" x2="14" y2="21.2" pathLength="100"/></svg></div>
               <div>
                 <h3>Scale Up or Down</h3>
                 <p>Add a role, change one or pause one as the business moves. No notice periods to negotiate.</p>
               </div>
             </div>
-          </div>
-        </div>
-
-        <div class="why-stats">
-          <div class="stat-box featured">
-            <div class="sb-num">14</div>
-            <div class="sb-lbl">Client Projects in the Portfolio</div>
-          </div>
-          <div class="stat-box">
-            <div class="sb-num">5</div>
-            <div class="sb-lbl">Roles You Can Outsource</div>
-          </div>
-          <div class="stat-box">
-            <div class="sb-num">Any</div>
-            <div class="sb-lbl">Time Zone Covered</div>
-          </div>
-          <div class="stat-box" style="grid-column: 1 / -1;">
-            <div class="sb-num">3–5 days</div>
-            <div class="sb-lbl">From Sign-Off to Someone Working</div>
           </div>
         </div>
 
@@ -507,27 +490,27 @@
 
         <div class="ai-visual">
           <div class="ai-card span2">
-            <div class="ai-card-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="7" y="7" width="10" height="10" rx="2.5"/><line x1="12" y1="3.5" x2="12" y2="7"/><line x1="12" y1="17" x2="12" y2="20.5"/><line x1="3.5" y1="12" x2="7" y2="12"/><line x1="17" y1="12" x2="20.5" y2="12"/></svg></div>
+            <div class="ai-card-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="7" y="7" width="10" height="10" rx="2.5" pathLength="100"/><line x1="12" y1="3.5" x2="12" y2="7" pathLength="100"/><line x1="12" y1="17" x2="12" y2="20.5" pathLength="100"/><line x1="3.5" y1="12" x2="7" y2="12" pathLength="100"/><line class="accent" x1="17" y1="12" x2="20.5" y2="12" pathLength="100"/></svg></div>
             <div class="ai-card-title">AI-Driven Marketing Intelligence</div>
             <div class="ai-card-desc">Predictive analytics, automated campaigns and smart targeting, powered by the latest AI tools.</div>
           </div>
           <div class="ai-card">
-            <div class="ai-card-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v2.6M12 18.6v2.6M4.5 12H1.9M22.1 12h-2.6M6.7 6.7 4.9 4.9M19.1 19.1l-1.8-1.8M17.3 6.7l1.8-1.8M4.9 19.1l1.8-1.8"/></svg></div>
+            <div class="ai-card-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3.2" pathLength="100"/><path class="accent" d="M12 2.8v2.6M12 18.6v2.6M4.5 12H1.9M22.1 12h-2.6M6.7 6.7 4.9 4.9M19.1 19.1l-1.8-1.8M17.3 6.7l1.8-1.8M4.9 19.1l1.8-1.8" pathLength="100"/></svg></div>
             <div class="ai-card-title">Automation</div>
             <div class="ai-card-desc">Repetitive tasks and workflows, handled by automation.</div>
           </div>
           <div class="ai-card">
-            <div class="ai-card-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><line x1="3.5" y1="20" x2="20.5" y2="20"/><line x1="7" y1="20" x2="7" y2="13"/><line x1="12" y1="20" x2="12" y2="7.5"/><line x1="17" y1="20" x2="17" y2="10.5"/></svg></div>
+            <div class="ai-card-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><line x1="3.5" y1="20" x2="20.5" y2="20" pathLength="100"/><line x1="7" y1="20" x2="7" y2="13" pathLength="100"/><line x1="12" y1="20" x2="12" y2="7.5" pathLength="100"/><line class="accent" x1="17" y1="20" x2="17" y2="10.5" pathLength="100"/></svg></div>
             <div class="ai-card-title">Data Analytics</div>
             <div class="ai-card-desc">Live dashboards and insights for smarter decisions.</div>
           </div>
           <div class="ai-card">
-            <div class="ai-card-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.6"/><circle cx="12" cy="12" r="1.3"/></svg></div>
+            <div class="ai-card-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5" pathLength="100"/><circle cx="12" cy="12" r="4.6" pathLength="100"/><circle class="accent" cx="12" cy="12" r="1.3" pathLength="100"/></svg></div>
             <div class="ai-card-title">Precision Targeting</div>
             <div class="ai-card-desc">Reach the right audience at the right time on the right channel.</div>
           </div>
           <div class="ai-card">
-            <div class="ai-card-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><ellipse cx="12" cy="12" rx="4" ry="8.5"/><line x1="3.5" y1="12" x2="20.5" y2="12"/></svg></div>
+            <div class="ai-card-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5" pathLength="100"/><ellipse cx="12" cy="12" rx="4" ry="8.5" pathLength="100"/><line class="accent" x1="3.5" y1="12" x2="20.5" y2="12" pathLength="100"/></svg></div>
             <div class="ai-card-title">Multimedia Content</div>
             <div class="ai-card-desc">Video, graphics and copy that engage and convert on every platform.</div>
           </div>
@@ -539,19 +522,19 @@
           <p class="subtitle">Your outsourced specialists work with the same AI and automation stack we run internally, so a small team covers more ground without cutting corners.</p>
           <div class="ai-list">
             <div class="ai-list-item">
-              <div class="ai-check"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="5 12.5 10 17 19 7.5"/></svg></div>
+              <div class="ai-check"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="5 12.5 10 17 19 7.5" pathLength="100"/></svg></div>
               <p><strong>AI-assisted drafting</strong> — faster first drafts in your brand voice, edited by the specialist on your account.</p>
             </div>
             <div class="ai-list-item">
-              <div class="ai-check"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="5 12.5 10 17 19 7.5"/></svg></div>
+              <div class="ai-check"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="5 12.5 10 17 19 7.5" pathLength="100"/></svg></div>
               <p><strong>Automated reporting</strong> — live dashboards, so you can see the work without asking for an update.</p>
             </div>
             <div class="ai-list-item">
-              <div class="ai-check"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="5 12.5 10 17 19 7.5"/></svg></div>
+              <div class="ai-check"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="5 12.5 10 17 19 7.5" pathLength="100"/></svg></div>
               <p><strong>Workflow automation</strong> — follow-ups, handovers and admin that run without anyone chasing them.</p>
             </div>
             <div class="ai-list-item">
-              <div class="ai-check"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="5 12.5 10 17 19 7.5"/></svg></div>
+              <div class="ai-check"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="5 12.5 10 17 19 7.5" pathLength="100"/></svg></div>
               <p><strong>One outsourced team</strong> — your site, your campaigns, your content and your inbox, under one roof.</p>
             </div>
           </div>
@@ -673,21 +656,21 @@
           <p>Fill out the form and we will reply within 24 hours with the roles that fit. No commitments. Just a real conversation about your business.</p>
 
           <div class="c-item">
-            <div class="c-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3.6 6.8 12 13 20.4 6.8"/></svg></div>
+            <div class="c-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2" pathLength="100"/><polyline class="accent" points="3.6 6.8 12 13 20.4 6.8" pathLength="100"/></svg></div>
             <div class="c-detail">
               <span>Email</span>
               <strong>kavyrosolutions@gmail.com</strong>
             </div>
           </div>
           <div class="c-item">
-            <div class="c-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 11.5a7.5 7.5 0 0 1-7.5 7.5H8l-5 3 1.4-4.4A7.5 7.5 0 0 1 13.5 4 7.5 7.5 0 0 1 21 11.5z"/></svg></div>
+            <div class="c-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 11.5a7.5 7.5 0 0 1-7.5 7.5H8l-5 3 1.4-4.4A7.5 7.5 0 0 1 13.5 4 7.5 7.5 0 0 1 21 11.5z" pathLength="100"/></svg></div>
             <div class="c-detail">
               <span>Response Time</span>
               <strong>Within 24 hours</strong>
             </div>
           </div>
           <div class="c-item">
-            <div class="c-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><polyline points="12 7 12 12 15.5 14"/></svg></div>
+            <div class="c-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5" pathLength="100"/><polyline class="accent" points="12 7 12 12 15.5 14" pathLength="100"/></svg></div>
             <div class="c-detail">
               <span>Availability</span>
               <strong>Mon – Sat, 8AM – 8PM</strong>
@@ -828,7 +811,7 @@
   </footer>
 
 <!-- ─── SCRIPTS ─────────────────────────────────────────────────── -->
-<script src="assets/scripts/main.js?v=20260922f"></script>
+<script src="assets/scripts/main.js?v=20260922g"></script>
 
 </body>
 </html>

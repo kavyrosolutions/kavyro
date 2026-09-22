@@ -39,9 +39,9 @@
   <meta name="twitter:image:alt" content="Kavyro Solutions — outsourcing partner in the Philippines" />
   <link rel="icon" type="image/png" href="assets/logo.png" />
   <link rel="apple-touch-icon" href="assets/logo.png" />
-  <link rel="stylesheet" href="assets/styles/main.css?v=20260922f" />
-  <link rel="stylesheet" href="assets/styles/legal-page.css?v=20260922f" />
-  <link rel="stylesheet" href="assets/styles/service-page.css?v=20260922f" />
+  <link rel="stylesheet" href="assets/styles/main.css?v=20260922g" />
+  <link rel="stylesheet" href="assets/styles/legal-page.css?v=20260922g" />
+  <link rel="stylesheet" href="assets/styles/service-page.css?v=20260922g" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -238,11 +238,13 @@
   </script>
 </head>
 <body>
+  <!-- Brand gradient for the inline icons. -->
+  <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute"><defs><linearGradient id="ico-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1658a1"/><stop offset="55%" stop-color="#1e6bbf"/><stop offset="100%" stop-color="#54c8da"/></linearGradient></defs></svg>
   <a class="skip-link" href="#main">Skip to content</a>
 
   <!-- ─── MOBILE NAV ─────────────────────────────────────────────── -->
   <div class="mobile-nav" id="mobileNav">
-    <span class="mobile-close" onclick="closeMob()"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></span>
+    <span class="mobile-close" onclick="closeMob()"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><line x1="6" y1="6" x2="18" y2="18" pathLength="100"/><line class="accent" x1="18" y1="6" x2="6" y2="18" pathLength="100"/></svg></span>
     <a href="/" onclick="closeMob()">Home</a>
     <a href="/services" onclick="closeMob()">Services</a>
     <a href="/portfolio" onclick="closeMob()">Portfolio</a>
@@ -321,10 +323,10 @@
         <div class="related">
           <h2>Related Services</h2>
           <ul>
-            <li><a href="/digital-marketing-seo"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/></svg> Digital Marketing & SEO</a></li>
-            <li><a href="/web-design"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="12" rx="2"/><line x1="8" y1="20" x2="16" y2="20"/><line x1="12" y1="16" x2="12" y2="20"/></svg> Web Design & Development</a></li>
-            <li><a href="/video-editing"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><polygon points="10 9.5 15.5 12 10 14.5"/></svg> Video Editing</a></li>
-            <li><a href="/ai-automation"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="7" y="7" width="10" height="10" rx="2.5"/><line x1="12" y1="3.5" x2="12" y2="7"/><line x1="12" y1="17" x2="12" y2="20.5"/><line x1="3.5" y1="12" x2="7" y2="12"/><line x1="17" y1="12" x2="20.5" y2="12"/></svg> AI Automation</a></li>
+            <li><a href="/digital-marketing-seo"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="3 17 9 11 13 15 21 7" pathLength="100"/><polyline class="accent" points="15 7 21 7 21 13" pathLength="100"/></svg> Digital Marketing & SEO</a></li>
+            <li><a href="/web-design"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="12" rx="2" pathLength="100"/><line x1="8" y1="20" x2="16" y2="20" pathLength="100"/><line class="accent" x1="12" y1="16" x2="12" y2="20" pathLength="100"/></svg> Web Design & Development</a></li>
+            <li><a href="/video-editing"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2" pathLength="100"/><polygon class="accent" points="10 9.5 15.5 12 10 14.5" pathLength="100"/></svg> Video Editing</a></li>
+            <li><a href="/ai-automation"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="7" y="7" width="10" height="10" rx="2.5" pathLength="100"/><line x1="12" y1="3.5" x2="12" y2="7" pathLength="100"/><line x1="12" y1="17" x2="12" y2="20.5" pathLength="100"/><line x1="3.5" y1="12" x2="7" y2="12" pathLength="100"/><line class="accent" x1="17" y1="12" x2="20.5" y2="12" pathLength="100"/></svg> AI Automation</a></li>
           </ul>
         </div>
       </aside>
@@ -355,37 +357,37 @@
           <h2>What a VA can take on</h2>
           <div class="svc-grid">
             <div class="svc-item">
-              <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3.6 6.8 12 13 20.4 6.8"/></svg></div>
+              <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2" pathLength="100"/><polyline class="accent" points="3.6 6.8 12 13 20.4 6.8" pathLength="100"/></svg></div>
               <h3>Inbox & Calendar</h3>
               <p>A clean inbox and a calendar that makes sense.</p>
               <ul><li>Triage, replies and follow-ups</li><li>Meeting scheduling across time zones</li><li>Reminders and prep notes</li></ul>
             </div>
             <div class="svc-item">
-              <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"/><line x1="16.2" y1="16.2" x2="21" y2="21"/></svg></div>
+              <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7" pathLength="100"/><line class="accent" x1="16.2" y1="16.2" x2="21" y2="21" pathLength="100"/></svg></div>
               <h3>Research & Data Entry</h3>
               <p>The digging and typing you never get to.</p>
               <ul><li>Lead and supplier research</li><li>Spreadsheets and database upkeep</li><li>Summaries you can act on</li></ul>
             </div>
             <div class="svc-item">
-              <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="5" width="17" height="14" rx="2"/><circle cx="9.5" cy="11" r="2"/><path d="M6.5 16a3.2 3.2 0 0 1 6 0"/><line x1="15" y1="10.5" x2="18" y2="10.5"/><line x1="15" y1="14" x2="18" y2="14"/></svg></div>
+              <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="5" width="17" height="14" rx="2" pathLength="100"/><circle cx="9.5" cy="11" r="2" pathLength="100"/><path d="M6.5 16a3.2 3.2 0 0 1 6 0" pathLength="100"/><line x1="15" y1="10.5" x2="18" y2="10.5" pathLength="100"/><line class="accent" x1="15" y1="14" x2="18" y2="14" pathLength="100"/></svg></div>
               <h3>CRM & Lead Follow-up</h3>
               <p>No lead goes cold in the pipeline.</p>
               <ul><li>CRM updates and hygiene</li><li>Follow-up sequences sent on time</li><li>Pipeline reports</li></ul>
             </div>
             <div class="svc-item">
-              <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 11.5a7.5 7.5 0 0 1-7.5 7.5H8l-5 3 1.4-4.4A7.5 7.5 0 0 1 13.5 4 7.5 7.5 0 0 1 21 11.5z"/></svg></div>
+              <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 11.5a7.5 7.5 0 0 1-7.5 7.5H8l-5 3 1.4-4.4A7.5 7.5 0 0 1 13.5 4 7.5 7.5 0 0 1 21 11.5z" pathLength="100"/></svg></div>
               <h3>Customer Support</h3>
               <p>Friendly, prompt replies in your voice.</p>
               <ul><li>Email and chat support</li><li>Order and booking queries</li><li>Escalation when it matters</li></ul>
             </div>
             <div class="svc-item">
-              <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.5 7.5h6l2 2.5h9a1.5 1.5 0 0 1 1.5 1.5v7a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 18.5V9a1.5 1.5 0 0 1 1.5-1.5z"/><line x1="6.5" y1="7.5" x2="6.5" y2="5"/></svg></div>
+              <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.5 7.5h6l2 2.5h9a1.5 1.5 0 0 1 1.5 1.5v7a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 18.5V9a1.5 1.5 0 0 1 1.5-1.5z" pathLength="100"/><line class="accent" x1="6.5" y1="7.5" x2="6.5" y2="5" pathLength="100"/></svg></div>
               <h3>Admin & Operations</h3>
               <p>The tasks that keep the business running.</p>
               <ul><li>Document preparation</li><li>Travel and bookings</li><li>Vendor coordination</li></ul>
             </div>
             <div class="svc-item">
-              <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><line x1="3.5" y1="20" x2="20.5" y2="20"/><line x1="7" y1="20" x2="7" y2="13"/><line x1="12" y1="20" x2="12" y2="7.5"/><line x1="17" y1="20" x2="17" y2="10.5"/></svg></div>
+              <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><line x1="3.5" y1="20" x2="20.5" y2="20" pathLength="100"/><line x1="7" y1="20" x2="7" y2="13" pathLength="100"/><line x1="12" y1="20" x2="12" y2="7.5" pathLength="100"/><line class="accent" x1="17" y1="20" x2="17" y2="10.5" pathLength="100"/></svg></div>
               <h3>Reporting</h3>
               <p>Numbers pulled together before you ask.</p>
               <ul><li>Weekly and monthly reports</li><li>Dashboard updates</li><li>Records and documents kept tidy</li></ul>
@@ -497,6 +499,6 @@
     </div>
   </footer>
 
-<script src="assets/scripts/main.js?v=20260922f"></script>
+<script src="assets/scripts/main.js?v=20260922g"></script>
 </body>
 </html>

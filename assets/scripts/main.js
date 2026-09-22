@@ -79,3 +79,30 @@ el.style.transform = 'translateY(20px)';
 el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
 observer.observe(el);
 });
+/* Inline icons draw themselves the first time they scroll into view. Armed
+   from JS so that with scripting off (or reduced motion) they simply render
+   finished rather than staying invisible. */
+(function () {
+  const icons = document.querySelectorAll('svg.icon');
+  if (!icons.length || !('IntersectionObserver' in window)) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const draw = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('is-drawn');
+      draw.unobserve(e.target);
+    });
+  }, { threshold: 0.25, rootMargin: '0px 0px -40px 0px' });
+
+  icons.forEach((icon) => {
+    icon.classList.add('is-armed');
+    draw.observe(icon);
+  });
+
+  // Whatever happens — a hidden tab, an observer that never fires — no icon
+  // stays invisible for more than a few seconds.
+  setTimeout(function () {
+    icons.forEach((icon) => icon.classList.add('is-drawn'));
+  }, 2500);
+})();

@@ -169,21 +169,6 @@
     margin: 0; font-family: 'Nunito', 'Nunito Fallback', sans-serif;
     font-size: 0.95rem; line-height: 1.75; color: var(--gray);
 }
-
-/* ── Stats ── */
-.pf-stats {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    margin-top: 56px; border-top: 1px solid var(--border);
-}
-.pf-stat { padding: 26px 0 0; }
-.pf-stat + .pf-stat { border-left: 1px solid var(--border); padding-left: 32px; }
-.pf-stat b {
-    display: block; font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
-    font-size: clamp(1.8rem, 3.4vw, 2.4rem); font-weight: 900; line-height: 1;
-    color: var(--blue); letter-spacing: -0.02em;
-}
-.pf-stat span { display: block; margin-top: 8px; font-size: 0.85rem; color: var(--gray); }
-
 /* ── Closing call to action ── */
 .pf-cta { padding: 72px 0 88px; }
 .pf-cta .cta-band { margin-top: 0; }
@@ -202,7 +187,5 @@
     .work + .work { margin-top: 40px; padding-top: 40px; }
     .sys-grid { grid-template-columns: 1fr; gap: 28px; }
     .pf-gallery { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .pf-stats { grid-template-columns: 1fr; }
-    .pf-stat + .pf-stat { border-left: 0; padding-left: 0; border-top: 1px solid var(--border); }
     .pf-cta { padding: 48px 0 64px; }
 }

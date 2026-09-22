@@ -333,12 +333,12 @@ a.panel-item { text-decoration: none; color: inherit; }
 #why { background: var(--gray-light); }
 .why-inner {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
+    grid-template-columns: 1fr;
+    gap: 48px;
+    align-items: start;
 }
 
-.why-list { display: flex; flex-direction: column; gap: 28px; margin-top: 36px; }
+.why-list { display: grid; grid-template-columns: 1fr 1fr; gap: 30px 56px; margin-top: 36px; }
 .why-item { display: flex; gap: 18px; align-items: flex-start; }
 .why-icon {
     width: 46px; height: 46px; flex-shrink: 0;
@@ -357,34 +357,6 @@ a.panel-item { text-decoration: none; color: inherit; }
     font-family: 'Nunito', 'Nunito Fallback', sans-serif;
     font-size: 0.9rem; color: var(--gray);
 }
-
-.why-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-}
-.stat-box {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 30px 24px;
-    text-align: center;
-    transition: var(--ease);
-}
-.stat-box:hover { border-color: var(--cyan); box-shadow: 0 8px 28px rgba(84,200,218,0.15); }
-.stat-box.featured {
-    grid-column: 1 / -1;
-    background: linear-gradient(135deg, var(--blue), var(--blue-mid));
-    border: none;
-}
-.sb-num {
-    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
-    font-size: 2.5rem; font-weight: 900;
-    color: var(--blue);   /* cyan on the white box is 2:1, short of the 3:1 large text needs */
-}
-.stat-box.featured .sb-num { color: #fff; }
-.sb-lbl { font-size: 0.82rem; color: var(--gray); margin-top: 5px; font-weight: 500; }
-.stat-box.featured .sb-lbl { color: rgba(255,255,255,0.72); }
 
 /* ─── PROCESS ────────────────────────────────────────────────── */
 #process {
@@ -615,8 +587,7 @@ footer {
 @media (max-width: 860px) {
     .hero-inner { grid-template-columns: 1fr; gap: 48px; }
     .hero-visual { display: none; }
-    .why-inner { grid-template-columns: 1fr; gap: 44px; }
-    .why-stats  { order: -1; }
+    .why-list { grid-template-columns: 1fr; gap: 26px; }
     .ai-inner   { grid-template-columns: 1fr; gap: 44px; }
     .process-steps { grid-template-columns: 1fr 1fr; }
     .process-steps::before { display: none; }
@@ -633,7 +604,6 @@ footer {
     .hero-btns .btn { padding: 12px 20px; font-size: 0.88rem; }
     .services-grid { grid-template-columns: 1fr; }
     .testi-grid { grid-template-columns: 1fr; }
-    .why-stats { grid-template-columns: 1fr 1fr; }
     .footer-top { grid-template-columns: 1fr; gap: 32px; }
     .footer-bottom { flex-direction: column; text-align: center; }
     .process-steps { grid-template-columns: 1fr; }
