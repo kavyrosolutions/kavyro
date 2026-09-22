@@ -150,27 +150,6 @@ nav { position: fixed; left: 0; right: 0; }
 
 .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
 
-.hero-stats {
-    display: flex;
-    gap: 44px;
-    margin-top: 56px;
-    padding-top: 36px;
-    border-top: 1px solid rgba(255,255,255,0.14);
-}
-.stat-num {
-    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
-    font-size: 2.1rem;
-    font-weight: 900;
-    color: var(--cyan);
-    line-height: 1;
-}
-.stat-lbl {
-    font-size: 0.78rem;
-    color: rgba(255,255,255,0.6);
-    margin-top: 4px;
-    font-family: 'Poppins', 'Poppins Fallback', sans-serif;
-}
-
 /* Hero right panel */
 .hero-panel {
     background: rgba(255,255,255,0.1);
@@ -651,12 +630,10 @@ footer {
     .hero-copy { display: flex; flex-direction: column; }
     .hero-title { font-size: 2.1rem; margin-bottom: 20px; }
     .hero-desc { order: 1; margin: 26px 0 0; font-size: 1rem; }
-    .hero-stats { order: 2; margin-top: 36px; padding-top: 28px; }
     .hero-btns .btn { padding: 12px 20px; font-size: 0.88rem; }
     .services-grid { grid-template-columns: 1fr; }
     .testi-grid { grid-template-columns: 1fr; }
     .why-stats { grid-template-columns: 1fr 1fr; }
-    .hero-stats { flex-wrap: wrap; gap: 24px; }
     .footer-top { grid-template-columns: 1fr; gap: 32px; }
     .footer-bottom { flex-direction: column; text-align: center; }
     .process-steps { grid-template-columns: 1fr; }
