@@ -14,6 +14,8 @@ Open the site in a browser via Laragon's local server (typically `http://kavyro.
 
 - `index.html` — Main landing page
 - `digital-marketing-seo.html`, `web-design.html`, `video-editing.html`, `virtual-assistant-services.html`, `ai-automation.html` — Service pages (same shell as the legal pages plus `assets/styles/service-page.css`; each carries Service, FAQPage and BreadcrumbList JSON-LD)
+- `services.html` — Services hub listing the five roles (same shell)
+- `contact.html` — Contact page: the enquiry form on its own URL (shares `assets/styles/contact-block.css` with the home page section)
 - `about.html` — About page (same shell)
 - `portfolio.html` — Portfolio page (same shell plus `assets/styles/portfolio-page.css`; full-width work sections instead of the TOC sidebar, real screenshots and campaign creative in `assets/portfolio/`, CollectionPage/ItemList/BreadcrumbList JSON-LD). No decorative icons here: the images carry the page.
 - `privacy-policy.html` — Privacy policy page
@@ -26,7 +28,7 @@ left to the proposal. Do not add pricing, packages or "affordable" copy.
 
 Assets are cache-busted with `?v=<date>` on every `<link rel="stylesheet">`
 and `<script src>`. After changing any CSS or JS, bump the version string in
-all ten HTML pages (`grep -l '?v=' *.html`).
+all twelve HTML pages (`grep -l '?v=' *.html`).
 
 ## Architecture
 
@@ -35,6 +37,12 @@ All styles, markup, and scripts live in one file in this order:
 1. **`<style>`** — Full CSS (~850 lines). Sections are delimited by `/* ─── SECTION NAME ─── */` comments. CSS variables are defined in `:root` and used throughout.
 2. **`<body>`** — Page sections in order: mobile nav overlay → `<nav>` → `#hero` → `#trust` → `#services` → `#why` → `#process` → `#ai-strip` → `#testimonials` → `#cta` → `#contact` → `<footer>`
 3. **`<script>`** — `assets/scripts/main.js`, loaded at the bottom: navbar scroll behavior, mobile nav toggle, contact form submission (`handleForm`)
+
+### Header
+Every page renders the same navbar and mobile sheet: Home, Services, Portfolio,
+About, Contact, one Get Started button and a hamburger below 860px. The markup
+is duplicated per page, but the styles live in `assets/styles/main.css` — do not
+re-add nav, logo or button rules to the page stylesheets.
 
 ### Design tokens (CSS variables)
 ```

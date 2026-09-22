@@ -47,6 +47,13 @@
     --gray-light: #f2f6fb;
     --white:      #ffffff;
     --border:     #dce5f0;
+
+    /* Used across the page stylesheets; without these the properties that
+       reference them compute to nothing — which is how the cyan button lost
+       its hover background and went dark-on-dark inside the sidebar card. */
+    --cyan-light: #7dd8e6;
+    --radius:     10px;
+    --ease:       0.25s ease;
 }
 
 html { scroll-behavior: smooth; }
@@ -74,3 +81,263 @@ body {
     transition: transform 180ms ease-out;
 }
 .skip-link:focus { transform: none; }
+
+/* ─── SITE CHROME ────────────────────────────────────────────────
+   One header on every page: the same bar, the same five links, the
+   same call to action and the same mobile sheet. Page stylesheets
+   used to each carry their own copy, which is how the home page
+   drifted to six links and the inner pages lost the mobile menu.
+   Buttons live here too because the header uses one. */
+
+.btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 13px 28px; border-radius: 7px;
+    font-family: 'Poppins', 'Poppins Fallback', sans-serif;
+    font-weight: 600; font-size: 0.9rem;
+    border: 2px solid transparent; white-space: nowrap; cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.btn:hover { text-decoration: none; }
+.btn-sm { padding: 11px 22px; font-size: 0.87rem; }
+.btn-cyan { background: var(--cyan); color: var(--blue-dark); border-color: var(--cyan); }
+.btn-cyan:hover { background: var(--cyan-light); border-color: var(--cyan-light); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(84,200,218,0.4); }
+.btn-blue { background: var(--blue); color: #fff; border-color: var(--blue); }
+.btn-blue:hover { background: var(--blue-dark); border-color: var(--blue-dark); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(22,88,161,0.35); }
+.btn-outline-white { background: transparent; color: #fff; border-color: rgba(255,255,255,0.55); }
+.btn-outline-white:hover { background: rgba(255,255,255,0.12); border-color: #fff; }
+.btn-outline-blue { background: transparent; color: var(--blue); border-color: var(--blue); }
+.btn-outline-blue:hover { background: var(--blue); color: #fff; }
+
+nav {
+    position: sticky; top: 0; z-index: 999;
+    background: #fff;
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 2px 20px rgba(22,88,161,0.07);
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo:hover { text-decoration: none; }
+.logo-icon {
+    width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--blue) 0%, var(--cyan) 100%);
+    display: flex; align-items: center; justify-content: center;
+}
+.logo-icon img { width: 40px; height: 40px; object-fit: contain; border-radius: 3px; }
+.logo-icon svg { width: 22px; height: 22px; }
+.logo-text { display: flex; flex-direction: column; line-height: 1; }
+.logo-name {
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
+    font-size: 1.05rem; font-weight: 800; color: var(--blue); letter-spacing: 0.02em;
+}
+.logo-sub {
+    font-family: 'Poppins', 'Poppins Fallback', sans-serif;
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em;
+    color: var(--gray); text-transform: uppercase;
+}
+
+.nav-right { display: flex; align-items: center; gap: 26px; }
+.nav-links { display: flex; align-items: center; gap: 26px; list-style: none; }
+.nav-links a {
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 2px;
+    font-size: 0.87rem; font-weight: 500; color: var(--gray);
+    text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover, .nav-links a[aria-current] { color: var(--blue); text-decoration: none; }
+
+/* A 44px button around the 24px glyph so the tap target meets Google's minimum. */
+.hamburger {
+    display: none; flex-direction: column; justify-content: center; align-items: center;
+    gap: 5px; width: 44px; height: 44px; margin-right: -10px;
+    background: none; border: 0; cursor: pointer;
+}
+.hamburger span { width: 24px; height: 2px; background: var(--blue); border-radius: 2px; }
+
+.mobile-nav {
+    display: none; position: fixed; inset: 0; z-index: 1000;
+    background: var(--white);
+    flex-direction: column; align-items: center; justify-content: center; gap: 36px;
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav a {
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
+    font-size: 1.6rem; font-weight: 700; color: var(--gray);
+    text-decoration: none; transition: color 0.2s;
+}
+.mobile-nav a:hover { color: var(--blue); text-decoration: none; }
+.mobile-close {
+    position: absolute; top: 24px; right: 28px;
+    font-size: 1.5rem; cursor: pointer; color: var(--gray);
+}
+
+@media (max-width: 860px) {
+    .nav-links, nav .nav-right > .btn { display: none !important; }
+    .hamburger { display: flex; }
+    .nav-right { gap: 0; }
+}
+
+/* Inline SVG icons. One drawing per concept, stroked in currentColor and
+   sized in em so each slot's font-size still governs it. They replaced the
+   emoji the pages used to carry, which rendered differently on every OS and
+   were read out by screen readers. */
+.icon {
+    width: 1em; height: 1em; display: inline-block; flex-shrink: 0;
+    fill: var(--ic, currentColor); stroke: none;
+    vertical-align: -0.14em;
+}
+/* A few shapes in the set are lines rather than solids. */
+.icon .stroke { fill: none; stroke: var(--ic, currentColor); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.icon .accent { fill: var(--ic2, var(--cyan)); }
+.icon .accent.stroke { fill: none; stroke: var(--ic2, var(--cyan)); }
+.ai-card-icon, .svc-item .ico { color: var(--blue); }
+.related a .icon, .legal-section p > .icon, .legal-section li > .icon { color: var(--blue-mid); margin-right: 7px; }
+.panel-avatar, .pi-icon { color: #fff; }
+.pi-icon .icon { stroke-width: 1.9; }
+
+/* Two tones, not one flat stroke: the body of the icon takes the brand
+   gradient on light tiles, and the last shape of each drawing — the detail
+   that says which icon it is — takes the cyan. On the dark slots both stay
+   in currentColor so they read as white. */
+/* The dark slots keep the icon in white and cyan: a green or amber mark on
+   the navy tile would fight the panel it sits in. */
+.why-icon .icon, .c-icon .icon, .panel-avatar .icon, .pi-icon .icon { --ic: #fff; --ic2: var(--cyan-light); }
+
+/* Motion: each icon draws itself once, the first time it scrolls into view,
+   and lifts slightly when its card is hovered. pathLength="100" on every
+   shape means one dash length works for all of them. */
+/* Motion: the icons keep moving. Each part rises into place once, then
+   settles into a slow loop — a wave through the shapes, the accent
+   breathing a little harder than the body. The loop only runs while the
+   icon is on screen, and it is transform/opacity only, so it stays on the
+   compositor. */
+.icon > * { transform-box: fill-box; transform-origin: 50% 100%; }
+.icon.is-armed > * { opacity: 0; transform: translateY(18%) scale(0.72); }
+.icon.is-live > * {
+    opacity: 1;
+    /* No backwards fill: the finished state is what applies when an animation
+       has not started, so a paused or blocked animation never hides an icon. */
+    animation: ico-rise 0.55s cubic-bezier(0.22, 1.4, 0.44, 1),
+               ico-loop 3.4s 0.55s ease-in-out infinite;
+}
+.icon.is-live > .accent { animation-name: ico-rise, ico-loop-accent; }
+
+.icon.is-live > *:nth-child(2) { animation-delay: 0.09s, 0.75s; }
+.icon.is-live > *:nth-child(3) { animation-delay: 0.18s, 0.95s; }
+.icon.is-live > *:nth-child(4) { animation-delay: 0.25s, 1.1s; }
+.icon.is-live > *:nth-child(n+5) { animation-delay: 0.3s, 1.2s; }
+
+@keyframes ico-rise {
+    from { opacity: 0; transform: translateY(18%) scale(0.72); }
+    to   { opacity: 1; transform: none; }
+}
+@keyframes ico-loop {
+    0%, 100% { transform: none; }
+    45%      { transform: translateY(-6%) scale(1.035); }
+}
+@keyframes ico-loop-accent {
+    0%, 100% { transform: none; }
+    40%      { transform: translateY(-9%) scale(1.08); }
+    70%      { transform: translateY(1%) scale(0.99); }
+}
+
+.svc-item .ico, .why-icon, .ai-card-icon, .c-icon, .pi-icon, .panel-avatar { transition: transform 0.3s cubic-bezier(0.34, 1.4, 0.64, 1); }
+.svc-item:hover .ico, .why-item:hover .why-icon,
+.ai-card:hover .ai-card-icon, .c-item:hover .c-icon, .panel-item:hover .pi-icon { transform: translateY(-3px) scale(1.08); }
+
+
+@media (prefers-reduced-motion: reduce) {
+    .icon.is-armed > *, .icon.is-live > * { opacity: 1; transform: none; animation: none; }
+    .svc-item:hover .ico, .why-item:hover .why-icon,
+    .ai-card:hover .ai-card-icon, .c-item:hover .c-icon, .panel-item:hover .pi-icon { transform: none; }
+}
+
+/* Icon tiles: flat lilac squares read as dull, so the tile now carries a
+   ring and a soft brand glow, and on hover it fills with the gradient and
+   flips the icon to white. */
+.svc-item .ico {
+    position: relative;
+    border: 1px solid rgba(22,88,161,0.12);
+    box-shadow: 0 6px 18px rgba(22,88,161,0.08), inset 0 1px 0 rgba(255,255,255,0.7);
+    transition: transform 0.3s cubic-bezier(0.34, 1.4, 0.64, 1), background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.svc-item .ico { font-size: 1.35rem; }
+
+.svc-item:hover .ico {
+    background: linear-gradient(135deg, var(--blue), var(--cyan));
+    border-color: transparent;
+    box-shadow: 0 12px 26px rgba(22,88,161,0.32);
+}
+
+/* The same treatment for the dark slots, which only lift today. */
+.why-item:hover .why-icon, .c-item:hover .c-icon {
+    box-shadow: 0 12px 26px rgba(22,88,161,0.35);
+}
+
+/* ─── MOTION SYSTEM ──────────────────────────────────────────────
+   Three primitives, borrowed from how a good product tour reads: a
+   block flies in once when it arrives, an accent pops as it lands,
+   and a few marks keep a slow beat so the page is never quite still.
+   All CSS, all transform/opacity, all off under reduced motion. */
+
+.reveal { animation-fill-mode: both; }
+.reveal.is-waiting { opacity: 0; transform: translateY(20px); }
+.reveal.is-in {
+    animation: fly-in 0.62s cubic-bezier(0.22, 0.9, 0.3, 1) var(--reveal-delay, 0s) both;
+}
+@keyframes fly-in {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: none; }
+}
+
+/* The slow beat: status dots, and the cyan accent inside an icon. */
+@keyframes beat {
+    0%, 100% { transform: scale(1); opacity: 0.85; }
+    50%      { transform: scale(1.35); opacity: 1; }
+}
+.badge-pulse, .dot-green, .dot-cyan { animation: beat 3.4s ease-in-out infinite; }
+.panel-pill.pill-bot .dot-cyan { animation-delay: 1.2s; }
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal.is-waiting { opacity: 1; transform: none; }
+    .reveal.is-in { animation: none; }
+    .badge-pulse, .dot-green, .dot-cyan { animation: none; }
+}
+
+/* ─── ICON COLOURS ───────────────────────────────────────────────
+   The emoji this set replaced were all different colours, and that is
+   what made a grid of them readable at a glance. Each icon carries a
+   pair: a body colour and an accent. The -lt pair is the same hue
+   lifted for the navy slots, where the mid tones would go muddy. */
+:root {
+    --f-blue: #1e6bbf;   --f-blue-lt: #8fc4ff;
+    --f-cyan: #2aa7bd;   --f-cyan-lt: #7dd8e6;
+    --f-green: #16a34a;  --f-green-lt: #5fe39b;
+    --f-amber: #ef8f12;  --f-amber-lt: #ffc857;
+    --f-violet: #7c4ddb; --f-violet-lt: #b79bf5;
+    --f-rose: #e0447c;   --f-rose-lt: #ff93b8;
+    --f-slate: #4c5a70;  --f-slate-lt: #b3c2d6;
+}
+
+.ico-trend, .ico-chart, .ico-refresh, .ico-card, .ico-globe, .ico-people { --ic: var(--f-blue); --ic2: var(--f-green); --ic-lt: var(--f-blue-lt); --ic2-lt: var(--f-green-lt); }
+.ico-monitor, .ico-mail, .ico-calendar { --ic: var(--f-blue); --ic2: var(--f-cyan); --ic-lt: var(--f-blue-lt); --ic2-lt: var(--f-cyan-lt); }
+.ico-search, .ico-clock { --ic: var(--f-blue); --ic2: var(--f-amber); --ic-lt: var(--f-blue-lt); --ic2-lt: var(--f-amber-lt); }
+.ico-target, .ico-pin { --ic: var(--f-blue); --ic2: var(--f-rose); --ic-lt: var(--f-blue-lt); --ic2-lt: var(--f-rose-lt); }
+.ico-video, .ico-phone { --ic: var(--f-violet); --ic2: var(--f-rose); --ic-lt: var(--f-violet-lt); --ic2-lt: var(--f-rose-lt); }
+.ico-chip, .ico-robot, .ico-puzzle { --ic: var(--f-violet); --ic2: var(--f-cyan); --ic-lt: var(--f-violet-lt); --ic2-lt: var(--f-cyan-lt); }
+.ico-palette { --ic: var(--f-rose); --ic2: var(--f-amber); --ic-lt: var(--f-rose-lt); --ic2-lt: var(--f-amber-lt); }
+.ico-megaphone, .ico-bolt, .ico-bulb, .ico-sparkle, .ico-folder, .ico-warning { --ic: var(--f-amber); --ic2: var(--f-rose); --ic-lt: var(--f-amber-lt); --ic2-lt: var(--f-rose-lt); }
+.ico-pen, .ico-chat, .ico-clipboard, .ico-broom { --ic: var(--f-cyan); --ic2: var(--f-amber); --ic-lt: var(--f-cyan-lt); --ic2-lt: var(--f-amber-lt); }
+.ico-rocket, .ico-cart { --ic: var(--f-rose); --ic2: var(--f-amber); --ic-lt: var(--f-rose-lt); --ic2-lt: var(--f-amber-lt); }
+.ico-checkcircle, .ico-check { --ic: var(--f-green); --ic2: #fff; --ic-lt: var(--f-green-lt); --ic2-lt: #0d3d73; }
+.ico-gear, .ico-wrench, .ico-lock, .ico-building { --ic: var(--f-slate); --ic2: var(--f-cyan); --ic-lt: var(--f-slate-lt); --ic2-lt: var(--f-cyan-lt); }
+.ico-close { --ic: var(--gray); --ic2: var(--gray); }
+
+/* Navy slots take the lifted pair. */
+.why-icon .icon, .c-icon .icon, .panel-avatar .icon, .pi-icon .icon {
+    --ic: var(--ic-lt, #fff);
+    --ic2: var(--ic2-lt, var(--cyan-light));
+}
+
+/* On a hovered card the tile fills with the gradient, so the icon goes white. */
+.svc-item:hover .ico .icon { --ic: #fff; --ic2: rgba(255,255,255,0.82); }

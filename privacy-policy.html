@@ -34,22 +34,34 @@
   <meta property="og:image" content="https://kavyrosolutions.com/assets/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Kavyro Solutions — AI-Driven Digital Agency" />
+  <meta property="og:image:alt" content="Kavyro Solutions — outsourcing partner in the Philippines" />
   <meta property="og:locale" content="en_US" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Privacy Policy | Kavyro Solutions" />
   <meta name="twitter:description" content="How Kavyro Solutions collects, uses, and protects your personal information, including cookies, data retention, and your privacy rights." />
   <meta name="twitter:image" content="https://kavyrosolutions.com/assets/og-image.jpg" />
-  <meta name="twitter:image:alt" content="Kavyro Solutions — AI-Driven Digital Agency" />
+  <meta name="twitter:image:alt" content="Kavyro Solutions — outsourcing partner in the Philippines" />
   <link rel="icon" type="image/png" href="assets/logo.png" />
   <link rel="apple-touch-icon" href="assets/logo.png" />
-  <link rel="stylesheet" href="assets/styles/main.css?v=20260922" />
-  <link rel="stylesheet" href="assets/styles/legal-page.css?v=20260922" />
+  <link rel="stylesheet" href="assets/styles/main.css?v=20260922m" />
+  <link rel="stylesheet" href="assets/styles/legal-page.css?v=20260922m" />
 </head>
 <body>
+  <!-- Brand gradient for the inline icons. -->
+  <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute"><defs><linearGradient id="ico-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1658a1"/><stop offset="55%" stop-color="#1e6bbf"/><stop offset="100%" stop-color="#54c8da"/></linearGradient></defs></svg>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- ── NAVBAR ─────────────────────────────────────────────── -->
+  <!-- ─── MOBILE NAV ─────────────────────────────────────────────── -->
+  <div class="mobile-nav" id="mobileNav">
+    <span class="mobile-close" onclick="closeMob()"><svg class="icon ico-close" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="stroke" d="m6 6 12 12M18 6 6 18" fill="none" stroke-width="2.6"/></svg></span>
+    <a href="/" onclick="closeMob()">Home</a>
+    <a href="/services" onclick="closeMob()">Services</a>
+    <a href="/portfolio" onclick="closeMob()">Portfolio</a>
+    <a href="/about" onclick="closeMob()">About</a>
+    <a href="/contact" onclick="closeMob()" class="btn btn-cyan" style="font-size:1rem;">Get Started</a>
+  </div>
+
+  <!-- ─── NAVBAR ─────────────────────────────────────────────────── -->
   <nav>
     <div class="container nav-inner">
       <a href="/" class="logo">
@@ -64,7 +76,19 @@
           <span class="logo-sub">Solutions</span>
         </div>
       </a>
-      <a href="/" class="nav-back">← Back to Home</a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/services">Services</a></li>
+          <li><a href="/portfolio">Portfolio</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+        <a href="/contact" class="btn btn-blue btn-sm">Get Started →</a>
+        <button type="button" class="hamburger" onclick="openMob()" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -76,7 +100,7 @@
       </div>
       <h1>Privacy Policy</h1>
       <p>We are committed to protecting your personal information and your right to privacy. This policy explains how we collect, use, and safeguard your data.</p>
-      <div class="updated">📅 Last updated: September 2026</div>
+      <div class="updated"><svg class="icon ico-calendar" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.4 4.6h15.2A2.4 2.4 0 0 1 22 7v12.6a2.4 2.4 0 0 1-2.4 2.4H4.4A2.4 2.4 0 0 1 2 19.6V7a2.4 2.4 0 0 1 2.4-2.4z"/><g class="accent"><rect x="6.6" y="1.4" width="2.4" height="5" rx="1.2"/><rect x="15" y="1.4" width="2.4" height="5" rx="1.2"/></g></svg> Last updated: September 2026</div>
     </div>
   </header>
 
@@ -106,7 +130,7 @@
       <main id="main" class="legal-content">
 
         <div class="info-box">
-          <p>📌 This Privacy Policy applies to Kavyro Solutions and describes how we handle information collected through our website and services. By using our website or engaging our services, you agree to the terms described herein.</p>
+          <p><svg class="icon ico-pin" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8.6 2.4h6.8a1.3 1.3 0 0 1 1.3 1.6l-.9 4.4 3 3a1.3 1.3 0 0 1-.9 2.2H6.1a1.3 1.3 0 0 1-.9-2.2l3-3-.9-4.4a1.3 1.3 0 0 1 1.3-1.6z"/><rect class="accent" x="10.8" y="13.6" width="2.4" height="8.4" rx="1.2"/></svg> This Privacy Policy applies to Kavyro Solutions and describes how we handle information collected through our website and services. By using our website or engaging our services, you agree to the terms described herein.</p>
         </div>
 
         <!-- 1 -->
@@ -250,7 +274,7 @@
             <li><strong>Response time:</strong> Within 24 hours, Monday to Saturday, 8AM – 8PM</li>
           </ul>
           <div class="info-box" style="margin-top:20px;">
-            <p>🔒 Your privacy matters to us. We are committed to handling your information responsibly and transparently at every step.</p>
+            <p><svg class="icon ico-lock" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.6" y="9.8" width="16.8" height="11.6" rx="3.4"/><path class="accent stroke" d="M7.6 9.8V7.4a4.4 4.4 0 0 1 8.8 0v2.4" fill="none"/></svg> Your privacy matters to us. We are committed to handling your information responsibly and transparently at every step.</p>
           </div>
         </div>
 
@@ -278,11 +302,16 @@
       <div class="footer-copy">© 2026 Kavyro Solutions. All rights reserved.</div>
       <div class="footer-links">
         <a href="/">Home</a>
+        <a href="/services">Services</a>
+        <a href="/portfolio">Portfolio</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
         <a href="/privacy-policy">Privacy Policy</a>
         <a href="/terms-of-service">Terms of Service</a>
       </div>
     </div>
   </footer>
 
+<script src="assets/scripts/main.js?v=20260922m"></script>
 </body>
 </html>
