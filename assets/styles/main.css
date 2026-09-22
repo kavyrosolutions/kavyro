@@ -183,13 +183,13 @@ nav {
    were read out by screen readers. */
 .icon {
     width: 1em; height: 1em; display: inline-block; flex-shrink: 0;
-    fill: currentColor; stroke: none;
+    fill: var(--ic, currentColor); stroke: none;
     vertical-align: -0.14em;
 }
 /* A few shapes in the set are lines rather than solids. */
-.icon .stroke { fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
-.icon .accent { fill: var(--cyan); }
-.icon .accent.stroke { fill: none; stroke: var(--cyan); }
+.icon .stroke { fill: none; stroke: var(--ic, currentColor); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.icon .accent { fill: var(--ic2, var(--cyan)); }
+.icon .accent.stroke { fill: none; stroke: var(--ic2, var(--cyan)); }
 .svc-icon, .ai-card-icon, .svc-item .ico { color: var(--blue); }
 .related a .icon, .legal-section p > .icon, .legal-section li > .icon { color: var(--blue-mid); margin-right: 7px; }
 .panel-avatar, .pi-icon { color: #fff; }
@@ -199,12 +199,9 @@ nav {
    gradient on light tiles, and the last shape of each drawing — the detail
    that says which icon it is — takes the cyan. On the dark slots both stay
    in currentColor so they read as white. */
-.svc-icon .icon, .svc-item .ico .icon, .ai-card-icon .icon, .related a .icon { fill: url(#ico-grad); }
-.svc-icon .icon .stroke, .svc-item .ico .icon .stroke, .ai-card-icon .icon .stroke, .related a .icon .stroke { stroke: url(#ico-grad); }
-.svc-icon .icon .accent, .svc-item .ico .icon .accent, .ai-card-icon .icon .accent, .related a .icon .accent { fill: var(--cyan); }
-.svc-icon .icon .accent.stroke, .svc-item .ico .icon .accent.stroke { stroke: var(--cyan); fill: none; }
-.why-icon .icon .accent, .c-icon .icon .accent, .panel-avatar .icon .accent, .pi-icon .icon .accent { fill: var(--cyan-light); }
-.why-icon .icon .accent.stroke, .c-icon .icon .accent.stroke, .pi-icon .icon .accent.stroke { stroke: var(--cyan-light); fill: none; }
+/* The dark slots keep the icon in white and cyan: a green or amber mark on
+   the navy tile would fight the panel it sits in. */
+.why-icon .icon, .c-icon .icon, .panel-avatar .icon, .pi-icon .icon { --ic: #fff; --ic2: var(--cyan-light); }
 
 /* Motion: each icon draws itself once, the first time it scrolls into view,
    and lifts slightly when its card is hovered. pathLength="100" on every
@@ -273,14 +270,6 @@ nav {
     border-color: transparent;
     box-shadow: 0 12px 26px rgba(22,88,161,0.32);
 }
-.svc-card:hover .svc-icon .icon,
-.svc-item:hover .ico .icon { fill: #fff; }
-.svc-card:hover .svc-icon .icon .stroke,
-.svc-item:hover .ico .icon .stroke { stroke: #fff; }
-.svc-card:hover .svc-icon .icon .accent,
-.svc-item:hover .ico .icon .accent { fill: rgba(255,255,255,0.82); }
-.svc-card:hover .svc-icon .icon .accent.stroke,
-.svc-item:hover .ico .icon .accent.stroke { stroke: rgba(255,255,255,0.82); }
 
 /* The same treatment for the dark slots, which only lift today. */
 .why-item:hover .why-icon, .c-item:hover .c-icon {
@@ -316,3 +305,41 @@ nav {
     .reveal.is-in { animation: none; }
     .badge-pulse, .dot-green, .dot-cyan { animation: none; }
 }
+
+/* ─── ICON COLOURS ───────────────────────────────────────────────
+   The emoji this set replaced were all different colours, and that is
+   what made a grid of them readable at a glance. Each icon carries a
+   pair: a body colour and an accent. The -lt pair is the same hue
+   lifted for the navy slots, where the mid tones would go muddy. */
+:root {
+    --f-blue: #1e6bbf;   --f-blue-lt: #8fc4ff;
+    --f-cyan: #2aa7bd;   --f-cyan-lt: #7dd8e6;
+    --f-green: #16a34a;  --f-green-lt: #5fe39b;
+    --f-amber: #ef8f12;  --f-amber-lt: #ffc857;
+    --f-violet: #7c4ddb; --f-violet-lt: #b79bf5;
+    --f-rose: #e0447c;   --f-rose-lt: #ff93b8;
+    --f-slate: #4c5a70;  --f-slate-lt: #b3c2d6;
+}
+
+.ico-trend, .ico-chart, .ico-refresh, .ico-card, .ico-globe, .ico-people { --ic: var(--f-blue); --ic2: var(--f-green); --ic-lt: var(--f-blue-lt); --ic2-lt: var(--f-green-lt); }
+.ico-monitor, .ico-mail, .ico-calendar { --ic: var(--f-blue); --ic2: var(--f-cyan); --ic-lt: var(--f-blue-lt); --ic2-lt: var(--f-cyan-lt); }
+.ico-search, .ico-clock { --ic: var(--f-blue); --ic2: var(--f-amber); --ic-lt: var(--f-blue-lt); --ic2-lt: var(--f-amber-lt); }
+.ico-target, .ico-pin { --ic: var(--f-blue); --ic2: var(--f-rose); --ic-lt: var(--f-blue-lt); --ic2-lt: var(--f-rose-lt); }
+.ico-video, .ico-phone { --ic: var(--f-violet); --ic2: var(--f-rose); --ic-lt: var(--f-violet-lt); --ic2-lt: var(--f-rose-lt); }
+.ico-chip, .ico-robot, .ico-puzzle { --ic: var(--f-violet); --ic2: var(--f-cyan); --ic-lt: var(--f-violet-lt); --ic2-lt: var(--f-cyan-lt); }
+.ico-palette { --ic: var(--f-rose); --ic2: var(--f-amber); --ic-lt: var(--f-rose-lt); --ic2-lt: var(--f-amber-lt); }
+.ico-megaphone, .ico-bolt, .ico-bulb, .ico-sparkle, .ico-folder, .ico-warning { --ic: var(--f-amber); --ic2: var(--f-rose); --ic-lt: var(--f-amber-lt); --ic2-lt: var(--f-rose-lt); }
+.ico-pen, .ico-chat, .ico-clipboard, .ico-broom { --ic: var(--f-cyan); --ic2: var(--f-amber); --ic-lt: var(--f-cyan-lt); --ic2-lt: var(--f-amber-lt); }
+.ico-rocket, .ico-cart { --ic: var(--f-rose); --ic2: var(--f-amber); --ic-lt: var(--f-rose-lt); --ic2-lt: var(--f-amber-lt); }
+.ico-checkcircle, .ico-check { --ic: var(--f-green); --ic2: #fff; --ic-lt: var(--f-green-lt); --ic2-lt: #0d3d73; }
+.ico-gear, .ico-wrench, .ico-lock, .ico-building { --ic: var(--f-slate); --ic2: var(--f-cyan); --ic-lt: var(--f-slate-lt); --ic2-lt: var(--f-cyan-lt); }
+.ico-close { --ic: var(--gray); --ic2: var(--gray); }
+
+/* Navy slots take the lifted pair. */
+.why-icon .icon, .c-icon .icon, .panel-avatar .icon, .pi-icon .icon {
+    --ic: var(--ic-lt, #fff);
+    --ic2: var(--ic2-lt, var(--cyan-light));
+}
+
+/* On a hovered card the tile fills with the gradient, so the icon goes white. */
+.svc-card:hover .svc-icon .icon, .svc-item:hover .ico .icon { --ic: #fff; --ic2: rgba(255,255,255,0.82); }
