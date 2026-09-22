@@ -47,6 +47,13 @@
     --gray-light: #f2f6fb;
     --white:      #ffffff;
     --border:     #dce5f0;
+
+    /* Used across the page stylesheets; without these the properties that
+       reference them compute to nothing — which is how the cyan button lost
+       its hover background and went dark-on-dark inside the sidebar card. */
+    --cyan-light: #7dd8e6;
+    --radius:     10px;
+    --ease:       0.25s ease;
 }
 
 html { scroll-behavior: smooth; }
