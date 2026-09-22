@@ -99,10 +99,17 @@ links.forEach(a => { a.style.color = a.getAttribute('href') === '#' + cur ? 'var
     io.observe(el);
   });
 
-  // Anything the observer never reports still ends up visible.
+  // Whatever is already on screen at load skips the wait entirely, and
+  // anything the observer never reports still ends up visible quickly.
+  requestAnimationFrame(function () {
+    blocks.forEach((el) => {
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0) el.classList.remove('is-waiting');
+    });
+  });
   setTimeout(function () {
     blocks.forEach((el) => el.classList.remove('is-waiting'));
-  }, 3000);
+  }, 1200);
 })();
 /* Inline icons: armed from JS so that with scripting off they simply render
    finished, then set running whenever they are on screen and idle when they
