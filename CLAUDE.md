@@ -15,7 +15,7 @@ Open the site in a browser via Laragon's local server (typically `http://kavyro.
 - `index.html` — Main landing page
 - `digital-marketing-seo.html`, `web-design.html`, `video-editing.html`, `virtual-assistant-services.html`, `ai-automation.html` — Service pages (same shell as the legal pages plus `assets/styles/service-page.css`; each carries Service, FAQPage and BreadcrumbList JSON-LD)
 - `about.html` — About page (same shell)
-- `portfolio.html` — Portfolio page (same shell plus `assets/styles/portfolio-page.css`; full-width work sections instead of the TOC sidebar, CollectionPage/ItemList/BreadcrumbList JSON-LD)
+- `portfolio.html` — Portfolio page (same shell plus `assets/styles/portfolio-page.css`; full-width work sections instead of the TOC sidebar, real screenshots and campaign creative in `assets/portfolio/`, CollectionPage/ItemList/BreadcrumbList JSON-LD). No decorative icons here: the images carry the page.
 - `privacy-policy.html` — Privacy policy page
 - `terms-of-service.html` — Terms of service page
 - `assets/` — `styles/`, `scripts/main.js`, self-hosted `fonts/`, `logo.png`/`logo.webp`, `og-image.jpg`
