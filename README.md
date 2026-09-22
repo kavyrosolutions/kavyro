@@ -25,9 +25,12 @@ own Service and FAQPage structured data:
 - `virtual-assistant-services.html`
 - `ai-automation.html`
 
-`about.html`, `privacy-policy.html` and `terms-of-service.html` complete the
-set. The service and About pages share `legal-page.css` for their shell and
-add `service-page.css` on top. Nothing on the site quotes a price; fees are
+`portfolio.html` collects the team's work — client websites, custom platforms,
+paid campaigns, email, social content and video — and links out to the live
+sites. `about.html`, `privacy-policy.html` and `terms-of-service.html` complete
+the set. The service, About and Portfolio pages share `legal-page.css` for
+their shell and add `service-page.css` on top; Portfolio adds
+`portfolio-page.css` for its full-width work sections. Nothing on the site quotes a price; fees are
 left to the proposal, and the pages are written that way on purpose.
 
 ## Stack
