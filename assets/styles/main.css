@@ -54,6 +54,23 @@
     --cyan-light: #7dd8e6;
     --radius:     10px;
     --ease:       0.25s ease;
+
+    --paper:          #f6f8fb;
+    --surface-raised: #ffffff;
+    --surface-sunk:   #edf2f8;
+    --line:           #d6e0ec;
+    --line-strong:    #72859c;
+    --ink:            #0b2545;
+    --ink-muted:      #4a5b70;
+    --blue-deep:      #0d3d73;
+    --night:          #0b2545;
+    --night-line:     rgba(169,189,214,0.18);
+    --on-night:       #ffffff;
+    --on-night-muted: #a9bdd6;
+    --signal:         #15784a;
+    --font-display:   'Montserrat', 'Montserrat Fallback', Arial, sans-serif;
+    --font-sans:      'Poppins', 'Poppins Fallback', Arial, sans-serif;
+    --out:            cubic-bezier(0.2, 0.7, 0.1, 1);
 }
 
 html { scroll-behavior: smooth; }
@@ -90,61 +107,65 @@ body {
    Buttons live here too because the header uses one. */
 
 .btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 13px 28px; border-radius: 7px;
-    font-family: 'Poppins', 'Poppins Fallback', sans-serif;
-    font-weight: 600; font-size: 0.9rem;
-    border: 2px solid transparent; white-space: nowrap; cursor: pointer;
-    transition: background 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    min-height: 48px; padding: 0 24px; border-radius: 8px;
+    font-family: var(--font-sans);
+    font-weight: 600; font-size: 15px; line-height: 20px; text-decoration: none;
+    border: 1.5px solid transparent; white-space: nowrap; cursor: pointer;
+    transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease;
 }
 .btn:hover { text-decoration: none; }
-.btn-sm { padding: 11px 22px; font-size: 0.87rem; }
-.btn-cyan { background: var(--cyan); color: var(--blue-dark); border-color: var(--cyan); }
-.btn-cyan:hover { background: var(--cyan-light); border-color: var(--cyan-light); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(84,200,218,0.4); }
+.btn:active { transform: translateY(1px); }
+.btn .arr { display: inline-block; transition: transform 0.18s ease; }
+.btn:hover .arr { transform: translateX(3px); }
+.btn-sm { min-height: 40px; padding: 0 16px; font-size: 14px; }
+.btn-cyan { background: var(--cyan); color: var(--ink); border-color: var(--cyan); }
+.btn-cyan:hover { background: #fff; border-color: var(--cyan); color: var(--ink); }
 .btn-blue { background: var(--blue); color: #fff; border-color: var(--blue); }
-.btn-blue:hover { background: var(--blue-dark); border-color: var(--blue-dark); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(22,88,161,0.35); }
-.btn-outline-white { background: transparent; color: #fff; border-color: rgba(255,255,255,0.55); }
-.btn-outline-white:hover { background: rgba(255,255,255,0.12); border-color: #fff; }
-.btn-outline-blue { background: transparent; color: var(--blue); border-color: var(--blue); }
-.btn-outline-blue:hover { background: var(--blue); color: #fff; }
+.btn-blue:hover { background: var(--blue-deep); border-color: var(--blue-deep); color: #fff; }
+.btn-outline-white { background: transparent; color: var(--on-night); border-color: var(--on-night-muted); }
+.btn-outline-white:hover { border-color: var(--on-night); color: var(--on-night); }
+.btn-outline-blue { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+.btn-outline-blue:hover { border-color: var(--blue); color: var(--blue); }
 
+/* The header is night on every page. On the home page it starts clear over
+   the hero and fills in once the page moves (main.js toggles is-scrolled). */
 nav {
     position: sticky; top: 0; z-index: 999;
-    background: #fff;
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--border);
-    box-shadow: 0 2px 20px rgba(22,88,161,0.07);
+    background: var(--night);
+    border-bottom: 1px solid var(--night-line);
+    transition: background-color 0.35s ease, border-color 0.35s ease;
 }
+nav.nav-over { position: fixed; left: 0; right: 0; background: transparent; border-bottom-color: transparent; }
+nav.nav-over.is-scrolled { background: var(--night); border-bottom-color: var(--night-line); }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
 
 .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
 .logo:hover { text-decoration: none; }
-.logo-icon {
-    width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
-    background: linear-gradient(135deg, var(--blue) 0%, var(--cyan) 100%);
-    display: flex; align-items: center; justify-content: center;
-}
-.logo-icon img { width: 40px; height: 40px; object-fit: contain; border-radius: 3px; }
-.logo-icon svg { width: 22px; height: 22px; }
+.logo-icon { display: flex; align-items: center; flex-shrink: 0; }
+.logo-icon img { display: block; width: auto; height: 30px; }
 .logo-text { display: flex; flex-direction: column; line-height: 1; }
 .logo-name {
-    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
-    font-size: 1.05rem; font-weight: 800; color: var(--blue); letter-spacing: 0.02em;
+    font-family: var(--font-display);
+    font-size: 19px; font-weight: 800; color: var(--on-night); letter-spacing: 0.01em;
 }
 .logo-sub {
-    font-family: 'Poppins', 'Poppins Fallback', sans-serif;
-    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em;
-    color: var(--gray); text-transform: uppercase;
+    margin-top: 3px;
+    font-family: var(--font-sans);
+    font-size: 10px; font-weight: 600; letter-spacing: 0.26em;
+    color: var(--on-night-muted); text-transform: uppercase;
 }
 
-.nav-right { display: flex; align-items: center; gap: 26px; }
-.nav-links { display: flex; align-items: center; gap: 26px; list-style: none; }
+.nav-right { display: flex; align-items: center; gap: 32px; }
+.nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
 .nav-links a {
-    display: inline-flex; align-items: center; min-height: 44px; padding: 0 2px;
-    font-size: 0.87rem; font-weight: 500; color: var(--gray);
-    text-decoration: none; transition: color 0.2s;
+    display: inline-flex; align-items: center; min-height: 44px;
+    font-size: 15px; font-weight: 500; color: var(--on-night-muted);
+    text-decoration: none; transition: color 0.18s ease;
 }
-.nav-links a:hover, .nav-links a[aria-current] { color: var(--blue); text-decoration: none; }
+.nav-links a:hover, .nav-links a[aria-current] { color: var(--on-night); text-decoration: none; }
+.nav-links a[aria-current] { box-shadow: inset 0 -2px 0 var(--cyan); }
+nav :focus-visible, .mobile-nav :focus-visible { outline-color: var(--cyan); }
 
 /* A 44px button around the 24px glyph so the tap target meets Google's minimum. */
 .hamburger {
@@ -152,127 +173,40 @@ nav {
     gap: 5px; width: 44px; height: 44px; margin-right: -10px;
     background: none; border: 0; cursor: pointer;
 }
-.hamburger span { width: 24px; height: 2px; background: var(--blue); border-radius: 2px; }
+.hamburger span { width: 22px; height: 2px; background: var(--on-night); border-radius: 2px; }
 
 .mobile-nav {
     display: none; position: fixed; inset: 0; z-index: 1000;
-    background: var(--white);
-    flex-direction: column; align-items: center; justify-content: center; gap: 36px;
+    background: var(--night);
+    flex-direction: column; align-items: flex-start; justify-content: center; gap: 22px;
+    padding: 0 32px;
 }
-.mobile-nav.open { display: flex; }
-.mobile-nav a {
-    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
-    font-size: 1.6rem; font-weight: 700; color: var(--gray);
-    text-decoration: none; transition: color 0.2s;
+.mobile-nav.open { display: flex; animation: sheet-in 0.45s var(--out); }
+.mobile-nav a:not(.btn) {
+    font-family: var(--font-display);
+    font-size: 40px; line-height: 1.1; font-weight: 800; letter-spacing: -0.03em; color: var(--on-night);
+    text-decoration: none; transition: color 0.18s ease;
 }
-.mobile-nav a:hover { color: var(--blue); text-decoration: none; }
+.mobile-nav a:not(.btn):hover { color: var(--cyan); text-decoration: none; }
+.mobile-nav .btn { margin-top: 12px; }
 .mobile-close {
-    position: absolute; top: 24px; right: 28px;
-    font-size: 1.5rem; cursor: pointer; color: var(--gray);
+    position: absolute; top: 14px; right: 16px;
+    width: 44px; height: 44px; display: grid; place-items: center;
+    font-size: 1.4rem; cursor: pointer; color: var(--on-night);
+    background: none; border: 0;
 }
+@keyframes sheet-in { from { opacity: 0; clip-path: inset(0 0 100% 0); } to { opacity: 1; clip-path: inset(0); } }
 
 @media (max-width: 860px) {
     .nav-links, nav .nav-right > .btn { display: none !important; }
     .hamburger { display: flex; }
     .nav-right { gap: 0; }
+    .nav-inner { height: 64px; }
 }
 
-/* Inline SVG icons. One drawing per concept, stroked in currentColor and
-   sized in em so each slot's font-size still governs it. They replaced the
-   emoji the pages used to carry, which rendered differently on every OS and
-   were read out by screen readers. */
-.icon {
-    width: 1em; height: 1em; display: inline-block; flex-shrink: 0;
-    fill: var(--ic, currentColor); stroke: none;
-    vertical-align: -0.14em;
-}
-/* A few shapes in the set are lines rather than solids. */
-.icon .stroke { fill: none; stroke: var(--ic, currentColor); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
-.icon .accent { fill: var(--ic2, var(--cyan)); }
-.icon .accent.stroke { fill: none; stroke: var(--ic2, var(--cyan)); }
-.ai-card-icon, .svc-item .ico { color: var(--blue); }
-.related a .icon, .legal-section p > .icon, .legal-section li > .icon { color: var(--blue-mid); margin-right: 7px; }
-.panel-avatar, .pi-icon { color: #fff; }
-.pi-icon .icon { stroke-width: 1.9; }
-
-/* Two tones, not one flat stroke: the body of the icon takes the brand
-   gradient on light tiles, and the last shape of each drawing — the detail
-   that says which icon it is — takes the cyan. On the dark slots both stay
-   in currentColor so they read as white. */
-/* The dark slots keep the icon in white and cyan: a green or amber mark on
-   the navy tile would fight the panel it sits in. */
-.why-icon .icon, .c-icon .icon, .panel-avatar .icon, .pi-icon .icon { --ic: #fff; --ic2: var(--cyan-light); }
-
-/* Motion: each icon draws itself once, the first time it scrolls into view,
-   and lifts slightly when its card is hovered. pathLength="100" on every
-   shape means one dash length works for all of them. */
-/* Motion: the icons keep moving. Each part rises into place once, then
-   settles into a slow loop — a wave through the shapes, the accent
-   breathing a little harder than the body. The loop only runs while the
-   icon is on screen, and it is transform/opacity only, so it stays on the
-   compositor. */
-.icon > * { transform-box: fill-box; transform-origin: 50% 100%; }
-.icon.is-armed > * { opacity: 0; transform: translateY(18%) scale(0.72); }
-.icon.is-live > * {
-    opacity: 1;
-    /* No backwards fill: the finished state is what applies when an animation
-       has not started, so a paused or blocked animation never hides an icon. */
-    animation: ico-rise 0.55s cubic-bezier(0.22, 1.4, 0.44, 1),
-               ico-loop 3.4s 0.55s ease-in-out infinite;
-}
-.icon.is-live > .accent { animation-name: ico-rise, ico-loop-accent; }
-
-.icon.is-live > *:nth-child(2) { animation-delay: 0.09s, 0.75s; }
-.icon.is-live > *:nth-child(3) { animation-delay: 0.18s, 0.95s; }
-.icon.is-live > *:nth-child(4) { animation-delay: 0.25s, 1.1s; }
-.icon.is-live > *:nth-child(n+5) { animation-delay: 0.3s, 1.2s; }
-
-@keyframes ico-rise {
-    from { opacity: 0; transform: translateY(18%) scale(0.72); }
-    to   { opacity: 1; transform: none; }
-}
-@keyframes ico-loop {
-    0%, 100% { transform: none; }
-    45%      { transform: translateY(-6%) scale(1.035); }
-}
-@keyframes ico-loop-accent {
-    0%, 100% { transform: none; }
-    40%      { transform: translateY(-9%) scale(1.08); }
-    70%      { transform: translateY(1%) scale(0.99); }
-}
-
-.svc-item .ico, .why-icon, .ai-card-icon, .c-icon, .pi-icon, .panel-avatar { transition: transform 0.3s cubic-bezier(0.34, 1.4, 0.64, 1); }
-.svc-item:hover .ico, .why-item:hover .why-icon,
-.ai-card:hover .ai-card-icon, .c-item:hover .c-icon, .panel-item:hover .pi-icon { transform: translateY(-3px) scale(1.08); }
-
-
-@media (prefers-reduced-motion: reduce) {
-    .icon.is-armed > *, .icon.is-live > * { opacity: 1; transform: none; animation: none; }
-    .svc-item:hover .ico, .why-item:hover .why-icon,
-    .ai-card:hover .ai-card-icon, .c-item:hover .c-icon, .panel-item:hover .pi-icon { transform: none; }
-}
-
-/* Icon tiles: flat lilac squares read as dull, so the tile now carries a
-   ring and a soft brand glow, and on hover it fills with the gradient and
-   flips the icon to white. */
-.svc-item .ico {
-    position: relative;
-    border: 1px solid rgba(22,88,161,0.12);
-    box-shadow: 0 6px 18px rgba(22,88,161,0.08), inset 0 1px 0 rgba(255,255,255,0.7);
-    transition: transform 0.3s cubic-bezier(0.34, 1.4, 0.64, 1), background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-}
-.svc-item .ico { font-size: 1.35rem; }
-
-.svc-item:hover .ico {
-    background: linear-gradient(135deg, var(--blue), var(--cyan));
-    border-color: transparent;
-    box-shadow: 0 12px 26px rgba(22,88,161,0.32);
-}
-
-/* The same treatment for the dark slots, which only lift today. */
-.why-item:hover .why-icon, .c-item:hover .c-icon {
-    box-shadow: 0 12px 26px rgba(22,88,161,0.35);
-}
+/* Inline SVG glyphs (only the menu close mark is left). */
+.icon { width: 1em; height: 1em; display: inline-block; flex-shrink: 0; fill: currentColor; vertical-align: -0.14em; }
+.icon .stroke { fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
 
 /* ─── MOTION SYSTEM ──────────────────────────────────────────────
    Three primitives, borrowed from how a good product tour reads: a
@@ -290,54 +224,121 @@ nav {
     to   { opacity: 1; transform: none; }
 }
 
-/* The slow beat: status dots, and the cyan accent inside an icon. */
-@keyframes beat {
-    0%, 100% { transform: scale(1); opacity: 0.85; }
-    50%      { transform: scale(1.35); opacity: 1; }
-}
-.badge-pulse, .dot-green, .dot-cyan { animation: beat 3.4s ease-in-out infinite; }
-.panel-pill.pill-bot .dot-cyan { animation-delay: 1.2s; }
-
 @media (prefers-reduced-motion: reduce) {
     .reveal.is-waiting { opacity: 1; transform: none; }
     .reveal.is-in { animation: none; }
-    .badge-pulse, .dot-green, .dot-cyan { animation: none; }
 }
 
-/* ─── ICON COLOURS ───────────────────────────────────────────────
-   The emoji this set replaced were all different colours, and that is
-   what made a grid of them readable at a glance. Each icon carries a
-   pair: a body colour and an accent. The -lt pair is the same hue
-   lifted for the navy slots, where the mid tones would go muddy. */
-:root {
-    --f-blue: #1e6bbf;   --f-blue-lt: #8fc4ff;
-    --f-cyan: #2aa7bd;   --f-cyan-lt: #7dd8e6;
-    --f-green: #16a34a;  --f-green-lt: #5fe39b;
-    --f-amber: #ef8f12;  --f-amber-lt: #ffc857;
-    --f-violet: #7c4ddb; --f-violet-lt: #b79bf5;
-    --f-rose: #e0447c;   --f-rose-lt: #ff93b8;
-    --f-slate: #4c5a70;  --f-slate-lt: #b3c2d6;
+/* ─── SHARED LAYOUT AND TYPE (2026 redesign) ─────────────────────
+   The pieces every redesigned page is built from: the 1200px wrap,
+   the pixel-trail eyebrow, chapter heads, display headlines and the
+   one lead paragraph under them. */
+
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+@media (max-width: 720px) { .wrap { padding: 0 16px; } }
+
+/* The four squares that trail off the logo's K. */
+.px { display: inline-grid; grid-template-columns: repeat(3, 6px); grid-template-rows: repeat(2, 6px); gap: 2px; flex-shrink: 0; }
+.px i { display: block; border-radius: 1px; background: var(--cyan); }
+.px i:nth-child(1) { grid-column: 1; grid-row: 2; background: var(--blue); }
+.px i:nth-child(2) { grid-column: 2; grid-row: 1; }
+.px i:nth-child(3) { grid-column: 2; grid-row: 2; background: var(--blue); opacity: .55; }
+.px i:nth-child(4) { grid-column: 3; grid-row: 1; opacity: .7; }
+
+.eyebrow {
+    display: inline-flex; align-items: center; gap: 8px; margin: 0;
+    font-family: var(--font-sans); font-size: 12px; line-height: 16px; font-weight: 600;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--blue);
+}
+.on-night .eyebrow { color: var(--cyan); }
+.on-night .px i:nth-child(1), .on-night .px i:nth-child(3) { background: #6aaef2; }
+
+.chap { display: flex; align-items: center; gap: 16px; margin-bottom: 40px; }
+.chap-n { font-family: var(--font-display); font-weight: 800; font-size: 14px; letter-spacing: 0.04em; color: var(--blue); }
+.chap-rule { flex: 1; height: 1px; background: var(--line); transform-origin: left; }
+.on-night .chap-n { color: var(--cyan); }
+.on-night .chap-rule { background: var(--night-line); }
+
+.h-d {
+    margin: 0;
+    font-family: var(--font-display); font-weight: 800;
+    font-size: clamp(34px, 4.4vw, 64px); line-height: 1.02; letter-spacing: -0.032em;
+    color: var(--ink); text-wrap: balance;
+}
+.h-d em { font-style: normal; color: var(--blue); }
+.on-night .h-d { color: var(--on-night); }
+.on-night .h-d em { color: var(--cyan); }
+
+.lead { margin: 0; max-width: 62ch; font-size: 19px; line-height: 31px; color: var(--ink-muted); }
+.on-night .lead { color: var(--on-night-muted); }
+@media (max-width: 720px) { .lead { font-size: 17px; line-height: 28px; } }
+
+/* Headline lines rise out of a mask. Each line is <span class="ln"><span>…</span></span>. */
+.ln { display: block; overflow: hidden; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.ln > span { display: block; }
+
+/* Scroll reveal for the redesigned pages. html.js is set by main.js only when
+   it can observe; without it nothing is ever hidden. */
+.js [data-reveal] { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease var(--d, 0s), transform 1s var(--out) var(--d, 0s); }
+.js [data-reveal].is-in { opacity: 1; transform: none; }
+.js [data-reveal="lines"] { opacity: 1; transform: none; }
+.js [data-reveal="lines"] .ln > span { transform: translateY(106%); transition: transform 1.1s var(--out); }
+.js [data-reveal="lines"] .ln:nth-child(2) > span { transition-delay: 0.08s; }
+.js [data-reveal="lines"] .ln:nth-child(3) > span { transition-delay: 0.16s; }
+.js [data-reveal="lines"] .ln:nth-child(4) > span { transition-delay: 0.24s; }
+.js [data-reveal="lines"].is-in .ln > span { transform: none; }
+.js [data-reveal="rule"] { opacity: 1; transform: scaleX(0); transition: transform 1.4s var(--out); }
+.js [data-reveal="rule"].is-in { transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+    .js [data-reveal], .js [data-reveal="lines"] .ln > span, .js [data-reveal="rule"] { opacity: 1; transform: none; transition: none; }
+    .mobile-nav.open { animation: none; }
+    .btn .arr { transition: none; }
 }
 
-.ico-trend, .ico-chart, .ico-refresh, .ico-card, .ico-globe, .ico-people { --ic: var(--f-blue); --ic2: var(--f-green); --ic-lt: var(--f-blue-lt); --ic2-lt: var(--f-green-lt); }
-.ico-monitor, .ico-mail, .ico-calendar { --ic: var(--f-blue); --ic2: var(--f-cyan); --ic-lt: var(--f-blue-lt); --ic2-lt: var(--f-cyan-lt); }
-.ico-search, .ico-clock { --ic: var(--f-blue); --ic2: var(--f-amber); --ic-lt: var(--f-blue-lt); --ic2-lt: var(--f-amber-lt); }
-.ico-target, .ico-pin { --ic: var(--f-blue); --ic2: var(--f-rose); --ic-lt: var(--f-blue-lt); --ic2-lt: var(--f-rose-lt); }
-.ico-video, .ico-phone { --ic: var(--f-violet); --ic2: var(--f-rose); --ic-lt: var(--f-violet-lt); --ic2-lt: var(--f-rose-lt); }
-.ico-chip, .ico-robot, .ico-puzzle { --ic: var(--f-violet); --ic2: var(--f-cyan); --ic-lt: var(--f-violet-lt); --ic2-lt: var(--f-cyan-lt); }
-.ico-palette { --ic: var(--f-rose); --ic2: var(--f-amber); --ic-lt: var(--f-rose-lt); --ic2-lt: var(--f-amber-lt); }
-.ico-megaphone, .ico-bolt, .ico-bulb, .ico-sparkle, .ico-folder, .ico-warning { --ic: var(--f-amber); --ic2: var(--f-rose); --ic-lt: var(--f-amber-lt); --ic2-lt: var(--f-rose-lt); }
-.ico-pen, .ico-chat, .ico-clipboard, .ico-broom { --ic: var(--f-cyan); --ic2: var(--f-amber); --ic-lt: var(--f-cyan-lt); --ic2-lt: var(--f-amber-lt); }
-.ico-rocket, .ico-cart { --ic: var(--f-rose); --ic2: var(--f-amber); --ic-lt: var(--f-rose-lt); --ic2-lt: var(--f-amber-lt); }
-.ico-checkcircle, .ico-check { --ic: var(--f-green); --ic2: #fff; --ic-lt: var(--f-green-lt); --ic2-lt: #0d3d73; }
-.ico-gear, .ico-wrench, .ico-lock, .ico-building { --ic: var(--f-slate); --ic2: var(--f-cyan); --ic-lt: var(--f-slate-lt); --ic2-lt: var(--f-cyan-lt); }
-.ico-close { --ic: var(--gray); --ic2: var(--gray); }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+@media (max-width: 720px) { .container { padding: 0 16px; } }
 
-/* Navy slots take the lifted pair. */
-.why-icon .icon, .c-icon .icon, .panel-avatar .icon, .pi-icon .icon {
-    --ic: var(--ic-lt, #fff);
-    --ic2: var(--ic2-lt, var(--cyan-light));
+/* ─── FAQ (home and inner pages) ─── */
+.faq { border-top: 1px solid var(--line); interpolate-size: allow-keywords; }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary {
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    min-height: 44px; padding: 24px 0; cursor: pointer; list-style: none;
+    font-family: var(--font-display); font-size: 19px; line-height: 27px; font-weight: 700; color: var(--ink);
 }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+    content: ""; flex-shrink: 0; width: 28px; height: 28px; border-radius: 4px;
+    border: 1.5px solid var(--line-strong);
+    background:
+        linear-gradient(var(--blue), var(--blue)) center / 12px 2px no-repeat,
+        linear-gradient(var(--blue), var(--blue)) center / 2px 12px no-repeat;
+    transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.35s var(--out);
+}
+.faq details[open] summary::after {
+    background: linear-gradient(#fff, #fff) center / 12px 2px no-repeat, var(--blue);
+    border-color: var(--blue); transform: rotate(180deg);
+}
+.faq details p { margin: 0; padding: 0 48px 24px 0; max-width: 62ch; font-size: 16px; line-height: 27px; color: var(--ink-muted); }
+.faq details::details-content { height: 0; overflow: clip; transition: height 0.45s var(--out), content-visibility 0.45s allow-discrete; }
+.faq details[open]::details-content { height: auto; }
+@media (max-width: 720px) { .faq details p { padding-right: 0; } }
 
-/* On a hovered card the tile fills with the gradient, so the icon goes white. */
-.svc-item:hover .ico .icon { --ic: #fff; --ic2: rgba(255,255,255,0.82); }
+/* ─── FOOTER (every page) ─── */
+footer { background: var(--surface-sunk); border-top: 1px solid var(--line); color: var(--ink-muted); font-size: 14px; line-height: 22px; }
+.footer-top { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 32px; padding: 72px 0 48px; }
+.f-logo { display: flex; align-items: center; gap: 10px; }
+.f-logo-icon img { display: block; width: auto; height: 30px; }
+.f-logo-name { font-family: var(--font-display); font-weight: 800; font-size: 19px; line-height: 1; color: var(--ink); }
+.f-logo-sub { display: block; margin-top: 3px; font-size: 10px; line-height: 1; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase; color: var(--ink-muted); }
+.f-brand p { margin: 16px 0 0; max-width: 34ch; }
+.f-col h3 { margin: 0 0 12px; font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); }
+.f-col ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 2px; }
+.f-col a, .footer-bottom-links a { display: inline-block; padding: 5px 0; color: var(--ink-muted); text-decoration: none; }
+.f-col a:hover, .footer-bottom-links a:hover { color: var(--blue); text-decoration: underline; }
+.footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 0; border-top: 1px solid var(--line); }
+.footer-bottom-links { display: flex; gap: 20px; }
+@media (max-width: 980px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 720px) { .footer-top { grid-template-columns: minmax(0, 1fr); } }
+@media (prefers-reduced-motion: reduce) { .faq summary::after, .faq details::details-content { transition: none; } }
