@@ -60,15 +60,6 @@ fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Accept': 'application/json' }
     .then(() => { btn.disabled = false; });
 }
 
-// Active nav link on scroll
-const secs = document.querySelectorAll('section[id]');
-const links = document.querySelectorAll('.nav-links a');
-window.addEventListener('scroll', () => {
-let cur = '';
-secs.forEach(s => { if (window.scrollY >= s.offsetTop - 90) cur = s.id; });
-links.forEach(a => { a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--blue)' : ''; });
-});
-
 /* Scroll reveal. Blocks fly up as they arrive, staggered within their own
    row so a grid arrives as a sequence rather than all at once. Classes do
    the work; JS only decides when, and only the first time. */
@@ -137,116 +128,130 @@ links.forEach(a => { a.style.color = a.getAttribute('href') === '#' + cur ? 'var
   }, 2500);
 })();
 
-/* Lottie slot. One element, one animation, and the 164KB player is only
-   fetched if that element is on the page and the visitor has scrolled it
-   into view — everything else on this site animates in CSS. */
-(function () {
-  const slot = document.querySelector('[data-lottie]');
-  if (!slot || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  let started = false;
-  const start = () => {
-    if (started) return;
-    started = true;
-    const s = document.createElement('script');
-    s.src = 'assets/scripts/lottie-light.min.js?v=20260922h';
-    s.onload = () => {
-      window.lottie.loadAnimation({
-        container: slot,
-        renderer: 'svg',
-        loop: true,
-        autoplay: true,
-        path: slot.dataset.lottie,
+/* ─── 2026 motion system ─────────────────────────────────────────
+   One scroll handler, one rAF per frame: the header fill, the progress
+   rail, the hero drifting out, and the pinned process row. Reveals are
+   an IntersectionObserver adding is-in. Under reduced motion only the
+   header state runs. */
+(function () {
+  const ASSET_V = '20260926a';
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canObserve = 'IntersectionObserver' in window;
+
+  // Reveals. html.js is what lets CSS hide anything, so it is set only when
+  // something will show it again.
+  const reveals = document.querySelectorAll('[data-reveal]');
+  if (reveals.length && canObserve && !reduce) {
+    document.documentElement.classList.add('js');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('is-in');
+        io.unobserve(e.target);
       });
-    };
-    document.body.appendChild(s);
-  };
-
-  if (!('IntersectionObserver' in window)) { start(); return; }
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((e) => { if (e.isIntersecting) { start(); io.disconnect(); } });
-  }, { rootMargin: '200px' });
-  io.observe(slot);
-})();
-
-/* Hero tour: the five roles advance on their own. Pauses on hover, on focus,
-   while the panel is off screen, and for anyone who asked for less motion —
-   and the Pause control is real, so nobody is stuck watching it move. */
-(function () {
-  const tour = document.getElementById('heroTour');
-  if (!tour) return;
-
-  const steps = [...tour.querySelectorAll('.tour-step')];
-  const dot = tour.querySelector('.tour-dot');
-  const fill = tour.querySelector('.tour-fill');
-  const caption = tour.querySelector('.tour-caption');
-  const toggle = tour.querySelector('.tour-toggle');
-  if (!steps.length) return;
-
-  const STEP_MS = 4600;
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let index = 0;
-  let timer = null;
-  let paused = reduced;
-  let visible = true;
-
-  function place(i) {
-    const step = steps[i];
-    steps.forEach((s, n) => s.classList.toggle('is-active', n === i));
-    if (dot) dot.style.setProperty('--dot-y', (step.offsetTop + step.offsetHeight / 2 - 4) + 'px');
-    if (caption) {
-      caption.textContent = step.dataset.caption || '';
-      caption.classList.remove('is-new');
-      void caption.offsetWidth;
-      caption.classList.add('is-new');
-    }
-    if (fill) {
-      fill.style.animation = 'none';
-      void fill.offsetWidth;
-      fill.style.animation = '';
-    }
-  }
-
-  function run() {
-    clearTimeout(timer);
-    if (paused || !visible) { tour.classList.remove('is-playing'); return; }
-    tour.classList.add('is-playing');
-    timer = setTimeout(() => {
-      index = (index + 1) % steps.length;
-      place(index);
-      run();
-    }, STEP_MS);
-  }
-
-  function goTo(i) { index = i; place(index); run(); }
-
-  place(0);
-  run();
-
-  steps.forEach((step, i) => {
-    step.addEventListener('mouseenter', () => { paused = true; run(); goTo(i); });
-    step.addEventListener('focus', () => { paused = true; run(); goTo(i); });
-  });
-  tour.addEventListener('mouseleave', () => {
-    if (toggle && toggle.dataset.state === 'paused') return;
-    paused = false;
-    run();
-  });
-
-  if (toggle) {
-    if (reduced) { toggle.dataset.state = 'paused'; toggle.textContent = 'Play'; }
-    toggle.addEventListener('click', () => {
-      const nowPaused = toggle.dataset.state === 'playing';
-      toggle.dataset.state = nowPaused ? 'paused' : 'playing';
-      toggle.textContent = nowPaused ? 'Play' : 'Pause';
-      paused = nowPaused;
-      run();
+    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+    reveals.forEach((el) => {
+      const sibs = el.parentElement ? [...el.parentElement.children].filter((c) => c.hasAttribute('data-reveal')) : [];
+      const i = sibs.indexOf(el);
+      if (i > 0) el.style.setProperty('--d', Math.min(i, 6) * 70 + 'ms');
+      io.observe(el);
     });
+  } else {
+    reveals.forEach((el) => el.classList.add('is-in'));
   }
 
-  if ('IntersectionObserver' in window) {
-    new IntersectionObserver((entries) => {
-      entries.forEach((e) => { visible = e.isIntersecting; run(); });
-    }, { threshold: 0.25 }).observe(tour);
+  const nav = document.querySelector('nav.nav-over');
+  const rail = document.querySelector('.prog i');
+  const heroCopy = document.querySelector('[data-hero-copy]');
+  const pin = document.querySelector('[data-pin]');
+  const track = pin && pin.querySelector('[data-pin-track]');
+  const pinRail = pin && pin.querySelector('[data-pin-rail]');
+  let travel = 0;
+
+  function measure() {
+    if (!pin || !track || reduce) return;
+    pin.classList.add('is-pinned');
+    travel = Math.max(0, track.scrollWidth - document.documentElement.clientWidth);
+    pin.style.height = (window.innerHeight + travel) + 'px';
+  }
+
+  function update() {
+    const y = window.scrollY;
+    const vh = window.innerHeight;
+    if (nav) nav.classList.toggle('is-scrolled', y > 24);
+    if (reduce) return;
+    if (rail) {
+      const max = document.documentElement.scrollHeight - vh;
+      rail.style.transform = 'scaleY(' + (max > 0 ? y / max : 0) + ')';
+    }
+    if (heroCopy && y < vh * 1.2) {
+      const p = Math.min(1, y / (vh * 0.85));
+      heroCopy.style.transform = 'translate3d(0,' + (-p * 120) + 'px,0)';
+      heroCopy.style.opacity = String(1 - p);
+    }
+    if (pin && travel) {
+      const r = pin.getBoundingClientRect();
+      const p = Math.max(0, Math.min(1, -r.top / travel));
+      track.style.transform = 'translate3d(' + (-p * travel) + 'px,0,0)';
+      if (pinRail) pinRail.style.transform = 'scaleX(' + p + ')';
+    }
+  }
+
+  let queued = false;
+  function queue() {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(() => { queued = false; update(); });
+  }
+
+  measure();
+  update();
+  window.addEventListener('scroll', queue, { passive: true });
+  window.addEventListener('resize', () => { measure(); queue(); });
+  window.addEventListener('load', () => { measure(); queue(); });
+
+  // Testimonials: one quote at a time, advancing every 7s until someone
+  // picks one, and holding while the pointer or focus is inside.
+  const quotes = document.querySelector('[data-quotes]');
+  if (quotes) {
+    const figs = [...quotes.querySelectorAll('.q')];
+    const picks = [...quotes.querySelectorAll('.qpick')];
+    let at = 0, timer = 0, held = false, chosen = reduce;
+    const show = (i) => {
+      at = i;
+      figs.forEach((f, n) => f.classList.toggle('is-on', n === i));
+      picks.forEach((b, n) => b.setAttribute('aria-pressed', String(n === i)));
+    };
+    const loop = () => {
+      clearTimeout(timer);
+      if (chosen || held) return;
+      timer = setTimeout(() => { show((at + 1) % figs.length); loop(); }, 7000);
+    };
+    picks.forEach((b, i) => b.addEventListener('click', () => { chosen = true; clearTimeout(timer); show(i); }));
+    const hold = (on) => { held = on; quotes.classList.toggle('is-paused', on); loop(); };
+    quotes.addEventListener('mouseenter', () => hold(true));
+    quotes.addEventListener('mouseleave', () => hold(false));
+    quotes.addEventListener('focusin', () => hold(true));
+    quotes.addEventListener('focusout', () => hold(false));
+    loop();
+  }
+
+  // The WebGL globe is fetched only after the page has loaded, and not at
+  // all on save-data; until then (or without WebGL) the SVG poster stands in.
+  const globes = document.querySelectorAll('[data-globe]');
+  const conn = navigator.connection;
+  if (globes.length && !(conn && conn.saveData)) {
+    const start = () => {
+      import('./hero-globe.js?v=' + ASSET_V).then((m) => {
+        globes.forEach((g) => m.mountGlobe(g.querySelector('canvas'), {
+          labels: g.querySelector('.globe-labels'),
+          scroll: g.dataset.globe === 'hero',
+        }));
+      }).catch(() => {});
+    };
+    const idle = () => (window.requestIdleCallback ? requestIdleCallback(start, { timeout: 2000 }) : setTimeout(start, 200));
+    if (document.readyState === 'complete') idle();
+    else window.addEventListener('load', idle);
   }
 })();
