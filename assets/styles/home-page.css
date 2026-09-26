@@ -265,8 +265,6 @@ body { background: var(--paper); color: var(--ink); }
 .cdl dd { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: 19px; line-height: 27px; color: var(--ink); overflow-wrap: anywhere; }
 .cdl dd a { color: var(--ink); text-decoration: none; box-shadow: inset 0 -2px 0 var(--cyan); }
 .cdl dd a:hover { color: var(--blue); }
-.socials { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 24px; }
-.socials a { display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; font-weight: 600; color: var(--blue); }
 
 /* ─── RESPONSIVE ─── */
 @media (max-width: 980px) {

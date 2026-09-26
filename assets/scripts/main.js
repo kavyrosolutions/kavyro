@@ -65,9 +65,8 @@ fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Accept': 'application/json' }
    the work; JS only decides when, and only the first time. */
 (function () {
   const SELECTOR = [
-    '.svc-card', '.why-item', '.step', '.testi-card', '.ai-card', '.ai-list-item',
-    '.svc-item', '.sys', '.work', '.plat', '.pf-gallery figure', '.pf-cap',
-    '.c-item', '.faq details', '.legal-section', '.pf-head', '.trust-logo',
+    '.svc-item', '.steps li', '.sys', '.work', '.pf-gallery figure', '.pf-cap',
+    '.c-item', '.legal-section', '.pf-head', '.side-card', '.related',
   ].join(', ');
 
   const blocks = document.querySelectorAll(SELECTOR);
@@ -102,40 +101,13 @@ fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Accept': 'application/json' }
     blocks.forEach((el) => el.classList.remove('is-waiting'));
   }, 1200);
 })();
-/* Inline icons: armed from JS so that with scripting off they simply render
-   finished, then set running whenever they are on screen and idle when they
-   are not, so a long page is never animating things nobody is looking at. */
-(function () {
-  const icons = document.querySelectorAll('svg.icon');
-  if (!icons.length) return;
-  if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    icons.forEach((icon) => icon.classList.add('is-live'));
-    return;
-  }
-
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((e) => e.target.classList.toggle('is-live', e.isIntersecting));
-  }, { threshold: 0.2, rootMargin: '0px 0px -40px 0px' });
-
-  icons.forEach((icon) => {
-    icon.classList.add('is-armed');
-    io.observe(icon);
-  });
-
-  // Nothing stays invisible if the observer never reports.
-  setTimeout(function () {
-    icons.forEach((icon) => { if (!icon.classList.contains('is-live')) icon.classList.add('is-live'); });
-  }, 2500);
-})();
-
-
 /* ─── 2026 motion system ─────────────────────────────────────────
    One scroll handler, one rAF per frame: the header fill, the progress
    rail, the hero drifting out, and the pinned process row. Reveals are
    an IntersectionObserver adding is-in. Under reduced motion only the
    header state runs. */
 (function () {
-  const ASSET_V = '20260926a';
+  const ASSET_V = '20260926b';
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const canObserve = 'IntersectionObserver' in window;
 
@@ -254,4 +226,41 @@ fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Accept': 'application/json' }
     if (document.readyState === 'complete') idle();
     else window.addEventListener('load', idle);
   }
+})();
+
+/* Contents rail: the link for the section being read is marked current. */
+(function () {
+  const links = [...document.querySelectorAll('.toc > ul a[href^="#"]')];
+  if (!links.length || !('IntersectionObserver' in window)) return;
+  const byId = new Map();
+  links.forEach((a) => {
+    const t = document.getElementById(decodeURIComponent(a.hash.slice(1)));
+    if (t) byId.set(t, a);
+  });
+  const seen = new Set();
+  const mark = () => {
+    let current = null;
+    byId.forEach((a, t) => { if (seen.has(t) && (!current || t.offsetTop < current.offsetTop)) current = t; });
+    links.forEach((a) => a.removeAttribute('aria-current'));
+    if (current) byId.get(current).setAttribute('aria-current', 'true');
+  };
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => (e.isIntersecting ? seen.add(e.target) : seen.delete(e.target)));
+    mark();
+  }, { rootMargin: '-96px 0px -55% 0px' });
+  byId.forEach((a, t) => io.observe(t));
+})();
+
+/* A sidebar taller than the window sticks by its bottom edge instead, so its
+   last card is still reachable while it rides along. */
+(function () {
+  const toc = document.querySelector('.toc');
+  if (!toc) return;
+  const fit = () => {
+    const room = window.innerHeight - 104 - 24;
+    toc.style.top = toc.offsetHeight > room ? (window.innerHeight - toc.offsetHeight - 24) + 'px' : '';
+  };
+  fit();
+  window.addEventListener('resize', fit);
+  window.addEventListener('load', fit);
 })();

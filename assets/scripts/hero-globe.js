@@ -6,7 +6,7 @@ import {
 import { sampleLand, toVec, HOME, VIEW, CITIES, arcPoint, angleBetween } from './globe-land.js';
 
 const CYAN = new Color('#54c8da');
-const DOT = new Color('#6aaef2');
+const DOT = new Color('#9fd0ff');
 const ARC_STEPS = 80;
 const CYCLE_MS = 5200;
 
@@ -92,7 +92,7 @@ export function mountGlobe(canvas, { labels = null, scroll = false } = {}) {
   tilt.add(spin);
   scene.add(tilt);
 
-  spin.add(new Mesh(new SphereGeometry(0.985, 64, 48), new MeshBasicMaterial({ color: 0x0e2c52 })));
+  spin.add(new Mesh(new SphereGeometry(0.985, 64, 48), new MeshBasicMaterial({ color: 0x12467f })));
 
   const rim = new Mesh(
     new SphereGeometry(1.1, 64, 48),
