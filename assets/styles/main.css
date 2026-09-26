@@ -63,7 +63,7 @@
     --ink:            #0b2545;
     --ink-muted:      #4a5b70;
     --blue-deep:      #0d3d73;
-    --night:          #0b2545;
+    --night:          #0d3d73;
     --night-line:     rgba(169,189,214,0.18);
     --on-night:       #ffffff;
     --on-night-muted: #a9bdd6;
@@ -208,11 +208,9 @@ nav :focus-visible, .mobile-nav :focus-visible { outline-color: var(--cyan); }
 .icon { width: 1em; height: 1em; display: inline-block; flex-shrink: 0; fill: currentColor; vertical-align: -0.14em; }
 .icon .stroke { fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
 
-/* ─── MOTION SYSTEM ──────────────────────────────────────────────
-   Three primitives, borrowed from how a good product tour reads: a
-   block flies in once when it arrives, an accent pops as it lands,
-   and a few marks keep a slow beat so the page is never quite still.
-   All CSS, all transform/opacity, all off under reduced motion. */
+/* ─── BLOCK REVEAL (inner pages) ─────────────────────────────────
+   A block flies in once when it arrives. main.js adds the classes;
+   the home page uses the [data-reveal] system further down instead. */
 
 .reveal { animation-fill-mode: both; }
 .reveal.is-waiting { opacity: 0; transform: translateY(20px); }

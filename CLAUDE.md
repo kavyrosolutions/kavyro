@@ -22,7 +22,7 @@ Open the site in a browser via Laragon's local server (typically `http://kavyro.
 - `terms-of-service.html` — Terms of service page
 - `assets/` — `styles/`, `scripts/main.js`, self-hosted `fonts/`, `logo.png`/`logo.webp`, `og-image.jpg`
 - `assets/scripts/hero-globe.js` + `globe-land.js` — the WebGL globe on the home page, imported by `main.js` after load. `vendor/three.min.js` is a trimmed Three.js r186 build (only the classes `hero-globe.js` imports, bundled with esbuild); rebuild it if the globe needs another Three.js class. `assets/images/globe-poster.svg` is the globe's first frame, shown before WebGL starts and when it cannot.
-- Header: night (`--night`) on every page, using the transparent `assets/logo-mark.*`; the home page adds `nav-over` so it starts clear over the hero.
+- Dark sections use `--night` (#0d3d73, the original dark blue). Header: night on every page, using the transparent `assets/logo-mark.*`; the home page adds `nav-over` so it starts clear over the hero.
 - `robots.txt`, `sitemap.xml`, `_headers` — crawl and Cloudflare header config, deployed as-is
 
 Site-wide rule: no prices, payment terms or billing language anywhere. Fees are

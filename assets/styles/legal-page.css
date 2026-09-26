@@ -19,7 +19,7 @@ a.logo:hover, a.btn:hover { text-decoration: none; }
 .page-hero::before {
     content: ""; position: absolute; z-index: -1;
     top: 50%; right: -180px; width: 640px; aspect-ratio: 1 / 1;
-    background: url(../images/globe-poster.svg?v=20260926a) center / contain no-repeat;
+    background: url(../images/globe-poster.svg?v=20260926b) center / contain no-repeat;
     opacity: 0.6;
     transform: translateY(-50%);
     animation: hero-globe-in 1.8s var(--out) 0.15s both, hero-globe-drift 24s ease-in-out 2s infinite alternate;
