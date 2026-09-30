@@ -99,6 +99,53 @@
     transition: transform 0.6s var(--out), box-shadow 0.4s ease;
 }
 .pf-gallery img:hover { transform: scale(1.03); box-shadow: 0 24px 48px rgba(13,61,115,0.18); }
+.pf-zoom { display: block; width: 100%; padding: 0; border: 0; background: none; border-radius: 12px; cursor: zoom-in; }
+.pf-zoom:focus-visible { outline: 3px solid var(--cyan); outline-offset: 4px; }
+.pf-zoom:focus-visible img { transform: scale(1.03); }
+
+/* ── Creative lightbox (built by main.js) ── */
+html.lb-open { overflow: hidden; }
+.lightbox {
+    width: 100%; max-width: none; height: 100%; max-height: none; margin: 0; padding: 0; border: 0;
+    background: transparent; color: #fff; overflow: hidden;
+}
+.lightbox[open] { display: grid; place-items: center; animation: lb-fade 0.25s ease; }
+.lightbox::backdrop { background: rgba(6, 22, 43, 0.9); animation: lb-fade 0.25s ease; }
+.lb-stage { margin: 0; padding: 72px 88px 24px; display: flex; flex-direction: column; align-items: center; pointer-events: none; }
+.lb-img {
+    display: block; width: min(720px, calc(100vw - 176px), calc(100vh - 170px)); height: auto; aspect-ratio: 1 / 1;
+    object-fit: contain; border-radius: 12px; background: var(--night); box-shadow: 0 32px 80px rgba(0,0,0,0.45);
+    pointer-events: auto; user-select: none; -webkit-user-drag: none;
+}
+.lb-stage figcaption { display: flex; gap: 16px; justify-content: space-between; width: 100%; margin-top: 16px; font-size: 14px; line-height: 22px; color: rgba(255,255,255,0.82); pointer-events: auto; }
+.lb-count { flex: none; font-variant-numeric: tabular-nums; color: rgba(255,255,255,0.6); }
+.lb-btn {
+    position: absolute; display: grid; place-items: center; width: 48px; height: 48px; padding: 0;
+    border: 1px solid rgba(255,255,255,0.18); border-radius: 50%; background: rgba(255,255,255,0.08);
+    color: #fff; cursor: pointer; transition: background 0.2s ease, border-color 0.2s ease;
+}
+.lb-btn:hover { background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.35); }
+.lb-btn:focus-visible { outline: 3px solid var(--cyan); outline-offset: 2px; }
+.lb-btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.lb-close { top: 16px; right: 16px; }
+.lb-prev, .lb-next { top: 50%; margin-top: -24px; }
+.lb-prev { left: 20px; }
+.lb-next { right: 20px; }
+.lb-from-right { animation: lb-slide-r 0.3s var(--out); }
+.lb-from-left { animation: lb-slide-l 0.3s var(--out); }
+@keyframes lb-fade { from { opacity: 0; } }
+@keyframes lb-slide-r { from { opacity: 0; transform: translateX(24px); } }
+@keyframes lb-slide-l { from { opacity: 0; transform: translateX(-24px); } }
+@media (max-width: 640px) {
+    .lb-stage { padding: 72px 16px 96px; }
+    .lb-img { width: min(100vw - 32px, 100vh - 200px); }
+    .lb-prev, .lb-next { top: auto; bottom: 24px; margin-top: 0; }
+    .lb-prev { left: calc(50% - 60px); }
+    .lb-next { right: calc(50% - 60px); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .lightbox[open], .lightbox::backdrop, .lb-from-right, .lb-from-left { animation: none; }
+}
 .pf-gallery figcaption { margin-top: 10px; font-size: 13px; line-height: 20px; color: var(--ink-muted); }
 .pf-gallery + * { margin-top: 40px; }
 
