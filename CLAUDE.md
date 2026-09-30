@@ -68,4 +68,4 @@ These pages duplicate the navbar and footer HTML. They share the same CSS variab
 - **No external CSS or JS files** — all code is inline per page.
 - **Section IDs** are the navigation anchors: `#hero`, `#services`, `#why`, `#process`, `#ai-strip`, `#testimonials`, `#contact`.
 - **Utility classes**: `.container` (max-width 1160px), `.section` (96px padding), `.btn`, `.label`, `.title`, `.subtitle`.
-- Contact email: `kavyrosolutions@gmail.com`
+- Contact email: `info@kavyrosolutions.com`

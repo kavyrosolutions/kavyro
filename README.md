@@ -110,4 +110,4 @@ until the cache expires.
 
 ## Contact
 
-kavyrosolutions@gmail.com
+info@kavyrosolutions.com
