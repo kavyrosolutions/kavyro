@@ -1,6 +1,6 @@
 ---
 name: kavyro-prod
-description: Release the kavyro site to production. Runs /kavyro-staging first to land all open PRs into staging, rebases staging onto main so history stays linear, opens a staging → main PR, merges it with GitHub's rebase method, and resets staging to match main. Handles conflicts along the way. Use when the user runs /kavyro-prod or asks to release, ship or deploy to production/main.
+description: Release the kavyro site to production. Runs /kavyro-staging first to land all open PRs into staging, rebases staging onto main so history stays linear, opens a staging → main PR, waits for its checks to pass, merges it with GitHub's rebase method, and resets staging to match main. Handles conflicts along the way. Use when the user runs /kavyro-prod or asks to release, ship or deploy to production/main.
 ---
 
 # /kavyro-prod
@@ -10,7 +10,7 @@ through the Cloudflare Worker `withered-night-aa0e`. Always rebase and never
 merge: no `git merge`, no merge commits, and `gh pr merge --rebase` only.
 
 Running this skill is the user's authorization to run `/kavyro-staging`, to
-force-push `staging` (with lease) in steps 2 and 5 only, to open the release PR
+force-push `staging` (with lease) in steps 2 and 6 only, to open the release PR
 and to merge it into `main`. Never push to `main` directly.
 
 ## 1. Land everything into staging
@@ -69,7 +69,34 @@ gh pr create --repo kavyrosolutions/kavyro --base main --head staging \
   --body "<one line per commit in origin/main..origin/staging, plus the PRs /kavyro-staging landed>"
 ```
 
-## 4. Merge it
+## 4. Wait for the release PR's checks
+
+This is the only CI gate in the release. The PRs that `/kavyro-staging`
+landed carry no checks of their own. The build that proves the combined
+code works is the one that ran on the `staging` head this PR points at:
+Cloudflare's "Workers Builds: kavyro", which deploys
+staging.kavyrosolutions.com.
+
+```bash
+gh pr checks <number> --repo kavyrosolutions/kavyro --watch --fail-fast
+```
+
+A check can take a few seconds to appear after a push, so if `gh` reports no
+checks yet, wait and run it again (at most a few tries, about a minute in
+all). Then confirm the result:
+
+```bash
+gh pr checks <number> --repo kavyrosolutions/kavyro --json name,state,link \
+  --jq '.[] | .name+" "+.state+" "+.link'
+```
+
+Merge only when every check is `SUCCESS` (or `SKIPPED`) and
+"Workers Builds: kavyro" is among them. Otherwise stop, do not merge, and
+leave the PR open. Report the failing or missing check with its link. Open
+that link in the Cloudflare dashboard to read the build log if the user asks
+why it failed.
+
+## 5. Merge it
 
 ```bash
 gh pr merge <number> --repo kavyrosolutions/kavyro --rebase
@@ -78,9 +105,9 @@ gh pr merge <number> --repo kavyrosolutions/kavyro --rebase
 Never pass `--delete-branch`: `staging` is permanent.
 
 If GitHub reports a conflict or says the branch is out of date, `main` moved.
-Go back to step 2, then retry this step once.
+Go back to step 2, then do step 4 again before retrying this step, once.
 
-## 5. Reset staging to main
+## 6. Reset staging to main
 
 GitHub's rebase merge rewrites the commits on `main`, so `staging` now
 holds the same changes under different hashes. Point `staging` at `main` so
@@ -96,7 +123,7 @@ git diff --quiet origin/main $OLD && \
 If `git diff` is not quiet, something landed on `staging` after the merge.
 Leave `staging` alone and report it; the next `/kavyro-prod` will rebase it.
 
-## 6. Finish
+## 7. Finish
 
 Check out the branch the user started on (or `staging`, updated to
 `origin/staging`, if that branch was deleted). Check the production deploy
