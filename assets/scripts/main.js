@@ -264,3 +264,85 @@ fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Accept': 'application/json' }
   window.addEventListener('resize', fit);
   window.addEventListener('load', fit);
 })();
+
+/* Portfolio creative wall: each post opens in a lightbox with previous/next,
+   arrow keys and swipe. The buttons are added here, so without JS the grid
+   stays a plain set of images. */
+(function () {
+  const figures = [...document.querySelectorAll('.pf-gallery figure')];
+  if (!figures.length || typeof HTMLDialogElement !== 'function') return;
+
+  const items = figures.map((fig) => {
+    const img = fig.querySelector('img');
+    const caption = fig.querySelector('figcaption');
+    return { src: img.currentSrc || img.src, alt: img.alt, caption: caption ? caption.textContent : '', img };
+  });
+
+  const box = document.createElement('dialog');
+  box.className = 'lightbox';
+  box.setAttribute('aria-label', 'Campaign creative viewer');
+  box.innerHTML =
+    '<figure class="lb-stage"><img class="lb-img" alt="" /><figcaption><span class="lb-caption"></span><span class="lb-count"></span></figcaption></figure>' +
+    '<button type="button" class="lb-btn lb-close" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>' +
+    '<button type="button" class="lb-btn lb-prev" aria-label="Previous image"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>' +
+    '<button type="button" class="lb-btn lb-next" aria-label="Next image"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>';
+  document.body.appendChild(box);
+
+  const view = box.querySelector('.lb-img');
+  const cap = box.querySelector('.lb-caption');
+  const count = box.querySelector('.lb-count');
+  let index = 0;
+
+  const show = (i, dir) => {
+    index = (i + items.length) % items.length;
+    const it = items[index];
+    view.src = it.src;
+    view.alt = it.alt;
+    cap.textContent = it.caption;
+    count.textContent = (index + 1) + ' / ' + items.length;
+    view.classList.remove('lb-from-left', 'lb-from-right');
+    if (dir) { void view.offsetWidth; view.classList.add(dir > 0 ? 'lb-from-right' : 'lb-from-left'); }
+    [index - 1, index + 1].forEach((n) => { new Image().src = items[(n + items.length) % items.length].src; });
+  };
+
+  let opener = null;
+  figures.forEach((fig, i) => {
+    const img = items[i].img;
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'pf-zoom';
+    btn.setAttribute('aria-label', 'View larger: ' + items[i].caption);
+    img.replaceWith(btn);
+    btn.appendChild(img);
+    btn.addEventListener('click', () => {
+      opener = btn;
+      show(i);
+      box.showModal();
+      document.documentElement.classList.add('lb-open');
+    });
+  });
+
+  box.addEventListener('close', () => {
+    document.documentElement.classList.remove('lb-open');
+    if (opener) opener.focus();
+  });
+  box.querySelector('.lb-close').addEventListener('click', () => box.close());
+  box.querySelector('.lb-prev').addEventListener('click', () => show(index - 1, -1));
+  box.querySelector('.lb-next').addEventListener('click', () => show(index + 1, 1));
+  // A click on the dim backdrop (the dialog itself, outside the stage) closes it.
+  box.addEventListener('click', (e) => { if (e.target === box) box.close(); });
+  box.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); show(index - 1, -1); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); show(index + 1, 1); }
+  });
+
+  let startX = null, startY = 0;
+  box.addEventListener('pointerdown', (e) => { if (e.pointerType !== 'mouse') { startX = e.clientX; startY = e.clientY; } });
+  box.addEventListener('pointerup', (e) => {
+    if (startX === null) return;
+    const dx = e.clientX - startX, dy = e.clientY - startY;
+    startX = null;
+    if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy)) show(index + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1);
+  });
+  box.addEventListener('pointercancel', () => { startX = null; });
+})();
