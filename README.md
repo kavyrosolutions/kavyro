@@ -48,18 +48,28 @@ left to the proposal, and the pages are written that way on purpose.
 
 ## Stack
 
-Plain HTML, CSS, and vanilla JavaScript. No framework, no bundler, no
-dependencies. Markup lives in the HTML files at the root; styles, scripts and
-fonts are split under `assets/`.
+Plain HTML, CSS, and vanilla JavaScript. No framework, no build, no
+dependencies. Node is used only by CI to run `tools/check-site.js`.
+
+```
+public/      the website: the pages, assets/, robots.txt, sitemap.xml, _headers
+docs/        why the site is built this way (decision notes)
+tools/       the site checker CI runs on every pull request
+.github/     CI
+.claude/     project skills for Claude Code
+```
+
+Only `public/` is deployed. Site paths in this README (`assets/...`,
+`_headers`) are relative to it.
 
 ## Development
 
-Open the files through Laragon (`http://kavyro.test`) or any static server.
+Point Laragon's document root for `kavyro.test` at `public/`.
 There is no build step for local work, so edit and refresh.
 
 Pages link to each other by clean URL (`/privacy-policy`, not
 `privacy-policy.html`) because that is what Cloudflare serves. To make Apache
-under Laragon do the same, drop this `.htaccess` in the project root (it is
+under Laragon do the same, drop this `.htaccess` in `public/` (it is
 git-ignored so it never ships):
 
 ```
@@ -71,28 +81,13 @@ RewriteCond %{REQUEST_FILENAME}.html -f
 RewriteRule ^(.*)$ $1.html [L]
 ```
 
-`assets/og-image.jpg` (the link-preview card) and `assets/logo.webp` are
-rendered from `assets/logo.png` by `tools/og-image.js`. Re-run it when the
-logo or tagline changes; the header of the script says how.
-
 ## Deployment
 
 The site is served by a Cloudflare Worker (`withered-night-aa0e`) using static
 assets, fronted by `kavyrosolutions.com`. DNS and SSL are managed in Cloudflare;
 the domain is registered at GoDaddy with nameservers pointed at Cloudflare.
 
-`build.sh` copies the public files into `dist/`, which is what Cloudflare serves.
-`dist/` is generated and not committed.
-
-To publish a change:
-
-```
-./deploy.sh        # macOS and Linux
-deploy.cmd         # Windows
-```
-
-Both run the build and then `wrangler deploy`. Authorize once first with
-`npx wrangler login`.
+`wrangler.jsonc` tells Cloudflare to publish `public/` and nothing else.
 
 `_headers` sets security headers and caches `assets/*` for a day, so purge the
 Cloudflare cache after a CSS or JS change if you need it visible immediately.
