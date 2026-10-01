@@ -1,6 +1,6 @@
 ---
 name: kavyro-staging
-description: Land every open pull request that targets staging in the kavyro repo, oldest first. Each PR branch is rebased onto the latest staging (never merged), conflicts are resolved, the branch is force-pushed with lease, and the PR is merged with GitHub's rebase method. Use when the user runs /kavyro-staging or asks to merge, land or ship all PRs into staging.
+description: Land every open pull request that targets staging in the kavyro repo, oldest first. Each PR branch is rebased onto the latest staging (never merged), conflicts are resolved, the branch is force-pushed with lease, its checks (including the Cloudflare preview build) must pass, and the PR is merged with GitHub's rebase method. PRs with a failed build are left open and reported. Use when the user runs /kavyro-staging or asks to merge, land or ship all PRs into staging.
 ---
 
 # /kavyro-staging
@@ -34,8 +34,9 @@ gh pr list --repo kavyrosolutions/kavyro --base staging --state open \
 Skip, and report as skipped:
 - drafts;
 - PRs from forks (`isCrossRepository: true`), because you cannot push to them;
-- PRs that have a failing check, other than Cloudflare's "Workers Builds"
-  preview checks. Those are stale, since branch previews are switched off.
+- PRs whose head already has a failing check, including Cloudflare's
+  "Workers Builds: kavyro-staging" preview build. A failed build is never
+  merged; report it with its link (see "Checks gate" below).
 
 If nothing is left, say so and stop.
 
@@ -68,10 +69,40 @@ Then run the site checks (cache-busting, links, JSON-LD, sitemap, pricing):
 BASE_REF=origin/staging node tools/check-site.js
 ```
 
-Then push and merge:
+If they fail, do not push or merge. Skip the PR and report what the check
+printed.
+
+Then push, if the rebase changed anything (`git rev-parse HEAD` differs from
+`origin/<head>`):
 
 ```bash
 git push --force-with-lease origin <head>
+```
+
+### Checks gate
+
+A push starts new checks, and checks from before the rebase say nothing about
+the rebased code. Wait for every check on the PR's current head to finish:
+
+```bash
+gh pr checks <number> --repo kavyrosolutions/kavyro --watch
+gh pr checks <number> --repo kavyrosolutions/kavyro --json name,state,link \
+  --jq '.[] | .name+" "+.state+" "+.link'
+```
+
+Checks can take a few seconds to appear after a push; if `gh` reports none
+yet, run it again (a few tries, about a minute in all).
+
+Merge only when every check is `SUCCESS` or `SKIPPED`, and both `site` and
+`Workers Builds: kavyro-staging` are among them. Otherwise do not merge:
+leave the PR open, skip it, and carry on with the next PR. A failed, cancelled
+or missing check is a skip. In the report, give each failing or missing
+check's name and link. For a Cloudflare build, the link opens the build log in
+the Cloudflare dashboard; read it there only if the user asks why it failed.
+
+When the gate passes, merge:
+
+```bash
 gh pr merge <number> --repo kavyrosolutions/kavyro --rebase --delete-branch
 ```
 
@@ -111,4 +142,6 @@ git checkout <branch the user started on>
 ```
 
 Report in a few lines: the PRs merged (number and title), the PRs skipped and
-why, and every conflict you resolved (file and how you resolved it).
+why, and every conflict you resolved (file and how you resolved it). Put a
+PR skipped for a failed build first, as "#<n> <title>: not merged,
+<check name> failed, <link>", so it cannot be missed.
