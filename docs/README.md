@@ -28,6 +28,7 @@ mark the old one `Superseded by`.
 | 0009 | [Real imagery only on the portfolio](decisions/0009-real-portfolio-imagery.md) | Accepted |
 | 0010 | [Branch, PR to staging, release to main](decisions/0010-staging-release-flow.md) | Accepted |
 | 0011 | [The website lives in `public/`](decisions/0011-site-in-public-folder.md) | Accepted |
+| 0012 | [A PR with a failed build is never merged](decisions/0012-failed-builds-never-merge.md) | Accepted |
 
 ## Adding a note
 

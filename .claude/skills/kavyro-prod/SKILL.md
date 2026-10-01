@@ -71,10 +71,9 @@ gh pr create --repo kavyrosolutions/kavyro --base main --head staging \
 
 ## 4. Wait for the release PR's checks
 
-This is the only CI gate in the release. The PRs that `/kavyro-staging`
-landed carry no checks of their own. The build that proves the combined
-code works is the one that ran on the `staging` head this PR points at:
-Cloudflare's "Workers Builds: kavyro", which deploys
+`/kavyro-staging` already gated each PR on its own checks. This gate proves
+the combined code works: the build that ran on the `staging` head this PR
+points at, Cloudflare's "Workers Builds: kavyro-staging", which deploys
 staging.kavyrosolutions.com.
 
 ```bash
@@ -91,7 +90,7 @@ gh pr checks <number> --repo kavyrosolutions/kavyro --json name,state,link \
 ```
 
 Merge only when every check is `SUCCESS` (or `SKIPPED`) and
-"Workers Builds: kavyro" is among them. Otherwise stop, do not merge, and
+"Workers Builds: kavyro-staging" is among them. Otherwise stop, do not merge, and
 leave the PR open. Report the failing or missing check with its link. Open
 that link in the Cloudflare dashboard to read the build log if the user asks
 why it failed.
