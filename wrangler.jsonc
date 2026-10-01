@@ -1,8 +1,13 @@
 {
-  "name": "withered-night-aa0e",
+  "name": "kavyro-prod",
   "compatibility_date": "2026-09-01",
   // Only the website is published; docs, tools and agent files stay private to the repo.
   "assets": {
     "directory": "./public"
+  },
+  "env": {
+    "staging": {
+      "name": "kavyro-staging"
+    }
   }
 }
