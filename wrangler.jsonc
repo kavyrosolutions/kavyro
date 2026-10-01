@@ -5,6 +5,8 @@
   "assets": {
     "directory": "./public"
   },
+  // Required by `wrangler preview` (per-PR preview URLs); empty because the site has no bindings.
+  "previews": {},
   "env": {
     "staging": {
       "name": "kavyro-staging"
