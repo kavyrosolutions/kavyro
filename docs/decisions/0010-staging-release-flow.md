@@ -30,3 +30,4 @@ merge.
 ## Related
 
 - [0006. Cache-bust assets with a dated `?v=`](0006-dated-cache-busting.md)
+- [0012. A PR with a failed build is never merged](0012-failed-builds-never-merge.md)
