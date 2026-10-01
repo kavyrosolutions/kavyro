@@ -6,7 +6,7 @@ description: Release the kavyro site to production. Runs /kavyro-staging first t
 # /kavyro-prod
 
 Ship `staging` to `main`. Merging into `main` deploys kavyrosolutions.com
-through the Cloudflare Worker `withered-night-aa0e`. Always rebase and never
+through the Cloudflare Worker `kavyro-prod`. Always rebase and never
 merge: no `git merge`, no merge commits, and `gh pr merge --rebase` only.
 
 Running this skill is the user's authorization to run `/kavyro-staging`, to
@@ -131,7 +131,7 @@ once, without polling in a loop:
 
 ```bash
 gh api repos/kavyrosolutions/kavyro/commits/$(git rev-parse origin/main)/check-runs \
-  --jq '.check_runs[] | select(.name|test("withered-night")) | .name+" "+.status+" "+(.conclusion//"")'
+  --jq '.check_runs[] | select(.name|test("kavyro-prod")) | .name+" "+.status+" "+(.conclusion//"")'
 ```
 
 Report in a few lines: the release PR link, what shipped, PRs that were

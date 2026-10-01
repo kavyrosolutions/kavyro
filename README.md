@@ -83,11 +83,14 @@ RewriteRule ^(.*)$ $1.html [L]
 
 ## Deployment
 
-The site is served by a Cloudflare Worker (`withered-night-aa0e`) using static
-assets, fronted by `kavyrosolutions.com`. DNS and SSL are managed in Cloudflare;
+Two Cloudflare Workers build from this repo using static assets: `kavyro-prod`
+deploys `main` to `kavyrosolutions.com`, and `kavyro-staging` deploys `staging`
+and gives every pull request its own preview URL. DNS and SSL are managed in Cloudflare;
 the domain is registered at GoDaddy with nameservers pointed at Cloudflare.
 
-`wrangler.jsonc` tells Cloudflare to publish `public/` and nothing else.
+`wrangler.jsonc` tells Cloudflare to publish `public/` and nothing else. Its
+default config is `kavyro-prod`; `env.staging` is `kavyro-staging`, so that
+Worker's build commands carry `--env staging`.
 
 `_headers` sets security headers and caches `assets/*` for a day, so purge the
 Cloudflare cache after a CSS or JS change if you need it visible immediately.
