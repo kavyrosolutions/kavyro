@@ -58,11 +58,13 @@ the programmer what is uncommitted and ask what to do.
 Keep the change as small as the request allows. Do not refactor, reformat or
 "tidy up" code the request does not touch.
 
-Rules that apply to every change on this site:
+Rules that apply to every change on this site. The website is everything in
+`public/`; site paths below (`assets/...`, `_headers`, `sitemap.xml`, the
+pages) are relative to it.
 
 - **Plain static site.** HTML, CSS and vanilla JS only. No build step, no
-  framework, no npm packages in the shipped site. (`node_modules/`, `.next/`,
-  `dist/` and the like are ignored local leftovers. Leave them alone.)
+  framework, no npm packages in the shipped site. Only `public/` is
+  deployed; do not put repo files (docs, tools, notes) in it.
 - **Shared styles live in `assets/styles/`.** `main.css` owns the header, nav,
   logo, buttons and footer. The page stylesheets (`home-page.css`,
   `service-page.css`, `legal-page.css`, `portfolio-page.css`,
@@ -79,7 +81,7 @@ Rules that apply to every change on this site:
   `?v=<yyyymmdd>`. If you changed any CSS or JS file, bump that string to
   today's date in all twelve pages (add a letter suffix, such as `20260930b`, if
   today's date is already in use):
-  `grep -l '?v=' *.html`.
+  `grep -l '?v=' public/*.html`.
 - **Use the design tokens** (`--blue`, `--night`, `--cyan` and so on in
   `:root`) rather than hard-coded colours.
 - **No prices.** No prices, packages, payment terms, billing language or
@@ -108,11 +110,14 @@ There are no tests and no build, so check the result directly:
 
 - `git diff` and read every hunk. Nothing unrelated should be in it.
 - Re-run the `git grep` from step 1 to confirm no copy was missed.
-- If the site is running locally (Laragon: `http://kavyro.test` or
-  `http://localhost/kavyro`), open the affected pages. Check desktop and a
+- If the site is running locally (Laragon: `http://kavyro.test`, document
+  root `public/`), open the affected pages. Check desktop and a
   phone-width viewport (about 375px), and check the browser console for
   errors. Layout changes must not cause horizontal scroll on phones.
 - Validate any JSON-LD you touched (it must still parse as JSON).
+- If the change sets a new rule, picks between real alternatives, or reverses
+  a note in `docs/decisions/`, add a decision note (see `docs/README.md`).
+  Routine fixes and copy edits do not need one.
 
 ### 5. Hand it back
 

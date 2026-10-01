@@ -45,7 +45,7 @@ the rebase and ask.
 
 ## 2. Check
 
-- If any CSS or JS under `assets/` changed, every page's `?v=` must be bumped
+- If any CSS or JS under `public/assets/` changed, every page's `?v=` must be bumped
   to today's date (letter suffix if taken). Do it if it was missed.
 - Run the site checks when the script exists:
 
@@ -55,6 +55,11 @@ the rebase and ask.
 
   Fix anything it reports that the change caused. If a failure predates the
   change, leave it and mention it.
+- If the change sets a new rule, picks between real alternatives, or reverses
+  a note in `docs/decisions/`, add the next numbered note from
+  `docs/decisions/_template.md` (mark any reversed note `Superseded by`), link
+  it from related notes and add its row to `docs/README.md`. Include it in the
+  same commit. Skip this for routine fixes and copy edits.
 
 ## 3. Commit
 

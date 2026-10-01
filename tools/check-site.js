@@ -3,13 +3,14 @@
 // .github/workflows/checks.yml. No dependencies: `node tools/check-site.js`.
 //
 // Set BASE_REF (e.g. origin/staging) to also require a ?v= bump whenever a
-// CSS or JS file under assets/ changed against that ref.
+// CSS or JS file under public/assets/ changed against that ref.
 
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-const root = path.resolve(__dirname, '..');
+const repo = path.resolve(__dirname, '..');
+const root = path.join(repo, 'public');
 const read = (f) => fs.readFileSync(path.join(root, f), 'utf8');
 const errors = [];
 const fail = (file, msg) => errors.push(`${file}: ${msg}`);
@@ -37,9 +38,12 @@ if (versions.size > 1) {
 
 // ─── A changed CSS/JS file needs a new ?v= ───
 if (process.env.BASE_REF && versions.size === 1) {
-  const diff = execSync(`git diff --name-only ${process.env.BASE_REF}...HEAD`, { cwd: root })
-    .toString().split('\n').filter((f) => /^assets\/.*\.(css|js)$/.test(f));
-  const baseIndex = execSync(`git show ${process.env.BASE_REF}:index.html`, { cwd: root }).toString();
+  // R100 is a pure move: the file content, and so the browser's copy, is unchanged.
+  const diff = execSync(`git diff --name-status ${process.env.BASE_REF}...HEAD`, { cwd: repo })
+    .toString().split('\n').filter((l) => l && !/^(D|R100)\t/.test(l))
+    .map((l) => l.split('\t').pop()).filter((f) => /^public\/assets\/.*\.(css|js)$/.test(f));
+  const baseIndex = diff.length
+    ? execSync(`git show ${process.env.BASE_REF}:public/index.html`, { cwd: repo }).toString() : '';
   const baseV = (baseIndex.match(/\?v=([^"&]+)/) || [])[1];
   if (diff.length && baseV === [...versions][0]) {
     errors.push(`${diff.join(', ')} changed but ?v= is still ${baseV}; bump it in every page`);

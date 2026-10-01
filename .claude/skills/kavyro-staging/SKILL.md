@@ -62,10 +62,10 @@ git grep -nE '^(<<<<<<<|=======|>>>>>>>)( |$)' -- . ':!*.md'   # must print noth
 git diff --stat origin/staging...HEAD                           # only this PR's files
 ```
 
-If the PR touched any `.html` page, also check that its JSON-LD still parses:
+Then run the site checks (cache-busting, links, JSON-LD, sitemap, pricing):
 
 ```bash
-node -e "for(const f of require('fs').readdirSync('.').filter(f=>f.endsWith('.html'))){const h=require('fs').readFileSync(f,'utf8');for(const m of h.matchAll(/<script type=\"application\/ld\+json\">([\s\S]*?)<\/script>/g)){try{JSON.parse(m[1])}catch(e){console.log(f,e.message);process.exitCode=1}}}"
+BASE_REF=origin/staging node tools/check-site.js
 ```
 
 Then push and merge:
