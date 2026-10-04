@@ -46,7 +46,7 @@ No page has inline `<style>`. Every page loads `assets/styles/main.css` (tokens,
 - `portfolio.html`: those two + `portfolio-page.css`
 - `privacy-policy`, `terms-of-service`: `legal-page.css`
 
-`assets/scripts/main.js` (loaded on every page) runs the mobile nav, the contact form and, on the home page, loads the globe after the `load` event.
+`assets/scripts/main.js` (loaded on every page) runs the mobile nav, the contact form and, on the home page, loads the globe on the first scroll, pointer move or key press after `load` (never at 860px or narrower).
 
 ### Home page sections
 `#hero` → `#trust` → `#services` → `#why` → `#process` → `#ai-strip` → `#testimonials` → `#faq` → `#cta` → `#contact`. The section IDs are the nav anchors.
