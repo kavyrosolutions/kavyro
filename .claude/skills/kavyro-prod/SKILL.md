@@ -15,10 +15,11 @@ and to merge it into `main`. Never push to `main` directly.
 
 ## 1. Land everything into staging
 
-Invoke the `kavyro-staging` skill (`.claude/skills/kavyro-staging/SKILL.md`)
-and follow it to the end. PRs it skips stay open and are not part of this
-release. Mention them in the final report. If its preflight fails (dirty
-tree, gh not authenticated), stop here.
+Invoke the `kavyro-staging` skill (`.claude/skills/kavyro-staging/SKILL.md`).
+It runs in a forked subagent and returns its report when done; wait for it.
+PRs it skips stay open and are not part of this release. Carry its report
+(merged, skipped, conflicts) into the final report. If its preflight failed
+(dirty tree, gh not authenticated), stop here.
 
 ## 2. Put staging on top of main
 

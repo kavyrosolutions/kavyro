@@ -1,6 +1,8 @@
 ---
 name: kavyro-staging
 description: Land every open pull request that targets staging in the kavyro repo, oldest first. Each PR branch is rebased onto the latest staging (never merged), conflicts are resolved, the branch is force-pushed with lease, its checks (including the Cloudflare preview build) must pass, and the PR is merged with GitHub's rebase method. PRs with a failed build are left open and reported. Use when the user runs /kavyro-staging or asks to merge, land or ship all PRs into staging.
+context: fork
+agent: general-purpose
 ---
 
 # /kavyro-staging
