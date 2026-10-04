@@ -209,11 +209,15 @@ fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Accept': 'application/json' }
     loop();
   }
 
-  // The WebGL globe is fetched only after the page has loaded, and not at
-  // all on save-data; until then (or without WebGL) the SVG poster stands in.
+  // The WebGL globe costs a 130 KB library and a render loop on the main
+  // thread, so it waits for the visitor's first scroll, pointer move or key
+  // press after load, and is skipped on phone-width screens (where it sits at
+  // half opacity behind the copy) and on save-data. The SVG poster, the
+  // globe's first frame, stands in until then and wherever it never starts.
   const globes = document.querySelectorAll('[data-globe]');
   const conn = navigator.connection;
-  if (globes.length && !(conn && conn.saveData)) {
+  const phone = window.matchMedia('(max-width: 860px)').matches;
+  if (globes.length && !phone && !(conn && conn.saveData)) {
     const start = () => {
       import('./hero-globe.js?v=' + ASSET_V).then((m) => {
         globes.forEach((g) => m.mountGlobe(g.querySelector('canvas'), {
@@ -223,8 +227,14 @@ fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Accept': 'application/json' }
       }).catch(() => {});
     };
     const idle = () => (window.requestIdleCallback ? requestIdleCallback(start, { timeout: 2000 }) : setTimeout(start, 200));
-    if (document.readyState === 'complete') idle();
-    else window.addEventListener('load', idle);
+    const events = ['pointermove', 'pointerdown', 'scroll', 'wheel', 'keydown', 'touchstart'];
+    const onFirst = () => {
+      events.forEach((t) => window.removeEventListener(t, onFirst));
+      idle();
+    };
+    const arm = () => events.forEach((t) => window.addEventListener(t, onFirst, { passive: true }));
+    if (document.readyState === 'complete') arm();
+    else window.addEventListener('load', arm);
   }
 })();
 

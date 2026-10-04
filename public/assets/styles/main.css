@@ -38,6 +38,8 @@
 @font-face { font-family: 'Nunito Fallback'; src: local('Arial'), local('ArialMT'); font-weight: 400; size-adjust: 100.95%; ascent-override: 100.15%; descent-override: 34.97%; line-gap-override: 0.00%; }
 @font-face { font-family: 'Nunito Fallback'; src: local('Arial Bold'), local('Arial-BoldMT'), local('Arial'); font-weight: 600; size-adjust: 96.66%; ascent-override: 104.59%; descent-override: 36.52%; line-gap-override: 0.00%; }
 
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
 :root {
     --blue:       #1658a1;
     --blue-dark:  #0d3d73;
