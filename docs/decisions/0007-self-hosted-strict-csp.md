@@ -8,7 +8,7 @@ Date: 2026-10-01
 Google Fonts and CDN scripts each add a third-party connection before the page
 can render, and an open Content-Security-Policy lets any injected script run.
 The site needs very few outside services: Google Analytics and the contact
-form endpoint.
+form (a LeadConnector embed).
 
 ## Decision
 
@@ -22,9 +22,11 @@ form endpoint.
 
 - Faster first render and no font flash from a third-party host.
 - Adding a service is a two-place change (the page and `_headers`). Forgetting
-  `_headers` works locally and breaks in production; if `FORM_ENDPOINT` in
-  `main.js` moves to a form service, add its origin to `connect-src`.
+  `_headers` works locally and breaks in production; the LeadConnector form
+  needs `api.leadconnectorhq.com` in `frame-src` and `link.msgsndr.com` in
+  `script-src`.
 
 ## Related
 
 - [0008. A trimmed Three.js bundle for the globe](0008-trimmed-threejs-globe.md)
+- [0014. The contact form is a HighLevel embed](0014-highlevel-contact-form.md)

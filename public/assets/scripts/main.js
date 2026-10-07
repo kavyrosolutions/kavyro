@@ -1,64 +1,28 @@
 function openMob()  { document.getElementById('mobileNav').classList.add('open'); document.body.style.overflow='hidden'; }
 function closeMob() { document.getElementById('mobileNav').classList.remove('open'); document.body.style.overflow=''; }
 
-/* The old handler showed "✓ Message Sent!" and posted nothing anywhere. Leave
-   FORM_ENDPOINT empty and the form composes a real email in the visitor's own
-   mail client; set it to a FormSubmit / Formspree / serverless URL and the same
-   form posts there instead (add that origin to connect-src in _headers). */
-const FORM_ENDPOINT = '';
-const CONTACT_EMAIL = 'info@kavyrosolutions.com';
-
-function formSay(status, message, isError) {
-if (!status) return;
-status.textContent = message;
-status.classList.toggle('is-error', !!isError);
-}
-
-function composeBody(d) {
-return [
-    'Name: ' + (d.firstName || '') + ' ' + (d.lastName || ''),
-    'Email: ' + (d.email || ''),
-    'Phone: ' + (d.phone || 'not given'),
-    'Service: ' + (d.service || ''),
-    '',
-    d.message || ''
-].join('\n');
-}
-
-function handleForm(e) {
-e.preventDefault();
-const form = e.target;
-const status = form.querySelector('.form-status');
-const btn = form.querySelector('button[type="submit"]');
-
-if (!form.checkValidity()) {
-    form.reportValidity();
-    formSay(status, '');
-    return;
-}
-
-const data = {};
-new FormData(form).forEach((v, k) => { data[k] = v; });
-
-if (!FORM_ENDPOINT) {
-    window.location.href = 'mailto:' + CONTACT_EMAIL +
-    '?subject=' + encodeURIComponent('Project enquiry: ' + (data.service || 'general')) +
-    '&body=' + encodeURIComponent(composeBody(data));
-    formSay(status, 'Opening your email app. If nothing happens, write to ' + CONTACT_EMAIL + ' directly.');
-    return;
-}
-
-btn.disabled = true;
-formSay(status, 'Sending…');
-fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Accept': 'application/json' }, body: new FormData(form) })
-    .then(res => {
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    form.reset();
-    formSay(status, 'Thanks. We will reply within one business day.');
-    })
-    .catch(() => formSay(status, 'That did not go through. Please email ' + CONTACT_EMAIL + ' instead.', true))
-    .then(() => { btn.disabled = false; });
-}
+/* The HighLevel form: form_embed.js keeps the iframe at visibility:hidden
+   until it loads, then flips it to visible. Drop the skeleton at that point,
+   or on load if the embed script never ran. After 12s, point at email. */
+(function () {
+const embed = document.querySelector('[data-embed]');
+if (!embed) return;
+const frame = embed.querySelector('iframe');
+let loaded = false;
+const check = () => {
+    const vis = frame.style.visibility;
+    if (vis === 'visible' || (loaded && vis !== 'hidden')) {
+    embed.classList.add('is-loaded');
+    watch.disconnect();
+    clearTimeout(slow);
+    }
+};
+const watch = new MutationObserver(check);
+watch.observe(frame, { attributes: true, attributeFilter: ['style'] });
+frame.addEventListener('load', () => { loaded = true; setTimeout(check, 50); });
+const slow = setTimeout(() => embed.classList.add('is-slow'), 12000);
+check();
+})();
 
 /* Scroll reveal. Blocks fly up as they arrive, staggered within their own
    row so a grid arrives as a sequence rather than all at once. Classes do

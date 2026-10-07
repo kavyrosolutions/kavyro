@@ -30,6 +30,7 @@ mark the old one `Superseded by`.
 | 0011 | [The website lives in `public/`](decisions/0011-site-in-public-folder.md) | Accepted |
 | 0012 | [A PR with a failed build is never merged](decisions/0012-failed-builds-never-merge.md) | Accepted |
 | 0013 | [The globe waits for the first interaction](decisions/0013-globe-waits-for-interaction.md) | Accepted |
+| 0014 | [The contact form is a HighLevel embed](decisions/0014-highlevel-contact-form.md) | Accepted |
 
 ## Adding a note
 
