@@ -10,7 +10,7 @@ Live at [kavyrosolutions.com](https://kavyrosolutions.com).
 
 The landing page runs top to bottom as a single narrative: a hero pitch, trust
 signals, the service catalogue, reasons to choose the agency, the engagement
-process, an AI capability strip, testimonials, an FAQ, a closing call to
+process, an AI capability strip, an FAQ, a closing call to
 action, and a contact form.
 
 Nine services are presented: digital marketing, SEO optimization, video editing,
@@ -94,9 +94,9 @@ Worker's build commands carry `--env staging`.
 
 `_headers` sets security headers and caches `assets/*` for a day, so purge the
 Cloudflare cache after a CSS or JS change if you need it visible immediately.
-Its Content-Security-Policy lists every origin the pages talk to; if
-`FORM_ENDPOINT` in `assets/scripts/main.js` is ever pointed at a form service,
-add that origin to `connect-src` or submissions will be blocked.
+Its Content-Security-Policy lists every origin the pages talk to, including
+the LeadConnector contact form (`frame-src` and `script-src`); a new
+third-party origin that is not added there is blocked in production.
 
 `robots.txt` and `sitemap.xml` are deployed as-is; add a `<url>` to the sitemap
 when a page is added.

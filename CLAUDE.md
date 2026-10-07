@@ -46,10 +46,10 @@ No page has inline `<style>`. Every page loads `assets/styles/main.css` (tokens,
 - `portfolio.html`: those two + `portfolio-page.css`
 - `privacy-policy`, `terms-of-service`: `legal-page.css`
 
-`assets/scripts/main.js` (loaded on every page) runs the mobile nav, the contact form and, on the home page, loads the globe on the first scroll, pointer move or key press after `load` (never at 860px or narrower).
+`assets/scripts/main.js` (loaded on every page) runs the mobile nav and, on the home page, loads the globe on the first scroll, pointer move or key press after `load` (never at 860px or narrower).
 
 ### Home page sections
-`#hero` → `#trust` → `#services` → `#why` → `#process` → `#ai-strip` → `#testimonials` → `#faq` → `#cta` → `#contact`. The section IDs are the nav anchors.
+`#hero` → `#trust` → `#services` → `#why` → `#process` → `#ai-strip` → `#faq` → `#cta` → `#contact`. The section IDs are the nav anchors.
 
 ### Header
 Every page renders the same navbar and mobile sheet: Home, Services, Portfolio,
@@ -65,7 +65,7 @@ Defined in `:root` in `assets/styles/main.css`; use them instead of hard-coded c
 Self-hosted in `assets/fonts/`: **Montserrat** (`--font-display`, headings/logo), **Poppins** (`--font-sans`, body/UI), **Nunito** (secondary).
 
 ### Contact form
-Handled in `assets/scripts/main.js`. With `FORM_ENDPOINT` empty (the current setting) it opens the visitor's mail client addressed to `CONTACT_EMAIL`; set it to a form service URL to post there instead, and add that origin to `connect-src` in `_headers`.
+A LeadConnector (HighLevel) embed on `index.html` and `contact.html`: an iframe from `api.leadconnectorhq.com` plus `link.msgsndr.com/js/form_embed.js`, which sizes it. Both origins are allowed in `_headers` (`frame-src`, `script-src`); the form's fields are edited in HighLevel, not here.
 
 ## Key Conventions
 
